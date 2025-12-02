@@ -18,12 +18,21 @@
 
 .link {
     font-family: var(--font-inter);
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(1.5rem, 5vw, 4rem);
     font-weight: 700;
     color: var(--fg-primary);
     transition: color 0.2s ease;
+    word-break: break-word;
+    max-width: 100%;
+    line-height: 1.1;
 }
 
 .link:hover {
     color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .link {
+        font-size: clamp(1.2rem, 6vw, 2rem);
+    }
 }
