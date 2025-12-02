@@ -98,26 +98,31 @@
 }
 
 /* HUD Elements */
-.hudTopLeft,
+.hudTopLeft {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: var(--tech-mono);
+    font-size: 0.75rem;
+    color: var(--fg-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    z-index: 2;
+}
+
 .hudTopRight {
     position: absolute;
     top: 2rem;
+    right: 2rem;
     font-family: var(--tech-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--fg-secondary);
-    letter-spacing: 0.05em;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-}
-
-.hudTopLeft {
-    left: 2rem;
-}
-
-.hudTopRight {
-    right: 2rem;
+    gap: 0.25rem;
     text-align: right;
+    z-index: 2;
 }
 
 .statusLive {
