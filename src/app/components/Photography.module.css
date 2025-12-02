@@ -1,106 +1,338 @@
 .section {
-    padding: 10rem 2rem;
-    max-width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+    padding: 6rem 0;
     position: relative;
-    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--grid-color);
+    overflow: hidden;
+    background: radial-gradient(circle at center, rgba(20, 20, 20, 0.5) 0%, transparent 70%);
 }
 
 .header {
-    margin-bottom: 6rem;
-    padding-left: 5vw;
-}
-
-.label {
-    font-family: var(--font-jetbrains-mono);
-    font-size: 0.875rem;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 1rem;
+    padding: 0 4rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 2;
 }
 
 .title {
     font-family: var(--font-inter);
-    font-size: clamp(4rem, 12vw, 10rem);
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 800;
-    color: var(--fg-primary);
-    line-height: 0.85;
     text-transform: uppercase;
     letter-spacing: -0.04em;
+    color: var(--fg-primary);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    line-height: 1;
+}
+
+.indicator {
+    width: 0.5em;
+    height: 0.5em;
+    background-color: var(--accent);
+    display: inline-block;
+    box-shadow: 0 0 15px var(--accent);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.meta {
+    font-family: var(--tech-mono);
+    font-size: 0.75rem;
+    color: var(--fg-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-left: 1px solid var(--accent);
+    padding-left: 1rem;
+}
+
+/* Gallery Container */
+.galleryWrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Static HUD Lines */
+.hudLine {
+    position: absolute;
+    height: 1px;
+    background: var(--grid-color);
+    width: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hudLineTop {
+    top: 20%;
+}
+
+.hudLineBottom {
+    bottom: 20%;
 }
 
 .gallery {
     display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: flex-start;
-    height: 120vh;
-    /* Limit height to create a window */
-    overflow: hidden;
-    /* Hide overflow for the parallax effect */
-    padding: 0 2rem;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 25vw;
+    gap: 4rem;
+    overflow-x: auto;
+    padding: 2rem calc(50vw - 175px) 4rem calc(50vw - 175px);
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     position: relative;
+    z-index: 2;
 }
 
-/* Offset the starting position of columns for visual interest */
-.column:nth-child(2) {
-    margin-top: -10vh;
-}
-
-.column:nth-child(3) {
-    margin-top: 5vh;
+.gallery::-webkit-scrollbar {
+    display: none;
 }
 
 .card {
+    flex: 0 0 350px;
+    height: 500px;
     position: relative;
-    width: 100%;
-    aspect-ratio: 3/4;
+    background: #000;
+    border: 1px solid var(--fg-secondary);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: none;
+    /* We'll use a custom cursor or crosshair */
     overflow: hidden;
-    background: var(--bg-secondary);
+    scroll-snap-align: center;
+    opacity: 0.4;
+    transform: scale(0.9);
 }
 
-.imageWrapper {
-    position: relative;
+.card:hover,
+.card:focus-within {
+    opacity: 1;
+    transform: scale(1);
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(255, 59, 48, 0.1);
+    z-index: 10;
+}
+
+.imageContainer {
     width: 100%;
     height: 100%;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.card:hover .imageWrapper {
-    transform: scale(1.05);
+    position: relative;
+    overflow: hidden;
 }
 
 .image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.2);
-    transition: filter 0.5s ease;
+    filter: grayscale(100%) contrast(1.2) brightness(0.8);
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .card:hover .image {
-    filter: grayscale(0%) contrast(1);
+    filter: grayscale(0%) contrast(1.1) brightness(1);
+    transform: scale(1.1);
 }
 
+/* Overlay & Data */
+.overlay {
+    position: absolute;
+    inset: 0;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.9) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transform: translateY(-10px);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .cardHeader {
+    transform: translateY(0);
+}
+
+.idBadge {
+    background: var(--accent);
+    color: #000;
+    font-family: var(--tech-mono);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.statusBadge {
+    color: var(--accent);
+    font-family: var(--tech-mono);
+    font-size: 0.6rem;
+    border: 1px solid var(--accent);
+    padding: 0.2rem 0.4rem;
+    text-transform: uppercase;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.dataGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    font-family: var(--tech-mono);
+    font-size: 0.7rem;
+    color: var(--fg-secondary);
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .dataGrid {
+    transform: translateY(0);
+}
+
+.dataItem {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.2rem;
+}
+
+.dataLabel {
+    opacity: 0.6;
+}
+
+.dataValue {
+    color: var(--fg-primary);
+    font-weight: 600;
+}
+
+/* Crosshair Overlay */
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.crosshair::before,
+.crosshair::after {
+    content: '';
+    position: absolute;
+    background: var(--accent);
+}
+
+.crosshair::before {
+    top: 19px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+}
+
+.crosshair::after {
+    top: 0;
+    left: 19px;
+    width: 2px;
+    height: 40px;
+}
+
+.card:hover .crosshair {
+    opacity: 0.5;
+}
+
+/* Mobile Optimizations */
 @media (max-width: 768px) {
-    .gallery {
+    .section {
+        padding: 4rem 0;
+    }
+
+    .header {
+        padding: 0 1.5rem;
         flex-direction: column;
-        height: auto;
-        overflow: visible;
+        align-items: flex-start;
+        gap: 1rem;
     }
 
-    .column {
+    .meta {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid var(--accent);
+        padding-top: 1rem;
         width: 100%;
-        margin-top: 0 !important;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    .title {
-        font-size: 4rem;
+    .gallery {
+        gap: 1rem;
+        /* Center the first item: 50vw - (85vw / 2) = 7.5vw padding */
+        padding: 0 7.5vw 2rem 7.5vw;
+        width: 100vw;
+    }
+
+    .card {
+        flex: 0 0 85vw;
+        height: 60vh;
+        opacity: 1;
+        /* Always visible on mobile */
+        transform: scale(1);
+    }
+
+    .overlay {
+        opacity: 1;
+        /* Always show data on mobile */
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.9) 100%);
+    }
+
+    .cardHeader {
+        transform: translateY(0);
+    }
+
+    .dataGrid {
+        transform: translateY(0);
+    }
+
+    .crosshair {
+        display: none;
+        /* Too busy for mobile */
+    }
+
+    .image {
+        filter: grayscale(0%);
+        /* Color by default on mobile */
     }
 }
