@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import styles from './Hero.module.css';
+import { soundSystem } from '../utils/sound';
 
 export default function Hero() {
     const [time, setTime] = useState('');
@@ -28,11 +29,15 @@ export default function Hero() {
         const fullTagline = "Design. Systems. Production.";
 
         const startTyping = async () => {
+            // Try to boot sound (might be blocked by browser policy until interaction)
+            try { soundSystem.playBootSequence(); } catch (e) { }
+
             // Wait for initial name animation
             await new Promise(r => setTimeout(r, 1500));
 
             // Switch cursor
             setActiveLine('tagline');
+            soundSystem.playCursorDrop();
 
             // Small pause before typing starts
             await new Promise(r => setTimeout(r, 500));
@@ -40,12 +45,30 @@ export default function Hero() {
             // Type out characters
             for (let i = 0; i <= fullTagline.length; i++) {
                 setTaglineText(fullTagline.slice(0, i));
+                soundSystem.playTypingSound();
                 // Randomize typing speed slightly for realism
                 await new Promise(r => setTimeout(r, 30 + Math.random() * 50));
             }
         };
 
         startTyping();
+    }, []);
+
+    // Resume audio context on first user interaction
+    useEffect(() => {
+        const handleInteraction = () => {
+            soundSystem.resume();
+            window.removeEventListener('click', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
+
+        window.addEventListener('click', handleInteraction);
+        window.addEventListener('keydown', handleInteraction);
+
+        return () => {
+            window.removeEventListener('click', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
     }, []);
 
     return (

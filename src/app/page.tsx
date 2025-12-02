@@ -3,20 +3,23 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Capabilities from "./components/Capabilities";
-import Photography from "./components/Photography";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import SmoothScroll from "./components/SmoothScroll";
+import Vulnerability from "./components/Vulnerability";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <Hero />
-      <About />
-      <Projects />
-      <Capabilities />
-      <Photography />
-      <Contact />
-      <Footer />
-    </main>
+    <SmoothScroll>
+      <main>
+        <Hero />
+        <About />
+        <Projects />
+        <Vulnerability />
+        <Capabilities />
+        <Contact />
+        <Footer />
+      </main>
+    </SmoothScroll>
   );
 }

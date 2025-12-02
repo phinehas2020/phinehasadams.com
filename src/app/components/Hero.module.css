@@ -10,6 +10,14 @@
     border: 1px solid var(--grid-color);
 }
 
+.constellationWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    z-index: 10;
+}
+
 .name {
     font-family: var(--font-inter);
     font-weight: 800;
