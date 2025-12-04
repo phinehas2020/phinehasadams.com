@@ -8,15 +8,18 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SmoothScroll from "./components/SmoothScroll";
 import Vulnerability from "./components/Vulnerability";
+import { getImages } from "./utils/getImages";
 
 export default function Home() {
+  const photos = getImages();
+
   return (
     <SmoothScroll>
       <main>
         <Hero />
         <About />
         <Projects />
-        <Photography />
+        <Photography photos={photos} />
         <Vulnerability />
         <Capabilities />
         <Contact />

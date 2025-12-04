@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import styles from "./Photography.module.css";
 
-interface PhotoData {
+export interface PhotoData {
     id: string;
     src: string;
     alt: string;
@@ -16,65 +16,12 @@ interface PhotoData {
     location: string;
 }
 
-const photos: PhotoData[] = [
-    {
-        id: "IMG_001",
-        src: "/images/bw_architecture.png",
-        alt: "Structural Geometry",
-        iso: "400",
-        shutter: "1/500",
-        aperture: "f/8.0",
-        focalLength: "35mm",
-        date: "2024.03.12",
-        location: "CHI.IL.US",
-    },
-    {
-        id: "IMG_002",
-        src: "/images/bw_urban.png",
-        alt: "Urban Density",
-        iso: "800",
-        shutter: "1/250",
-        aperture: "f/5.6",
-        focalLength: "50mm",
-        date: "2024.03.14",
-        location: "NYC.NY.US",
-    },
-    {
-        id: "IMG_003",
-        src: "/images/bw_abstract.png",
-        alt: "Light Abstraction",
-        iso: "1600",
-        shutter: "1/60",
-        aperture: "f/2.8",
-        focalLength: "85mm",
-        date: "2024.03.15",
-        location: "LAX.CA.US",
-    },
-    {
-        id: "IMG_004",
-        src: "/images/bw_architecture.png",
-        alt: "Structural Geometry II",
-        iso: "200",
-        shutter: "1/1000",
-        aperture: "f/11",
-        focalLength: "24mm",
-        date: "2024.03.16",
-        location: "CHI.IL.US",
-    },
-    {
-        id: "IMG_005",
-        src: "/images/bw_urban.png",
-        alt: "Urban Density II",
-        iso: "3200",
-        shutter: "1/125",
-        aperture: "f/4.0",
-        focalLength: "50mm",
-        date: "2024.03.18",
-        location: "TYO.JP",
-    },
-];
+interface PhotographyProps {
+    photos: PhotoData[];
+}
 
-export default function Photography() {
+export default function Photography({ photos = [] }: PhotographyProps) {
+
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     return (
