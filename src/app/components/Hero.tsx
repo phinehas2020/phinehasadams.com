@@ -30,7 +30,7 @@ export default function Hero() {
 
         const startTyping = async () => {
             // Try to boot sound (might be blocked by browser policy until interaction)
-            try { soundSystem.playBootSequence(); } catch (e) { }
+            try { soundSystem.playBootSequence(); } catch { }
 
             // Wait for initial name animation
             await new Promise(r => setTimeout(r, 1500));

@@ -20,7 +20,9 @@ const capabilities = [
 export default function Capabilities() {
     return (
         <section className={styles.section}>
-            <span className={styles.label}>// CAPABILITIES</span>
+            <span className={styles.label}>
+                {"//"} CAPABILITIES
+            </span>
             <ul className={styles.list}>
                 {capabilities.map((c, i) => (
                     <motion.li

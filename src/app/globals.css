@@ -35,6 +35,17 @@ a {
   text-decoration: none;
 }
 
+/* Keyboard focus visibility */
+:focus-visible {
+  outline: 2px solid var(--nasa-blue);
+  outline-offset: 3px;
+}
+
+/* Avoid double outlines when we already style a focused component */
+.sr-only:focus-visible {
+  outline: none;
+}
+
 ::selection {
   background: var(--accent);
   color: var(--bg-core);

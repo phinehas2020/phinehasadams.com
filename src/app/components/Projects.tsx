@@ -25,7 +25,9 @@ const projects = [
 export default function Projects() {
     return (
         <section className={styles.section}>
-            <span className={styles.label}>// OPERATIONS</span>
+            <span className={styles.label}>
+                {"//"} OPERATIONS
+            </span>
             <div className={styles.grid}>
                 {projects.map((p, i) => (
                     <div key={i} className={cardStyles.card}>

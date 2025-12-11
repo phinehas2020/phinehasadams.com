@@ -94,7 +94,7 @@
     display: flex;
     gap: 4rem;
     overflow-x: auto;
-    padding: 2rem calc(50vw - 175px) 4rem calc(50vw - 175px);
+    padding: 2rem 4rem 4rem 4rem;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -ms-overflow-style: none;
@@ -114,10 +114,9 @@
     background: #000;
     border: 1px solid var(--fg-secondary);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    cursor: none;
-    /* We'll use a custom cursor or crosshair */
+    cursor: default;
     overflow: hidden;
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     opacity: 0.4;
     transform: scale(0.9);
 }
@@ -129,6 +128,18 @@
     border-color: var(--accent);
     box-shadow: 0 0 30px rgba(255, 59, 48, 0.1);
     z-index: 10;
+}
+
+.card:focus-visible {
+    outline: 2px solid var(--nasa-blue);
+    outline-offset: 4px;
+}
+
+/* Only hide cursor on devices that support hover/fine pointer */
+@media (hover: hover) and (pointer: fine) {
+    .card {
+        cursor: none;
+    }
 }
 
 .imageContainer {
@@ -168,6 +179,11 @@
     opacity: 1;
 }
 
+.card:focus-within .overlay,
+.card:focus-visible .overlay {
+    opacity: 1;
+}
+
 .cardHeader {
     display: flex;
     justify-content: space-between;
@@ -177,6 +193,11 @@
 }
 
 .card:hover .cardHeader {
+    transform: translateY(0);
+}
+
+.card:focus-within .cardHeader,
+.card:focus-visible .cardHeader {
     transform: translateY(0);
 }
 
@@ -217,6 +238,11 @@
 }
 
 .card:hover .dataGrid {
+    transform: translateY(0);
+}
+
+.card:focus-within .dataGrid,
+.card:focus-visible .dataGrid {
     transform: translateY(0);
 }
 
@@ -271,6 +297,11 @@
 }
 
 .card:hover .crosshair {
+    opacity: 0.5;
+}
+
+.card:focus-within .crosshair,
+.card:focus-visible .crosshair {
     opacity: 0.5;
 }
 

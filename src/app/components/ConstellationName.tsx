@@ -51,7 +51,7 @@ export default function ConstellationName() {
         const fontSize = Math.min(dimensions.width / 8, 120); // Responsive font size
         const font = `800 ${fontSize}px Inter, sans-serif`;
         const particleGap = 6; // Gap between scan points
-        const connectionDist = 25; // Max distance to draw line
+        // const connectionDist = 25; // Max distance to draw line (reserved for future)
 
         // 1. Generate Points from Text
         const points: Point[] = [];

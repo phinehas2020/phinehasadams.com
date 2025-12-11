@@ -13,7 +13,12 @@ class SoundSystem {
 
     private init() {
         if (!this.ctx) {
-            const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+            const AudioContextClass =
+                window.AudioContext ??
+                (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+
+            if (!AudioContextClass) return;
+
             this.ctx = new AudioContextClass();
             this.masterGain = this.ctx.createGain();
             this.masterGain.gain.value = 0.5; // Increased from 0.3
