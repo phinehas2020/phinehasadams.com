@@ -15,9 +15,9 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <Projects />
       <About />
       <Process />
-      <Projects />
       <Photography photos={photos} />
       <Vulnerability />
       <Capabilities />

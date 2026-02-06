@@ -18,8 +18,16 @@ export default async function Projects() {
     return (
         <section className={styles.section}>
             <span className={styles.label}>
-                {"//"} WEBSITES FOR SALE
+                {"//"} BUY A WEBSITE
             </span>
+            <div className={styles.pitch}>
+                <h2 className={styles.headline}>
+                    Customized &amp; shipped on <span className={styles.accent}>your domain</span> in{' '}
+                    <span className={styles.metric}><span className={styles.number}>3</span> days</span>.
+                    {' '}Ranking on the <span className={styles.accent}>first page of Google</span> in{' '}
+                    <span className={styles.metric}><span className={styles.number}>10</span> days</span>.
+                </h2>
+            </div>
             <div className={styles.grid}>
                 {displayWebsites.map((site: Website) => (
                     <a
