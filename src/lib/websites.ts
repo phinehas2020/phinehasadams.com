@@ -16,11 +16,10 @@ export async function getWebsites(): Promise<Website[]> {
         const data = await fs.readFile(DATA_FILE, 'utf-8');
         return JSON.parse(data);
     } catch (error) {
-        if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-            await fs.writeFile(DATA_FILE, '[]', 'utf-8');
-            return [];
-        }
-        throw error;
+        // If file doesn't exist or we can't read it, return empty list.
+        // Do NOT try to write to the file system as it may be read-only (Vercel).
+        console.warn('Failed to read websites data file:', error);
+        return [];
     }
 }
 
