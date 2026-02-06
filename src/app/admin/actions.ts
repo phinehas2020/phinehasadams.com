@@ -30,7 +30,7 @@ export async function deleteWebsiteAction(id: string) {
     revalidatePath('/admin');
 }
 
-export async function loginAction(formData: FormData) {
+export async function loginAction(prevState: any, formData: FormData) {
     const password = formData.get('password') as string;
     // Simple env var check, fallback to a default for initial setup
     const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
