@@ -118,6 +118,17 @@ export function AddWebsiteForm() {
                 </div>
             </div>
 
+            <div className={styles.inputGroup}>
+                <label htmlFor="stripe_link" className={styles.label}>Stripe Payment Link</label>
+                <input
+                    type="url"
+                    id="stripe_link"
+                    name="stripe_link"
+                    className={styles.input}
+                    placeholder="https://buy.stripe.com/..."
+                />
+            </div>
+
             <SubmitButton label="Add Website" />
         </form>
     );
@@ -202,6 +213,18 @@ export function EditWebsiteForm({ website, onClose }: { website: Website; onClos
                                 defaultValue={website.monthly_price || ''}
                             />
                         </div>
+                    </div>
+
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="edit-stripe_link" className={styles.label}>Stripe Payment Link</label>
+                        <input
+                            type="url"
+                            id="edit-stripe_link"
+                            name="stripe_link"
+                            className={styles.input}
+                            placeholder="https://buy.stripe.com/..."
+                            defaultValue={website.stripe_link || ''}
+                        />
                     </div>
 
                     <div className={styles.modalActions}>

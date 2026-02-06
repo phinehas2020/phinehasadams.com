@@ -9,6 +9,7 @@ export interface Website {
     sold: boolean;
     purchase_price?: number;
     monthly_price?: number;
+    stripe_link?: string;
     created_at: string;
 }
 
@@ -18,6 +19,7 @@ export interface WebsiteInput {
     description?: string;
     purchase_price?: number;
     monthly_price?: number;
+    stripe_link?: string;
 }
 
 export async function getWebsites(): Promise<Website[]> {
@@ -44,9 +46,9 @@ export async function addWebsite(data: WebsiteInput): Promise<Website> {
     const client = await pool.connect();
     try {
         const res = await client.query(
-            `INSERT INTO websites (url, title, description, purchase_price, monthly_price) 
-             VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [data.url, data.title, data.description || null, data.purchase_price || null, data.monthly_price || null]
+            `INSERT INTO websites (url, title, description, purchase_price, monthly_price, stripe_link) 
+             VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+            [data.url, data.title, data.description || null, data.purchase_price || null, data.monthly_price || null, data.stripe_link || null]
         );
         return res.rows[0];
     } finally {
@@ -63,9 +65,10 @@ export async function updateWebsite(id: string, data: Partial<WebsiteInput>): Pr
                  title = COALESCE($3, title),
                  description = COALESCE($4, description),
                  purchase_price = $5,
-                 monthly_price = $6
+                 monthly_price = $6,
+                 stripe_link = $7
              WHERE id = $1 RETURNING *`,
-            [id, data.url, data.title, data.description, data.purchase_price ?? null, data.monthly_price ?? null]
+            [id, data.url, data.title, data.description, data.purchase_price ?? null, data.monthly_price ?? null, data.stripe_link ?? null]
         );
         return res.rows[0];
     } finally {

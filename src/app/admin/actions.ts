@@ -10,6 +10,7 @@ export async function createWebsiteAction(formData: FormData) {
     const description = formData.get('description') as string;
     const purchasePriceStr = formData.get('purchase_price') as string;
     const monthlyPriceStr = formData.get('monthly_price') as string;
+    const stripeLink = formData.get('stripe_link') as string;
 
     if (!url || !title) {
         throw new Error('Missing required fields');
@@ -30,6 +31,7 @@ export async function createWebsiteAction(formData: FormData) {
         description: description || undefined,
         purchase_price: purchasePrice,
         monthly_price: monthlyPrice,
+        stripe_link: stripeLink || undefined,
     });
 
     revalidatePath('/websites-for-sale');
@@ -44,6 +46,7 @@ export async function updateWebsiteAction(formData: FormData) {
     const description = formData.get('description') as string;
     const purchasePriceStr = formData.get('purchase_price') as string;
     const monthlyPriceStr = formData.get('monthly_price') as string;
+    const stripeLink = formData.get('stripe_link') as string;
 
     if (!id || !url || !title) {
         throw new Error('Missing required fields');
@@ -64,6 +67,7 @@ export async function updateWebsiteAction(formData: FormData) {
         description: description || undefined,
         purchase_price: purchasePrice,
         monthly_price: monthlyPrice,
+        stripe_link: stripeLink || undefined,
     });
 
     revalidatePath('/websites-for-sale');

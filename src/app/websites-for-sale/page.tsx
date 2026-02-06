@@ -52,20 +52,33 @@ export default async function WebsitesForSale() {
                                 </h2>
                                 {site.description && <p className={styles.siteDesc}>{site.description}</p>}
                             </div>
-                            {(site.purchase_price || site.monthly_price) && (
-                                <div className={styles.pricing}>
-                                    {site.purchase_price && (
-                                        <span className={styles.priceTag}>
-                                            ${site.purchase_price.toLocaleString()}
-                                        </span>
-                                    )}
-                                    {site.monthly_price && (
-                                        <span className={styles.monthlyTag}>
-                                            +${site.monthly_price}/mo
-                                        </span>
-                                    )}
-                                </div>
-                            )}
+                            <div className={styles.infoFooter}>
+                                {(site.purchase_price || site.monthly_price) && (
+                                    <div className={styles.pricing}>
+                                        {site.purchase_price && (
+                                            <span className={styles.priceTag}>
+                                                ${site.purchase_price.toLocaleString()}
+                                            </span>
+                                        )}
+                                        {site.monthly_price && (
+                                            <span className={styles.monthlyTag}>
+                                                +${site.monthly_price}/mo
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
+                                {site.stripe_link && !site.sold && (
+                                    <a
+                                        href={site.stripe_link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.buyButton}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        Buy Now
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </div>
                 ))}
