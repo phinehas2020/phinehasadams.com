@@ -55,7 +55,7 @@
 
 .iframeContainer {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 16 / 10;
     position: relative;
     overflow: hidden;
     background: #0a0a0a;
@@ -64,11 +64,10 @@
 }
 
 .iframe {
-    width: 1000px;
-    height: 750px;
+    width: 1440px;
+    height: 900px;
     border: none;
     background: #fff;
-    transform: scale(0.32);
     transform-origin: 0 0;
     position: absolute;
     top: 0;

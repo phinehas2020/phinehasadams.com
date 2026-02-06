@@ -2,6 +2,7 @@ import styles from './Projects.module.css';
 import cardStyles from './ProjectCard.module.css';
 import { getWebsites, Website } from '@/lib/websites';
 import Link from 'next/link';
+import { WebsitePreviewCard } from './WebsitePreviewCard';
 
 export default async function Projects() {
     const websites = await getWebsites();
@@ -28,20 +29,7 @@ export default async function Projects() {
                             <div className={cardStyles.dot}></div>
                             <div className={cardStyles.dot}></div>
                         </div>
-                        <div className={cardStyles.iframeContainer}>
-                            <iframe
-                                src={site.url}
-                                className={cardStyles.iframe}
-                                title={`Preview of ${site.title}`}
-                                tabIndex={-1}
-                                loading="lazy"
-                            />
-                            {site.sold && (
-                                <div className={cardStyles.soldOverlay}>
-                                    <span className={cardStyles.soldBadge}>SOLD</span>
-                                </div>
-                            )}
-                        </div>
+                        <WebsitePreviewCard url={site.url} title={site.title} sold={site.sold} />
                         <div className={cardStyles.content}>
                             <div className={cardStyles.header}>
                                 <h3 className={cardStyles.title}>

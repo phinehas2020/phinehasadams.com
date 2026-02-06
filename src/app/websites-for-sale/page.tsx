@@ -1,6 +1,7 @@
 import { getWebsites } from '@/lib/websites';
 import styles from './page.module.css';
 import Link from 'next/link';
+import { WebsitePreview } from './WebsitePreview';
 
 export const dynamic = 'force-dynamic';
 
@@ -40,15 +41,7 @@ export default async function WebsitesForSale() {
                                 <div className={`${styles.dot} ${styles.dotGreen}`} />
                                 <div className={styles.addressBar} />
                             </div>
-                            <div className={styles.previewContainer}>
-                                <iframe
-                                    src={site.url}
-                                    className={styles.iframe}
-                                    title={`Preview of ${site.title}`}
-                                    tabIndex={-1}
-                                    loading="lazy"
-                                />
-                            </div>
+                            <WebsitePreview url={site.url} title={site.title} />
                         </div>
 
                         <div className={styles.info}>
