@@ -24,7 +24,7 @@ export default async function WebsitesForSale() {
                 <span className={styles.tagline}>{"// "}BUY A WEBSITE</span>
                 <h1 className={styles.title}>
                     Your business online.<br />
-                    <span className={styles.titleAccent}>Ranking #1 locally.</span>
+                    <span className={styles.titleAccent}>On the first page of Google.</span>
                 </h1>
                 <p className={styles.subtitle}>
                     Pick a site below. We customize it for your brand, ship it on your domain,
@@ -75,9 +75,9 @@ export default async function WebsitesForSale() {
                             <span className={styles.pingRing2} />
                         </div>
                     </div>
-                    <span className={styles.metricNumber}>#1</span>
+                    <span className={styles.metricNumber}>SEO</span>
                     <span className={styles.metricUnit}>LOCAL</span>
-                    <p className={styles.metricDesc}>Your business, first result in your area</p>
+                    <p className={styles.metricDesc}>Optimized to rank for your business in your area</p>
                 </div>
             </div>
 
@@ -98,9 +98,20 @@ export default async function WebsitesForSale() {
                     <div className={styles.step}>
                         <span className={styles.stepNum}>03</span>
                         <h3 className={styles.stepTitle}>Live &amp; ranking</h3>
-                        <p className={styles.stepDesc}>Shipped to your domain, optimized for Google, and ranking #1 locally within days.</p>
+                        <p className={styles.stepDesc}>Shipped to your domain, optimized for Google, and ranking locally within days.</p>
                     </div>
                 </div>
+            </div>
+
+            {/* ── Custom CTA ── */}
+            <div className={styles.customCta}>
+                <p className={styles.customText}>
+                    These are starting points. Every site gets fully customized for your business.
+                    Need something built from scratch?{' '}
+                    <a href="mailto:phinehas@phinehasadams.com" className={styles.customLink}>
+                        Reach out for a custom quote
+                    </a>.
+                </p>
             </div>
 
             {/* ── Website Grid ── */}

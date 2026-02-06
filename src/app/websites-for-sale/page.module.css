@@ -51,10 +51,7 @@
 }
 
 .titleAccent {
-    background: linear-gradient(135deg, var(--accent), #ff6b5b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent);
 }
 
 .subtitle {
@@ -298,6 +295,36 @@
     font-size: 0.85rem;
     color: var(--fg-secondary);
     line-height: 1.5;
+}
+
+/* ═══════════════════════════════
+   CUSTOM CTA
+   ═══════════════════════════════ */
+.customCta {
+    margin-bottom: 4rem;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.customText {
+    font-family: var(--font-inter);
+    font-size: 0.95rem;
+    color: var(--fg-secondary);
+    line-height: 1.6;
+}
+
+.customLink {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.customLink:hover {
+    opacity: 0.8;
 }
 
 /* ═══════════════════════════════
