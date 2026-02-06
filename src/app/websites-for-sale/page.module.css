@@ -169,6 +169,32 @@
     font-size: 0.9rem;
     color: var(--fg-secondary);
     line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.pricing {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: auto;
+}
+
+.priceTag {
+    background: linear-gradient(135deg, rgba(39, 201, 63, 0.2), rgba(39, 201, 63, 0.1));
+    color: #27c93f;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(39, 201, 63, 0.3);
+}
+
+.monthlyTag {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
 }
 
 .visitLink {

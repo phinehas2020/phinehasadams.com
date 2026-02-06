@@ -50,8 +50,22 @@ export default async function WebsitesForSale() {
                                     {site.title}
                                     {site.sold && <span className={styles.soldTag}>Sold</span>}
                                 </h2>
-                                <p className={styles.siteDesc}>{site.description}</p>
+                                {site.description && <p className={styles.siteDesc}>{site.description}</p>}
                             </div>
+                            {(site.purchase_price || site.monthly_price) && (
+                                <div className={styles.pricing}>
+                                    {site.purchase_price && (
+                                        <span className={styles.priceTag}>
+                                            ${site.purchase_price.toLocaleString()}
+                                        </span>
+                                    )}
+                                    {site.monthly_price && (
+                                        <span className={styles.monthlyTag}>
+                                            +${site.monthly_price}/mo
+                                        </span>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}

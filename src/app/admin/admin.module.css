@@ -1,6 +1,6 @@
 .container {
     padding: 4rem 2rem;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     min-height: 100vh;
 }
@@ -37,6 +37,14 @@
     backdrop-filter: blur(10px);
 }
 
+.listSection {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+}
+
 .sectionTitle {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
@@ -46,6 +54,7 @@
 
 .inputGroup {
     margin-bottom: 1.5rem;
+    flex: 1;
 }
 
 .label {
@@ -76,6 +85,11 @@
     resize: vertical;
 }
 
+.priceRow {
+    display: flex;
+    gap: 1rem;
+}
+
 .button {
     background: var(--nasa-blue);
     color: white;
@@ -99,7 +113,7 @@
     gap: 1rem;
 }
 
-.listItem {
+.item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -107,38 +121,108 @@
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
+    gap: 1.5rem;
 }
 
-.itemInfo h3 {
+.itemContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.itemContent h3 {
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.itemInfo p {
+.itemUrl {
+    color: var(--nasa-blue);
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.itemUrl:hover {
+    text-decoration: underline;
+}
+
+.itemDesc {
     color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.pricing {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.priceTag {
+    background: linear-gradient(135deg, rgba(39, 201, 63, 0.2), rgba(39, 201, 63, 0.1));
+    color: #27c93f;
     font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid rgba(39, 201, 63, 0.3);
+}
+
+.monthlyTag {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+}
+
+.itemActions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.editBtn {
+    background: transparent;
+    color: var(--nasa-blue);
+    border: 1px solid rgba(0, 127, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.editBtn:hover {
+    background: rgba(0, 127, 255, 0.1);
+    border-color: var(--nasa-blue);
 }
 
 .deleteBtn {
     background: transparent;
     color: #ff3b30;
     border: 1px solid rgba(255, 59, 48, 0.3);
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .deleteBtn:hover {
     background: rgba(255, 59, 48, 0.1);
     border-color: #ff3b30;
-}
-
-.itemActions {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
 }
 
 .soldItem {
@@ -152,7 +236,6 @@
     font-size: 0.65rem;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    margin-left: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -162,11 +245,11 @@
     background: transparent;
     color: #ffbd2e;
     border: 1px solid rgba(255, 189, 46, 0.3);
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .markSoldBtn:hover {
@@ -178,14 +261,96 @@
     background: transparent;
     color: #27c93f;
     border: 1px solid rgba(39, 201, 63, 0.3);
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .markAvailableBtn:hover {
     background: rgba(39, 201, 63, 0.1);
     border-color: #27c93f;
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+.modal {
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    max-width: 550px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modalHeader .sectionTitle {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.closeBtn {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.closeBtn:hover {
+    color: #fff;
+}
+
+.editForm {
+    padding: 2rem;
+}
+
+.modalActions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cancelBtn {
+    flex: 1;
+    background: transparent;
+    color: #888;
+    border: 1px solid #333;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancelBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.modalActions .button {
+    flex: 1;
 }
