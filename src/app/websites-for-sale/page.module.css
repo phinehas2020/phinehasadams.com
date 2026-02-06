@@ -134,34 +134,37 @@
 }
 
 .trailDot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: rgba(77, 150, 255, 0.25);
-    animation: trailFade 1.5s ease-in-out infinite;
+    background: rgba(77, 150, 255, 0.15);
+    animation: dotPulse 2s ease-in-out infinite;
 }
 
-.trailDot:nth-child(1) { animation-delay: 0s; opacity: 0.3; }
-.trailDot:nth-child(2) { animation-delay: 0.15s; opacity: 0.5; }
-.trailDot:nth-child(3) { animation-delay: 0.3s; opacity: 0.7; }
+.trailDot:nth-child(1) { animation-delay: 0s; }
+.trailDot:nth-child(2) { animation-delay: 0.25s; }
+.trailDot:nth-child(3) { animation-delay: 0.5s; }
 
 .rocketHead {
-    width: 10px;
-    height: 10px;
-    background: var(--nasa-blue);
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    box-shadow: 0 0 12px var(--nasa-blue), 0 0 24px rgba(77, 150, 255, 0.3);
-    animation: rocketPulse 1.5s ease-in-out infinite;
+    background: rgba(77, 150, 255, 0.15);
+    animation: dotPulse 2s ease-in-out infinite;
+    animation-delay: 0.75s;
 }
 
-@keyframes trailFade {
-    0%, 100% { opacity: 0.15; }
-    50%      { opacity: 0.6; }
-}
-
-@keyframes rocketPulse {
-    0%, 100% { box-shadow: 0 0 8px var(--nasa-blue); }
-    50%      { box-shadow: 0 0 18px var(--nasa-blue), 0 0 30px rgba(77, 150, 255, 0.4); }
+@keyframes dotPulse {
+    0%, 100% {
+        background: rgba(77, 150, 255, 0.15);
+        box-shadow: none;
+        transform: scale(1);
+    }
+    25%, 35% {
+        background: var(--nasa-blue);
+        box-shadow: 0 0 12px var(--nasa-blue), 0 0 20px rgba(77, 150, 255, 0.3);
+        transform: scale(1.4);
+    }
 }
 
 /* ── Bar Chart Graphic ── */
