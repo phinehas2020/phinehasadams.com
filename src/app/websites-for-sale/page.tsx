@@ -1,9 +1,33 @@
+import type { Metadata } from 'next';
 import { getWebsites, Website } from '@/lib/websites';
 import styles from './page.module.css';
 import Link from 'next/link';
 import { WebsitePreview } from './WebsitePreview';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: 'Buy a Website | Phinehas Adams',
+    description: 'Customized & shipped on your domain in 3 days. Ranking on the first page of Google in 10 days.',
+    openGraph: {
+        title: 'Buy a Website — On the First Page of Google',
+        description: 'Customized & shipped on your domain in 3 days. Ranking on the first page of Google in 10 days.',
+        images: [
+            {
+                url: '/og-websites.png',
+                width: 1400,
+                height: 860,
+                alt: 'Buy a Website — Your business online. On the first page of Google.',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Buy a Website — On the First Page of Google',
+        description: 'Customized & shipped on your domain in 3 days. Ranking on the first page of Google in 10 days.',
+        images: ['/og-websites.png'],
+    },
+};
 
 export default async function WebsitesForSale() {
     let websites: Website[] = [];
