@@ -146,6 +146,17 @@ export default function Hero() {
                 <span className={`${styles.cursor} ${activeLine === 'name' ? styles.cursorActive : styles.cursorHidden}`}></span>
             </motion.h1>
 
+            <motion.a
+                href="/websites-for-sale"
+                className={styles.websitesLink}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+                style={{ marginBottom: '1rem' }}
+            >
+                [ ACQUIRE_WEBSITES ]
+            </motion.a>
+
             <div className={styles.tagline}>
                 {taglineText}
                 {/* Conditionally render cursor on tagline */}
