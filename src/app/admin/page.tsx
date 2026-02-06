@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { getWebsites } from '@/lib/websites';
 import styles from './admin.module.css';
-import { LoginForm, AddWebsiteForm, DeleteButton } from './client-forms';
+import { LoginForm, AddWebsiteForm, DeleteButton, ToggleSoldButton } from './client-forms';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,12 +37,18 @@ export default async function AdminPage() {
                 <h2 className={styles.sectionTitle}>Manage Listings ({websites.length})</h2>
                 <div className={styles.list}>
                     {websites.map((site) => (
-                        <div key={site.id} className={styles.listItem}>
+                        <div key={site.id} className={`${styles.listItem} ${site.sold ? styles.soldItem : ''}`}>
                             <div className={styles.itemInfo}>
-                                <h3>{site.title}</h3>
+                                <h3>
+                                    {site.title}
+                                    {site.sold && <span className={styles.soldBadge}>SOLD</span>}
+                                </h3>
                                 <p>{site.url}</p>
                             </div>
-                            <DeleteButton id={site.id} />
+                            <div className={styles.itemActions}>
+                                <ToggleSoldButton id={site.id} sold={site.sold} />
+                                <DeleteButton id={site.id} />
+                            </div>
                         </div>
                     ))}
                     {websites.length === 0 && (

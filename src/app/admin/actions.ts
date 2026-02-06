@@ -1,6 +1,6 @@
 'use server'
 
-import { addWebsite, deleteWebsite } from '@/lib/websites';
+import { addWebsite, deleteWebsite, toggleWebsiteSold } from '@/lib/websites';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
@@ -22,12 +22,21 @@ export async function createWebsiteAction(formData: FormData) {
     await addWebsite(formattedUrl, title, description);
     revalidatePath('/websites-for-sale');
     revalidatePath('/admin');
+    revalidatePath('/');
 }
 
 export async function deleteWebsiteAction(id: string) {
     await deleteWebsite(id);
     revalidatePath('/websites-for-sale');
     revalidatePath('/admin');
+    revalidatePath('/');
+}
+
+export async function toggleSoldAction(id: string) {
+    await toggleWebsiteSold(id);
+    revalidatePath('/websites-for-sale');
+    revalidatePath('/admin');
+    revalidatePath('/');
 }
 
 export async function loginAction(prevState: any, formData: FormData) {

@@ -118,3 +118,58 @@
     background: rgba(255, 59, 48, 0.1);
     border-color: #ff3b30;
 }
+
+.itemActions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.soldItem {
+    opacity: 0.6;
+    border-color: rgba(255, 189, 46, 0.3);
+}
+
+.soldBadge {
+    background: rgba(255, 189, 46, 0.2);
+    color: #ffbd2e;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.markSoldBtn {
+    background: transparent;
+    color: #ffbd2e;
+    border: 1px solid rgba(255, 189, 46, 0.3);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.markSoldBtn:hover {
+    background: rgba(255, 189, 46, 0.1);
+    border-color: #ffbd2e;
+}
+
+.markAvailableBtn {
+    background: transparent;
+    color: #27c93f;
+    border: 1px solid rgba(39, 201, 63, 0.3);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.markAvailableBtn:hover {
+    background: rgba(39, 201, 63, 0.1);
+    border-color: #27c93f;
+}

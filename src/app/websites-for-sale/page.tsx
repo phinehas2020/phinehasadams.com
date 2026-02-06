@@ -17,10 +17,16 @@ export default async function WebsitesForSale() {
 
             <div className={styles.grid}>
                 {websites.map((site) => (
-                    <div key={site.id} className={styles.card}>
+                    <div key={site.id} className={`${styles.card} ${site.sold ? styles.soldCard : ''}`}>
                         <a href={site.url} target="_blank" rel="noopener noreferrer" className={styles.visitLink}>
                             <span className="sr-only">Visit {site.title}</span>
                         </a>
+
+                        {site.sold && (
+                            <div className={styles.soldOverlay}>
+                                <span className={styles.soldBadge}>SOLD</span>
+                            </div>
+                        )}
 
                         <div className={styles.browserWindow}>
                             <div className={styles.browserHeader}>
@@ -42,7 +48,10 @@ export default async function WebsitesForSale() {
 
                         <div className={styles.info}>
                             <div>
-                                <h2 className={styles.siteTitle}>{site.title}</h2>
+                                <h2 className={styles.siteTitle}>
+                                    {site.title}
+                                    {site.sold && <span className={styles.soldTag}>Sold</span>}
+                                </h2>
                                 <p className={styles.siteDesc}>{site.description}</p>
                             </div>
                         </div>

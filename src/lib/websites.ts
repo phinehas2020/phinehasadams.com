@@ -1,60 +1,56 @@
-import fs from 'fs/promises';
-import path from 'path';
-
-// Import the JSON directly so Next.js bundles it efficiently
-import sitesData from '../data/websites.json';
+import pool from './db';
 
 export interface Website {
     id: string;
     url: string;
     title: string;
     description?: string;
-    createdAt: string;
+    image_url?: string;
+    sold: boolean;
+    created_at: string;
 }
 
-// In-memory store initialized from the JSON file
-// accessible to the server process. Note: In Vercel serverless,
-// this state may reset between requests if the lambda is cold-booted.
-let currentWebsites: Website[] = [...(sitesData as Website[])];
-
-// Backup file path for purely local persistent storage
-const DATA_FILE = path.join(process.cwd(), 'src', 'data', 'websites.json');
-
 export async function getWebsites(): Promise<Website[]> {
-    // Always return the in-memory data which is fast and crash-proof
-    return currentWebsites;
+    const client = await pool.connect();
+    try {
+        const res = await client.query('SELECT * FROM websites ORDER BY created_at DESC');
+        return res.rows;
+    } finally {
+        client.release();
+    }
 }
 
 export async function addWebsite(url: string, title: string, description?: string): Promise<Website> {
-    const newWebsite: Website = {
-        id: crypto.randomUUID(),
-        url,
-        title,
-        description,
-        createdAt: new Date().toISOString(),
-    };
-
-    // Update in-memory
-    currentWebsites.push(newWebsite);
-
-    // Try to persist to disk (works locally, silently fails in Prod/Read-Only)
+    const client = await pool.connect();
     try {
-        await fs.writeFile(DATA_FILE, JSON.stringify(currentWebsites, null, 2), 'utf-8');
-    } catch (error) {
-        console.log('Note: Could not persist website to disk (read-only environment). changes are ephemeral.');
+        const res = await client.query(
+            'INSERT INTO websites (url, title, description) VALUES ($1, $2, $3) RETURNING *',
+            [url, title, description || null]
+        );
+        return res.rows[0];
+    } finally {
+        client.release();
     }
-
-    return newWebsite;
 }
 
 export async function deleteWebsite(id: string): Promise<void> {
-    // Update in-memory
-    currentWebsites = currentWebsites.filter(w => w.id !== id);
-
-    // Try to persist to disk
+    const client = await pool.connect();
     try {
-        await fs.writeFile(DATA_FILE, JSON.stringify(currentWebsites, null, 2), 'utf-8');
-    } catch (error) {
-        console.log('Note: Could not persist deletion (read-only environment).');
+        await client.query('DELETE FROM websites WHERE id = $1', [id]);
+    } finally {
+        client.release();
+    }
+}
+
+export async function toggleWebsiteSold(id: string): Promise<Website> {
+    const client = await pool.connect();
+    try {
+        const res = await client.query(
+            'UPDATE websites SET sold = NOT sold WHERE id = $1 RETURNING *',
+            [id]
+        );
+        return res.rows[0];
+    } finally {
+        client.release();
     }
 }

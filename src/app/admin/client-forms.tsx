@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
-import { loginAction, createWebsiteAction, deleteWebsiteAction } from './actions';
+import { loginAction, createWebsiteAction, deleteWebsiteAction, toggleSoldAction } from './actions';
 import { useRouter } from 'next/navigation';
 import styles from './admin.module.css';
 
@@ -105,6 +105,21 @@ export function DeleteButton({ id }: { id: string }) {
         <form action={deleteWithId}>
             <button type="submit" className={styles.deleteBtn}>
                 Delete
+            </button>
+        </form>
+    );
+}
+
+export function ToggleSoldButton({ id, sold }: { id: string; sold: boolean }) {
+    const toggleWithId = toggleSoldAction.bind(null, id);
+
+    return (
+        <form action={toggleWithId}>
+            <button
+                type="submit"
+                className={sold ? styles.markAvailableBtn : styles.markSoldBtn}
+            >
+                {sold ? 'Mark Available' : 'Mark Sold'}
             </button>
         </form>
     );
