@@ -41,7 +41,7 @@
 }
 
 .title {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     font-size: clamp(2.4rem, 6vw, 4rem);
     font-weight: 700;
     line-height: 1.1;
@@ -55,7 +55,7 @@
 }
 
 .subtitle {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     color: var(--fg-secondary);
     font-size: clamp(1rem, 2vw, 1.2rem);
     max-width: 580px;
@@ -119,7 +119,7 @@
 }
 
 .metricDesc {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     font-size: 0.85rem;
     color: var(--fg-secondary);
     line-height: 1.4;
@@ -272,7 +272,7 @@
 }
 
 .stepTitle {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--fg-primary);
@@ -280,7 +280,7 @@
 }
 
 .stepDesc {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     font-size: 0.85rem;
     color: var(--fg-secondary);
     line-height: 1.5;
@@ -311,7 +311,7 @@
 }
 
 .ctaHeadline {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     font-weight: 600;
     color: var(--fg-primary);
@@ -323,7 +323,7 @@
 }
 
 .customText {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     font-size: 0.95rem;
     color: var(--fg-secondary);
     line-height: 1.6;
@@ -376,7 +376,7 @@
     text-align: center;
     color: var(--fg-secondary);
     padding: 4rem;
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
 }
 
 /* ═══════════════════════════════
@@ -467,7 +467,7 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--fg-primary);
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
 }
 
 .siteDesc {

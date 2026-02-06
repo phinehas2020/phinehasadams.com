@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { GeistPixelSquare } from "geist/font/pixel";
+import { JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+const geistPixel = GeistPixelSquare;
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -56,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${geistPixel.variable} ${jetbrainsMono.variable}`}>
         <SmoothScroll>
           {children}
         </SmoothScroll>

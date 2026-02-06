@@ -17,7 +17,7 @@
 }
 
 .link {
-    font-family: var(--font-inter);
+    font-family: var(--font-geist-pixel-square);
     font-size: clamp(1.5rem, 5vw, 4rem);
     font-weight: 700;
     color: var(--fg-primary);
