@@ -5,6 +5,22 @@
     min-height: 100vh;
 }
 
+.breadcrumbs {
+    margin-bottom: 2rem;
+}
+
+.breadcrumbLink {
+    font-family: var(--font-jetbrains-mono);
+    font-size: 0.85rem;
+    color: var(--fg-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+    color: var(--nasa-blue);
+}
+
 .title {
     font-size: 2rem;
     margin-bottom: 2rem;

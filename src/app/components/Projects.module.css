@@ -18,3 +18,25 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
 }
+
+.viewMore {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.viewMoreLink {
+    font-family: var(--font-jetbrains-mono);
+    font-size: 0.85rem;
+    color: var(--nasa-blue);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--nasa-blue);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.viewMoreLink:hover {
+    background: var(--nasa-blue);
+    color: #fff;
+}

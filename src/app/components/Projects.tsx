@@ -1,28 +1,13 @@
 import styles from './Projects.module.css';
 import cardStyles from './ProjectCard.module.css';
-import pool from '@/lib/db';
-
-interface Project {
-    id: number;
-    title: string;
-    status: string;
-    description: string;
-    technologies: string[];
-    image_url: string;
-}
-
-async function getProjects() {
-    const client = await pool.connect();
-    try {
-        const res = await client.query('SELECT * FROM projects ORDER BY id ASC');
-        return res.rows;
-    } finally {
-        client.release();
-    }
-}
+import { getWebsites, Website } from '@/lib/websites';
+import Link from 'next/link';
 
 export default async function Projects() {
-    const projects = await getProjects();
+    const websites = await getWebsites();
+
+    // Only show first 3 websites on homepage
+    const displayWebsites = websites.slice(0, 3);
 
     return (
         <section className={styles.section}>
@@ -30,37 +15,54 @@ export default async function Projects() {
                 {"//"} WEBSITES FOR SALE
             </span>
             <div className={styles.grid}>
-                {projects.map((p: Project) => (
-                    <div key={p.id} className={cardStyles.card}>
+                {displayWebsites.map((site: Website) => (
+                    <a
+                        key={site.id}
+                        href={site.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${cardStyles.card} ${site.sold ? cardStyles.soldCard : ''}`}
+                    >
                         <div className={cardStyles.browserHeader}>
                             <div className={cardStyles.dot}></div>
                             <div className={cardStyles.dot}></div>
                             <div className={cardStyles.dot}></div>
                         </div>
-                        {p.image_url && (
-                            <div className={cardStyles.imageContainer}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={p.image_url}
-                                    alt={p.title}
-                                    className={cardStyles.image}
-                                    loading="lazy"
-                                />
-                            </div>
-                        )}
+                        <div className={cardStyles.iframeContainer}>
+                            <iframe
+                                src={site.url}
+                                className={cardStyles.iframe}
+                                title={`Preview of ${site.title}`}
+                                tabIndex={-1}
+                                loading="lazy"
+                            />
+                            {site.sold && (
+                                <div className={cardStyles.soldOverlay}>
+                                    <span className={cardStyles.soldBadge}>SOLD</span>
+                                </div>
+                            )}
+                        </div>
                         <div className={cardStyles.content}>
                             <div className={cardStyles.header}>
-                                <h3 className={cardStyles.title}>{p.title}</h3>
-                                <span className={cardStyles.status}>{p.status}</span>
+                                <h3 className={cardStyles.title}>
+                                    {site.title}
+                                    {site.sold && <span className={cardStyles.soldTag}>Sold</span>}
+                                </h3>
                             </div>
-                            <p className={cardStyles.description}>{p.description}</p>
-                            <div className={cardStyles.meta}>
-                                {p.technologies.map(t => <span key={t}>[{t}]</span>)}
-                            </div>
+                            {site.description && (
+                                <p className={cardStyles.description}>{site.description}</p>
+                            )}
                         </div>
-                    </div>
+                    </a>
                 ))}
             </div>
+            {websites.length > 3 && (
+                <div className={styles.viewMore}>
+                    <Link href="/websites-for-sale" className={styles.viewMoreLink}>
+                        View All Websites →
+                    </Link>
+                </div>
+            )}
         </section>
     );
 }

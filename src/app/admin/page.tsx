@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { getWebsites } from '@/lib/websites';
 import styles from './admin.module.css';
 import { LoginForm, AddWebsiteForm, DeleteButton, ToggleSoldButton } from './client-forms';
+import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,6 +13,9 @@ export default async function AdminPage() {
     if (!isAuthenticated) {
         return (
             <main className={styles.container}>
+                <nav className={styles.breadcrumbs}>
+                    <Link href="/" className={styles.breadcrumbLink}>← Back to Home</Link>
+                </nav>
                 <h1 className={styles.title}>Admin Access</h1>
                 <LoginForm />
             </main>
@@ -22,6 +26,10 @@ export default async function AdminPage() {
 
     return (
         <main className={styles.container}>
+            <nav className={styles.breadcrumbs}>
+                <Link href="/" className={styles.breadcrumbLink}>← Back to Home</Link>
+            </nav>
+
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h1 className={styles.title}>Dashboard</h1>
                 {!process.env.ADMIN_PASSWORD && (

@@ -1,5 +1,6 @@
 import { getWebsites } from '@/lib/websites';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,6 +9,10 @@ export default async function WebsitesForSale() {
 
     return (
         <main className={styles.container}>
+            <nav className={styles.breadcrumbs}>
+                <Link href="/" className={styles.breadcrumbLink}>← Back to Home</Link>
+            </nav>
+
             <header className={styles.header}>
                 <h1 className={styles.title}>Websites for Sale</h1>
                 <p className={styles.subtitle}>

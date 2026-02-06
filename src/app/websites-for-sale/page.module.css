@@ -5,6 +5,22 @@
     margin: 0 auto;
 }
 
+.breadcrumbs {
+    margin-bottom: 2rem;
+}
+
+.breadcrumbLink {
+    font-family: var(--font-jetbrains-mono);
+    font-size: 0.85rem;
+    color: var(--fg-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+    color: var(--nasa-blue);
+}
+
 .header {
     margin-bottom: 4rem;
     text-align: center;
@@ -96,7 +112,7 @@
     height: 240px;
     position: relative;
     overflow: hidden;
-    background: #fff;
+    background: #0a0a0a;
     /* Prevent interaction with iframe content */
     pointer-events: none;
 }
@@ -107,6 +123,7 @@
     height: 750px;
     /* Aspect ratio roughly 4:3 */
     border: none;
+    background: #fff;
     /* Transform to fit container - ratio 320/1000 = 0.32 */
     transform: scale(0.32);
     transform-origin: 0 0;
