@@ -105,13 +105,17 @@ export default async function WebsitesForSale() {
 
             {/* ── Custom CTA ── */}
             <div className={styles.customCta}>
+                <span className={styles.ctaLabel}>{"// "}IMPORTANT</span>
+                <h3 className={styles.ctaHeadline}>
+                    These are starting points — <span className={styles.ctaAccent}>not finished products</span>.
+                </h3>
                 <p className={styles.customText}>
-                    These are starting points. Every site gets fully customized for your business.
-                    Need something built from scratch?{' '}
-                    <a href="mailto:phinehas@phinehasadams.com" className={styles.customLink}>
-                        Reach out for a custom quote
-                    </a>.
+                    Every site gets fully rebuilt around your business — your brand, your content, your domain.
+                    Want something completely custom from scratch?
                 </p>
+                <a href="mailto:me@phinehasadams.com" className={styles.ctaButton}>
+                    Get a Custom Quote →
+                </a>
             </div>
 
             {/* ── Website Grid ── */}
