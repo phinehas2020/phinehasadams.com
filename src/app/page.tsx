@@ -1,5 +1,6 @@
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Process from "./components/Process";
 import Projects from "./components/Projects";
 import Photography from "./components/Photography";
 import Capabilities from "./components/Capabilities";
@@ -15,6 +16,7 @@ export default function Home() {
     <main>
       <Hero />
       <About />
+      <Process />
       <Projects />
       <Photography photos={photos} />
       <Vulnerability />

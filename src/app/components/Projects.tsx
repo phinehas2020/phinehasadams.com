@@ -5,7 +5,12 @@ import Link from 'next/link';
 import { WebsitePreviewCard } from './WebsitePreviewCard';
 
 export default async function Projects() {
-    const websites = await getWebsites();
+    let websites: Website[] = [];
+    try {
+        websites = await getWebsites();
+    } catch {
+        // DB unavailable (local dev without DATABASE_URL)
+    }
 
     // Only show first 3 websites on homepage
     const displayWebsites = websites.slice(0, 3);
