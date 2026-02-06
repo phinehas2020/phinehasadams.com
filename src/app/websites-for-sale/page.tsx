@@ -73,7 +73,6 @@ export default async function WebsitesForSale() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={styles.buyButton}
-                                        onClick={(e) => e.stopPropagation()}
                                     >
                                         Buy Now
                                     </a>
