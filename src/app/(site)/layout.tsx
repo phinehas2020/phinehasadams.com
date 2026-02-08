@@ -2,6 +2,7 @@ import { GeistPixelSquare } from "geist/font/pixel";
 import { JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import SmoothScroll from "./components/SmoothScroll";
+import SignalGrid from "./components/SignalGrid";
 
 const geistPixel = GeistPixelSquare;
 
@@ -18,6 +19,7 @@ export default function SiteLayout({
 }>) {
   return (
     <div className={`${geistPixel.variable} ${jetbrainsMono.variable}`}>
+      <SignalGrid />
       <SmoothScroll>
         {children}
       </SmoothScroll>

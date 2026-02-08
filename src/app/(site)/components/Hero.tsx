@@ -1,14 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { svg, createTimeline } from 'animejs';
 import styles from './Hero.module.css';
 import { soundSystem } from '../utils/sound';
+
+const TRAJECTORY = 'M-200,1000 Q600,100 1600,0';
 
 export default function Hero() {
     const [time, setTime] = useState('');
     const [taglineText, setTaglineText] = useState('');
     const [activeLine, setActiveLine] = useState<'name' | 'tagline'>('name');
+    const trajectoryRef = useRef<SVGSVGElement>(null);
 
     useEffect(() => {
         const updateTime = () => {
@@ -21,32 +25,21 @@ export default function Hero() {
     }, []);
 
     useEffect(() => {
-        // Sequence:
-        // 1. Wait for Name fade in (approx 1s)
-        // 2. Move cursor to tagline
-        // 3. Type tagline
-
         const fullTagline = "Design. Systems. Production.";
 
         const startTyping = async () => {
-            // Try to boot sound (might be blocked by browser policy until interaction)
             try { soundSystem.playBootSequence(); } catch { }
 
-            // Wait for initial name animation
             await new Promise(r => setTimeout(r, 1500));
 
-            // Switch cursor
             setActiveLine('tagline');
             soundSystem.playCursorDrop();
 
-            // Small pause before typing starts
             await new Promise(r => setTimeout(r, 500));
 
-            // Type out characters
             for (let i = 0; i <= fullTagline.length; i++) {
                 setTaglineText(fullTagline.slice(0, i));
                 soundSystem.playTypingSound();
-                // Randomize typing speed slightly for realism
                 await new Promise(r => setTimeout(r, 30 + Math.random() * 50));
             }
         };
@@ -54,7 +47,6 @@ export default function Hero() {
         startTyping();
     }, []);
 
-    // Resume audio context on first user interaction
     useEffect(() => {
         const handleInteraction = () => {
             soundSystem.resume();
@@ -71,6 +63,55 @@ export default function Hero() {
         };
     }, []);
 
+    // Rocket trajectory — anime.js powered
+    useEffect(() => {
+        const svgEl = trajectoryRef.current;
+        if (!svgEl) return;
+
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+        if (prefersReducedMotion) return;
+
+        const guidePath = svgEl.querySelector('#guide-path') as SVGPathElement;
+        const cometTrail = svgEl.querySelector('#comet-trail') as SVGPathElement;
+        const rocketBody = svgEl.querySelector('#rocket-body') as SVGGElement;
+        if (!guidePath || !cometTrail || !rocketBody) return;
+
+        const FLIGHT = 6000;
+        const TRAIL_FADE = 1500;
+
+        const tl = createTimeline({
+            loop: true,
+            loopDelay: 2000,
+        });
+
+        // Comet trail — slides along the arc as a glowing segment
+        tl.add(svg.createDrawable(cometTrail), {
+            draw: [
+                '0 0',      // nothing
+                '0 0.2',    // trail appears behind rocket
+                '0.05 0.45',
+                '0.25 0.7',
+                '0.5 0.9',
+                '0.75 1',   // trail reaches end
+                '1 1',      // trail fades out
+            ],
+            duration: FLIGHT + TRAIL_FADE,
+            ease: 'linear',
+        });
+
+        // Rocket follows the trajectory path
+        tl.add(rocketBody, {
+            ...svg.createMotionPath(guidePath),
+            opacity: [0, 1, 1, 1, 0],
+            duration: FLIGHT,
+            ease: 'inOutQuad',
+        }, 0);
+
+        return () => { tl.revert(); };
+    }, []);
+
     return (
         <section className={styles.hero}>
             <div className={styles.noise}></div>
@@ -85,13 +126,24 @@ export default function Hero() {
                 <span className={styles.statusLive}>● LIVE</span>
             </div>
 
-            {/* Rocket Nod: Arcing Trajectory */}
-            <svg className={styles.trajectoryArc} viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+            {/* Rocket Trajectory — anime.js driven */}
+            <svg
+                ref={trajectoryRef}
+                className={styles.trajectoryArc}
+                viewBox="0 0 1440 900"
+                preserveAspectRatio="xMidYMid slice"
+            >
                 <defs>
-                    <linearGradient id="fadeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <linearGradient id="guideGrad" x1="0%" y1="100%" x2="100%" y2="0%">
                         <stop offset="0%" stopColor="rgba(77, 150, 255, 0)" />
-                        <stop offset="20%" stopColor="rgba(77, 150, 255, 0.4)" />
-                        <stop offset="80%" stopColor="rgba(77, 150, 255, 0.4)" />
+                        <stop offset="20%" stopColor="rgba(77, 150, 255, 0.25)" />
+                        <stop offset="80%" stopColor="rgba(77, 150, 255, 0.25)" />
+                        <stop offset="100%" stopColor="rgba(77, 150, 255, 0)" />
+                    </linearGradient>
+                    <linearGradient id="trailGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="rgba(77, 150, 255, 0)" />
+                        <stop offset="10%" stopColor="rgba(77, 150, 255, 0.7)" />
+                        <stop offset="90%" stopColor="rgba(77, 150, 255, 0.7)" />
                         <stop offset="100%" stopColor="rgba(77, 150, 255, 0)" />
                     </linearGradient>
                     <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
@@ -104,30 +156,43 @@ export default function Hero() {
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
+                    <filter id="trailGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" in="SourceGraphic" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
                 </defs>
-                {/* The Path */}
+
+                {/* Dim guide path — planned trajectory (always visible) */}
                 <path
-                    d="M-200,1000 Q600,100 1600,0"
-                    stroke="url(#fadeGrad)"
-                    strokeWidth="2"
+                    id="guide-path"
+                    d={TRAJECTORY}
+                    stroke="url(#guideGrad)"
+                    strokeWidth="1"
                     fill="none"
+                    opacity="0.3"
                 />
-                {/* The Glowing Thingy - Tear Drop / Flame Shape */}
+
+                {/* Bright comet trail — animated exhaust plume */}
                 <path
-                    d="M 4,0 Q 4,3 -12,0 Q 4,-3 4,0"
-                    fill="#4D96FF"
-                    filter="url(#glow)"
-                >
-                    <animateMotion
-                        dur="6s"
-                        repeatCount="indefinite"
-                        path="M-200,1000 Q600,100 1600,0"
-                        rotate="auto"
-                        calcMode="spline"
-                        keySplines="0.4 0 0.2 1"
-                        keyTimes="0;1"
+                    id="comet-trail"
+                    d={TRAJECTORY}
+                    stroke="url(#trailGrad)"
+                    strokeWidth="2.5"
+                    fill="none"
+                    filter="url(#trailGlow)"
+                />
+
+                {/* Rocket body — teardrop flame */}
+                <g id="rocket-body" opacity="0">
+                    <path
+                        d="M 4,0 Q 4,3 -12,0 Q 4,-3 4,0"
+                        fill="#4D96FF"
+                        filter="url(#glow)"
                     />
-                </path>
+                </g>
             </svg>
 
             <div className={styles.cornerTopLeft}></div>
@@ -142,7 +207,6 @@ export default function Hero() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
                 Phinehas<br />Adams
-                {/* Conditionally render cursor on name */}
                 <span className={`${styles.cursor} ${activeLine === 'name' ? styles.cursorActive : styles.cursorHidden}`}></span>
             </motion.h1>
 
@@ -159,7 +223,6 @@ export default function Hero() {
 
             <div className={styles.tagline}>
                 {taglineText}
-                {/* Conditionally render cursor on tagline */}
                 <span className={`${styles.cursor} ${activeLine === 'tagline' ? styles.cursorActive : styles.cursorHidden}`}></span>
             </div>
 
