@@ -12,6 +12,7 @@ export default defineConfig({
   title: 'Phinehas Adams',
   projectId,
   dataset,
+  basePath: '/studio',
   plugins: [structureTool()],
   schema: {
     types: schemaTypes,
