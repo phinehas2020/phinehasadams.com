@@ -1,19 +1,15 @@
 import styles from './Projects.module.css';
 import cardStyles from './ProjectCard.module.css';
-import { getWebsites, Website } from '@/lib/websites';
+import { sanityFetch } from '@/sanity/lib/live';
+import { WEBSITES_QUERY, type SanityWebsite } from '@/sanity/lib/queries';
 import Link from 'next/link';
 import { WebsitePreviewCard } from './WebsitePreviewCard';
 
 export default async function Projects() {
-    let websites: Website[] = [];
-    try {
-        websites = await getWebsites();
-    } catch {
-        // DB unavailable (local dev without DATABASE_URL)
-    }
+    const { data: websites } = await sanityFetch<SanityWebsite[]>({ query: WEBSITES_QUERY });
 
     // Only show first 3 websites on homepage
-    const displayWebsites = websites.slice(0, 3);
+    const displayWebsites = (websites ?? []).slice(0, 3);
 
     return (
         <section className={styles.section}>
@@ -29,9 +25,9 @@ export default async function Projects() {
                 </h2>
             </div>
             <div className={styles.grid}>
-                {displayWebsites.map((site: Website) => (
+                {displayWebsites.map((site) => (
                     <a
-                        key={site.id}
+                        key={site._id}
                         href={site.url}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -57,7 +53,7 @@ export default async function Projects() {
                     </a>
                 ))}
             </div>
-            {websites.length > 3 && (
+            {(websites ?? []).length > 3 && (
                 <div className={styles.viewMore}>
                     <Link href="/websites-for-sale" className={styles.viewMoreLink}>
                         View All Websites →

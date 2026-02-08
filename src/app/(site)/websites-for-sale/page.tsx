@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import { getWebsites, Website } from '@/lib/websites';
+import { sanityFetch } from '@/sanity/lib/live';
+import { WEBSITES_QUERY, type SanityWebsite } from '@/sanity/lib/queries';
 import styles from './page.module.css';
 import Link from 'next/link';
 import { WebsitePreview } from './WebsitePreview';
-
-export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: 'Buy a Website | Phinehas Adams',
@@ -30,12 +29,8 @@ export const metadata: Metadata = {
 };
 
 export default async function WebsitesForSale() {
-    let websites: Website[] = [];
-    try {
-        websites = await getWebsites();
-    } catch {
-        // DB unavailable (local dev without DATABASE_URL)
-    }
+    const { data: websites } = await sanityFetch<SanityWebsite[]>({ query: WEBSITES_QUERY });
+    const sites = websites ?? [];
 
     return (
         <main className={styles.container}>
@@ -146,8 +141,8 @@ export default async function WebsitesForSale() {
             <div className={styles.gridSection}>
                 <span className={styles.gridLabel}>{"// "}AVAILABLE WEBSITES</span>
                 <div className={styles.grid}>
-                    {websites.map((site) => (
-                        <div key={site.id} className={`${styles.card} ${site.sold ? styles.soldCard : ''}`}>
+                    {sites.map((site) => (
+                        <div key={site._id} className={`${styles.card} ${site.sold ? styles.soldCard : ''}`}>
                             <a href={site.url} target="_blank" rel="noopener noreferrer" className={styles.visitLink}>
                                 <span className="sr-only">Visit {site.title}</span>
                             </a>
@@ -177,23 +172,23 @@ export default async function WebsitesForSale() {
                                     {site.description && <p className={styles.siteDesc}>{site.description}</p>}
                                 </div>
                                 <div className={styles.infoFooter}>
-                                    {(site.purchase_price || site.monthly_price) && (
+                                    {(site.purchasePrice || site.monthlyPrice) && (
                                         <div className={styles.pricing}>
-                                            {site.purchase_price && (
+                                            {site.purchasePrice && (
                                                 <span className={styles.priceTag}>
-                                                    ${site.purchase_price.toLocaleString()}
+                                                    ${site.purchasePrice.toLocaleString()}
                                                 </span>
                                             )}
-                                            {site.monthly_price && (
+                                            {site.monthlyPrice && (
                                                 <span className={styles.monthlyTag}>
-                                                    +${site.monthly_price}/mo
+                                                    +${site.monthlyPrice}/mo
                                                 </span>
                                             )}
                                         </div>
                                     )}
-                                    {site.stripe_link && !site.sold && (
+                                    {site.stripeLink && !site.sold && (
                                         <a
-                                            href={site.stripe_link}
+                                            href={site.stripeLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={styles.buyButton}
@@ -206,7 +201,7 @@ export default async function WebsitesForSale() {
                         </div>
                     ))}
 
-                    {websites.length === 0 && (
+                    {sites.length === 0 && (
                         <div className={styles.emptyState}>
                             No websites listed at the moment.
                         </div>

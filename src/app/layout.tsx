@@ -1,17 +1,5 @@
 import type { Metadata } from "next";
-import { GeistPixelSquare } from "geist/font/pixel";
-import { JetBrains_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
-
-const geistPixel = GeistPixelSquare;
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Phinehas Adams",
@@ -53,12 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistPixel.variable} ${jetbrainsMono.variable}`}>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
-        <Analytics />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
