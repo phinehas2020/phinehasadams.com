@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { animate, stagger, onScroll, createScope } from 'animejs';
 import styles from './Capabilities.module.css';
 
 const capabilities = [
@@ -18,23 +19,56 @@ const capabilities = [
 ];
 
 export default function Capabilities() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+        if (prefersReducedMotion) return;
+
+        const scope = createScope({ root: section });
+        scopeRef.current = scope;
+
+        scope.add(() => {
+            const items = section.querySelectorAll(`.${styles.item}`);
+
+            animate(Array.from(items), {
+                x: [-30, 0],
+                opacity: [0, 1],
+                duration: 700,
+                delay: stagger(50),
+                ease: 'outQuint',
+                autoplay: onScroll({
+                    target: section,
+                    enter: 'bottom-=60',
+                }),
+            });
+        });
+
+        return () => {
+            scope.revert();
+        };
+    }, []);
+
     return (
-        <section className={styles.section}>
+        <section ref={sectionRef} className={styles.section}>
             <span className={styles.label}>
                 {"//"} CAPABILITIES
             </span>
             <ul className={styles.list}>
                 {capabilities.map((c, i) => (
-                    <motion.li
+                    <li
                         key={i}
                         className={styles.item}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.05, duration: 0.5 }}
+                        style={{ opacity: 0 }}
                     >
                         {c}
-                    </motion.li>
+                    </li>
                 ))}
             </ul>
         </section>

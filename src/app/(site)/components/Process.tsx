@@ -1,22 +1,54 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { animate, stagger, onScroll, createScope } from 'animejs';
 import styles from './Process.module.css';
 
 export default function Process() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+        if (prefersReducedMotion) return;
+
+        const scope = createScope({ root: section });
+        scopeRef.current = scope;
+
+        scope.add(() => {
+            const cards = section.querySelectorAll(`.${styles.card}`);
+
+            animate(Array.from(cards), {
+                y: [40, 0],
+                opacity: [0, 1],
+                scale: [0.95, 1],
+                duration: 900,
+                delay: stagger(120),
+                ease: 'outQuint',
+                autoplay: onScroll({
+                    target: section,
+                    enter: 'bottom-=80',
+                }),
+            });
+        });
+
+        return () => {
+            scope.revert();
+        };
+    }, []);
+
     return (
-        <section className={styles.section}>
+        <section ref={sectionRef} className={styles.section}>
             <span className={styles.label}>{"// "}PROCESS</span>
             <div className={styles.bento}>
 
                 {/* ITERATE — dual orbit animation */}
-                <motion.div
-                    className={`${styles.card} ${styles.iterate}`}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
+                <div className={`${styles.card} ${styles.iterate}`} style={{ opacity: 0 }}>
                     <div className={styles.visual}>
                         <div className={styles.orbitOuter}>
                             <div className={styles.orbitInner} />
@@ -27,16 +59,10 @@ export default function Process() {
                         <span className={styles.tag}>ITERATE</span>
                         <p className={styles.desc}>Debug. Refactor. Ship. Repeat.</p>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* INTEGRATE — connected nodes with signal pulses */}
-                <motion.div
-                    className={`${styles.card} ${styles.integrate}`}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1, duration: 0.6 }}
-                >
+                <div className={`${styles.card} ${styles.integrate}`} style={{ opacity: 0 }}>
                     <div className={styles.visual}>
                         <div className={styles.network}>
                             <span className={styles.dot} />
@@ -54,16 +80,10 @@ export default function Process() {
                         <span className={styles.tag}>INTEGRATE</span>
                         <p className={styles.desc}>Systems wired into one pipeline.</p>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* DEPLOY — ascending pipeline bars */}
-                <motion.div
-                    className={`${styles.card} ${styles.deploy}`}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2, duration: 0.6 }}
-                >
+                <div className={`${styles.card} ${styles.deploy}`} style={{ opacity: 0 }}>
                     <div className={styles.visual}>
                         <div className={styles.pipeline}>
                             <div className={`${styles.bar} ${styles.bar1}`} />
@@ -76,16 +96,10 @@ export default function Process() {
                         <span className={styles.tag}>DEPLOY</span>
                         <p className={styles.desc}>Local to production. Full pipeline.</p>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* BUILD — stacking layers */}
-                <motion.div
-                    className={`${styles.card} ${styles.build}`}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
-                >
+                <div className={`${styles.card} ${styles.build}`} style={{ opacity: 0 }}>
                     <div className={styles.visual}>
                         <div className={styles.layers}>
                             <div className={`${styles.layerBar} ${styles.l1}`} />
@@ -99,7 +113,7 @@ export default function Process() {
                         <span className={styles.tag}>BUILD</span>
                         <p className={styles.desc}>Software. Hardware. Whatever it takes.</p>
                     </div>
-                </motion.div>
+                </div>
 
             </div>
         </section>

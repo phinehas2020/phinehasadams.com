@@ -1,16 +1,17 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { animate, stagger, createAnimatable } from 'animejs';
+import { animate, stagger, createAnimatable, createScope } from 'animejs';
 import styles from './SignalGrid.module.css';
 
-const GRID_SIZE = 50;
-const DOT_BASE_OPACITY = 0.15;
-const PROXIMITY_RADIUS = 2;
+const GRID_SIZE = 60;
+const DOT_BASE_OPACITY = 0.12;
+const PROXIMITY_RADIUS = 3;
 
 export default function SignalGrid() {
   const dotContainerRef = useRef<HTMLDivElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
+  const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
 
   useEffect(() => {
     const container = dotContainerRef.current;
@@ -43,33 +44,38 @@ export default function SignalGrid() {
     }
     container.appendChild(fragment);
 
-    // -- Boot sequence --
-    if (!prefersReducedMotion) {
-      animate(dots, {
-        scale: [0, 1],
-        opacity: [0, DOT_BASE_OPACITY],
-        duration: 2000,
-        delay: stagger(4, { grid: [cols, rows], from: 'center' }),
-        ease: 'outExpo',
-      });
-    } else {
-      dots.forEach((d) => {
-        d.style.opacity = String(DOT_BASE_OPACITY);
-      });
-    }
+    // Create scope for proper cleanup
+    const scope = createScope({ root: container });
+    scopeRef.current = scope;
 
-    // -- Spotlight follows cursor --
+    scope.add(() => {
+      // -- Boot sequence --
+      if (!prefersReducedMotion) {
+        animate(dots, {
+          scale: [0, 1],
+          opacity: [0, DOT_BASE_OPACITY],
+          duration: 1800,
+          delay: stagger(3, { grid: [cols, rows], from: 'center' }),
+          ease: 'outExpo',
+        });
+      } else {
+        dots.forEach((d) => {
+          d.style.opacity = String(DOT_BASE_OPACITY);
+        });
+      }
+    });
+
+    // -- Spotlight follows cursor (createAnimatable for smooth tracking) --
     const spotlight = createAnimatable(spotlightEl, {
-      x: { duration: 400, ease: 'out(3)' },
-      y: { duration: 400, ease: 'out(3)' },
+      x: { duration: 500, ease: 'out(4)' },
+      y: { duration: 500, ease: 'out(4)' },
     });
 
     let spotlightShown = false;
-    let activeDotIndices = new Set<number>();
+    const activeDots = new Map<number, number>(); // idx -> raf handle or 0
     let lastProximityTime = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Reveal spotlight on first move
       if (!spotlightShown) {
         spotlightEl.style.opacity = '1';
         spotlightShown = true;
@@ -77,9 +83,9 @@ export default function SignalGrid() {
       spotlight.x(e.clientX);
       spotlight.y(e.clientY);
 
-      // Throttle dot proximity updates
+      // Throttle proximity to 60ms
       const now = performance.now();
-      if (now - lastProximityTime < 50 || prefersReducedMotion) return;
+      if (now - lastProximityTime < 60 || prefersReducedMotion) return;
       lastProximityTime = now;
 
       const nearCol = Math.round(e.clientX / GRID_SIZE);
@@ -91,77 +97,94 @@ export default function SignalGrid() {
           const r = nearRow + dr;
           const c = nearCol + dc;
           if (r >= 0 && r < rows && c >= 0 && c < cols) {
-            newActive.add(r * cols + c);
+            const dist = Math.sqrt(dc * dc + dr * dr);
+            if (dist <= PROXIMITY_RADIUS) {
+              newActive.add(r * cols + c);
+            }
           }
         }
       }
 
-      // Activate new dots
+      // Activate new dots -- direct style for zero-overhead
       newActive.forEach((idx) => {
-        if (!activeDotIndices.has(idx)) {
+        if (!activeDots.has(idx)) {
           const r = Math.floor(idx / cols);
           const c = idx % cols;
           const dist = Math.sqrt((c - nearCol) ** 2 + (r - nearRow) ** 2);
-          const intensity = Math.max(0, 1 - dist / (PROXIMITY_RADIUS + 1));
-          animate(dots[idx], {
-            scale: 1 + intensity * 1.5,
-            opacity: DOT_BASE_OPACITY + intensity * 0.5,
-            duration: 200,
-            ease: 'outQuad',
-          });
+          const intensity = Math.max(0, 1 - dist / (PROXIMITY_RADIUS + 0.5));
+          const dot = dots[idx];
+          dot.style.transform = `scale(${1 + intensity * 1.2})`;
+          dot.style.opacity = String(DOT_BASE_OPACITY + intensity * 0.45);
+          dot.style.transition = 'transform 0.2s cubic-bezier(0.23,1,0.32,1), opacity 0.2s ease-out';
+          activeDots.set(idx, 1);
         }
       });
 
       // Deactivate old dots
-      activeDotIndices.forEach((idx) => {
+      activeDots.forEach((_, idx) => {
         if (!newActive.has(idx)) {
-          animate(dots[idx], {
-            scale: 1,
-            opacity: DOT_BASE_OPACITY,
-            duration: 400,
-            ease: 'outQuad',
-          });
+          const dot = dots[idx];
+          dot.style.transform = 'scale(1)';
+          dot.style.opacity = String(DOT_BASE_OPACITY);
+          dot.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1), opacity 0.5s ease-out';
+          activeDots.delete(idx);
         }
       });
+    };
 
-      activeDotIndices = newActive;
+    const handleMouseLeave = () => {
+      if (spotlightShown) {
+        spotlightEl.style.opacity = '0';
+        spotlightShown = false;
+      }
+      // Reset all active dots
+      activeDots.forEach((_, idx) => {
+        const dot = dots[idx];
+        dot.style.transform = 'scale(1)';
+        dot.style.opacity = String(DOT_BASE_OPACITY);
+        dot.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
+      });
+      activeDots.clear();
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
 
-    // -- Signal pulses --
+    // -- Signal pulses (keep anime.js -- these are infrequent, impactful) --
     let pulseTimeout: ReturnType<typeof setTimeout>;
 
     const schedulePulse = () => {
       if (prefersReducedMotion) return;
-      const delay = 3000 + Math.random() * 4000;
+      const delay = 4000 + Math.random() * 5000;
       pulseTimeout = setTimeout(() => {
         firePulse(dots, dotGrid, cols, rows);
         schedulePulse();
       }, delay);
     };
 
-    // Start pulses after boot finishes
-    const pulseStartTimeout = setTimeout(schedulePulse, 3000);
+    const pulseStartTimeout = setTimeout(schedulePulse, 3500);
 
-    // -- Ambient flicker --
+    // -- Ambient flicker (less frequent, more subtle) --
     let flickerInterval: ReturnType<typeof setInterval> | undefined;
     if (!prefersReducedMotion) {
       flickerInterval = setInterval(() => {
         const idx = Math.floor(Math.random() * dots.length);
-        animate(dots[idx], {
-          opacity: [DOT_BASE_OPACITY, DOT_BASE_OPACITY * 3, DOT_BASE_OPACITY],
-          duration: 800,
-          ease: 'inOutSine',
-        });
-      }, 400);
+        const dot = dots[idx];
+        dot.style.transition = 'opacity 0.6s ease-in-out';
+        dot.style.opacity = String(DOT_BASE_OPACITY * 2.5);
+        setTimeout(() => {
+          dot.style.opacity = String(DOT_BASE_OPACITY);
+        }, 600);
+      }, 800);
     }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
       clearTimeout(pulseTimeout);
       clearTimeout(pulseStartTimeout);
       if (flickerInterval) clearInterval(flickerInterval);
+      scope.revert();
       container.innerHTML = '';
     };
   }, []);
@@ -185,14 +208,12 @@ function firePulse(
 
   const crossDots: { dot: HTMLDivElement; dist: number }[] = [];
 
-  // Same row
   for (let c = 0; c < cols; c++) {
     if (dotGrid[oRow]?.[c]) {
       crossDots.push({ dot: dotGrid[oRow][c], dist: Math.abs(c - oCol) });
     }
   }
 
-  // Same column (skip origin row, already added)
   for (let r = 0; r < rows; r++) {
     if (r !== oRow && dotGrid[r]?.[oCol]) {
       crossDots.push({ dot: dotGrid[r][oCol], dist: Math.abs(r - oRow) });
@@ -203,12 +224,12 @@ function firePulse(
   const dotElements = crossDots.map((d) => d.dot);
 
   animate(dotElements, {
-    opacity: [DOT_BASE_OPACITY, 0.7, DOT_BASE_OPACITY],
-    scale: [1, 2.5, 1],
-    duration: 1500,
+    opacity: [DOT_BASE_OPACITY, 0.6, DOT_BASE_OPACITY],
+    scale: [1, 2, 1],
+    duration: 1200,
     delay: (_el, i) => {
-      const d = distances.get(dotElements[i]) || 0;
-      return d * 25;
+      const d = distances.get(dotElements[i as number]) || 0;
+      return d * 20;
     },
     ease: 'outExpo',
   });

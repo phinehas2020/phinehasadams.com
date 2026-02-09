@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { svg, createTimeline } from 'animejs';
+import { svg, createTimeline, createScope } from 'animejs';
 import styles from './Hero.module.css';
 import { soundSystem } from '../utils/sound';
 
@@ -13,6 +13,7 @@ export default function Hero() {
     const [taglineText, setTaglineText] = useState('');
     const [activeLine, setActiveLine] = useState<'name' | 'tagline'>('name');
     const trajectoryRef = useRef<SVGSVGElement>(null);
+    const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
 
     useEffect(() => {
         const updateTime = () => {
@@ -63,7 +64,7 @@ export default function Hero() {
         };
     }, []);
 
-    // Rocket trajectory — anime.js powered
+    // Rocket trajectory — anime.js powered with createScope
     useEffect(() => {
         const svgEl = trajectoryRef.current;
         if (!svgEl) return;
@@ -78,38 +79,46 @@ export default function Hero() {
         const rocketBody = svgEl.querySelector('#rocket-body') as SVGGElement;
         if (!guidePath || !cometTrail || !rocketBody) return;
 
-        const FLIGHT = 6000;
-        const TRAIL_FADE = 1500;
+        const scope = createScope({ root: svgEl });
+        scopeRef.current = scope;
 
-        const tl = createTimeline({
-            loop: true,
-            loopDelay: 2000,
+        scope.add(() => {
+            const FLIGHT = 5000;
+            const TRAIL_FADE = 1200;
+
+            const tl = createTimeline({
+                loop: true,
+                loopDelay: 3000,
+                defaults: { ease: 'linear' },
+            });
+
+            // Comet trail — glowing segment slides along arc
+            tl.add(svg.createDrawable(cometTrail), {
+                draw: [
+                    '0 0',
+                    '0 0.15',
+                    '0.05 0.4',
+                    '0.2 0.65',
+                    '0.45 0.85',
+                    '0.7 1',
+                    '1 1',
+                ],
+                duration: FLIGHT + TRAIL_FADE,
+                ease: 'linear',
+            });
+
+            // Rocket follows the trajectory
+            tl.add(rocketBody, {
+                ...svg.createMotionPath(guidePath),
+                opacity: [0, 1, 1, 1, 0],
+                duration: FLIGHT,
+                ease: 'inOutSine',
+            }, 0);
         });
 
-        // Comet trail — slides along the arc as a glowing segment
-        tl.add(svg.createDrawable(cometTrail), {
-            draw: [
-                '0 0',      // nothing
-                '0 0.2',    // trail appears behind rocket
-                '0.05 0.45',
-                '0.25 0.7',
-                '0.5 0.9',
-                '0.75 1',   // trail reaches end
-                '1 1',      // trail fades out
-            ],
-            duration: FLIGHT + TRAIL_FADE,
-            ease: 'linear',
-        });
-
-        // Rocket follows the trajectory path
-        tl.add(rocketBody, {
-            ...svg.createMotionPath(guidePath),
-            opacity: [0, 1, 1, 1, 0],
-            duration: FLIGHT,
-            ease: 'inOutQuad',
-        }, 0);
-
-        return () => { tl.revert(); };
+        return () => {
+            scope.revert();
+        };
     }, []);
 
     return (
@@ -136,28 +145,26 @@ export default function Hero() {
                 <defs>
                     <linearGradient id="guideGrad" x1="0%" y1="100%" x2="100%" y2="0%">
                         <stop offset="0%" stopColor="rgba(77, 150, 255, 0)" />
-                        <stop offset="20%" stopColor="rgba(77, 150, 255, 0.25)" />
-                        <stop offset="80%" stopColor="rgba(77, 150, 255, 0.25)" />
+                        <stop offset="20%" stopColor="rgba(77, 150, 255, 0.2)" />
+                        <stop offset="80%" stopColor="rgba(77, 150, 255, 0.2)" />
                         <stop offset="100%" stopColor="rgba(77, 150, 255, 0)" />
                     </linearGradient>
                     <linearGradient id="trailGrad" x1="0%" y1="100%" x2="100%" y2="0%">
                         <stop offset="0%" stopColor="rgba(77, 150, 255, 0)" />
-                        <stop offset="10%" stopColor="rgba(77, 150, 255, 0.7)" />
-                        <stop offset="90%" stopColor="rgba(77, 150, 255, 0.7)" />
+                        <stop offset="15%" stopColor="rgba(77, 150, 255, 0.6)" />
+                        <stop offset="85%" stopColor="rgba(77, 150, 255, 0.6)" />
                         <stop offset="100%" stopColor="rgba(77, 150, 255, 0)" />
                     </linearGradient>
-                    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-                        <feGaussianBlur stdDeviation="2" in="SourceGraphic" result="blur1" />
-                        <feGaussianBlur stdDeviation="6" in="SourceGraphic" result="blur2" />
+                    {/* Simplified glow -- single blur pass instead of stacked */}
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" in="SourceGraphic" result="blur" />
                         <feMerge>
-                            <feMergeNode in="blur2" />
-                            <feMergeNode in="blur2" />
-                            <feMergeNode in="blur1" />
+                            <feMergeNode in="blur" />
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
-                    <filter id="trailGlow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="4" in="SourceGraphic" result="blur" />
+                    <filter id="trailGlow" x="-25%" y="-25%" width="150%" height="150%">
+                        <feGaussianBlur stdDeviation="3" in="SourceGraphic" result="blur" />
                         <feMerge>
                             <feMergeNode in="blur" />
                             <feMergeNode in="SourceGraphic" />
@@ -165,22 +172,22 @@ export default function Hero() {
                     </filter>
                 </defs>
 
-                {/* Dim guide path — planned trajectory (always visible) */}
+                {/* Dim guide path */}
                 <path
                     id="guide-path"
                     d={TRAJECTORY}
                     stroke="url(#guideGrad)"
                     strokeWidth="1"
                     fill="none"
-                    opacity="0.3"
+                    opacity="0.25"
                 />
 
-                {/* Bright comet trail — animated exhaust plume */}
+                {/* Bright comet trail */}
                 <path
                     id="comet-trail"
                     d={TRAJECTORY}
                     stroke="url(#trailGrad)"
-                    strokeWidth="2.5"
+                    strokeWidth="2"
                     fill="none"
                     filter="url(#trailGlow)"
                 />
