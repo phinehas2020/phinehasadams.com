@@ -6,6 +6,7 @@ import CanvasBackground from './CanvasBackground';
 
 export default function Hero() {
     const [time, setTime] = useState('');
+    const [headingText, setHeadingText] = useState('');
     const [taglineText, setTaglineText] = useState('');
     const [activeLine, setActiveLine] = useState<'name' | 'tagline'>('name');
     const [showSubtext, setShowSubtext] = useState(false);
@@ -18,6 +19,45 @@ export default function Hero() {
         updateTime();
         const interval = setInterval(updateTime, 1000);
         return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        const words = ["PHINEHAS ADAMS", "ENGINEER", "DESIGNER", "ARCHITECT"];
+        let isWriting = true;
+        let wordIndex = 0;
+        let charIndex = 0;
+        let timer: NodeJS.Timeout;
+
+        const type = () => {
+            const currentWord = words[wordIndex];
+
+            if (isWriting) {
+                setHeadingText(currentWord.substring(0, charIndex + 1));
+                charIndex++;
+
+                if (charIndex === currentWord.length) {
+                    isWriting = false;
+                    timer = setTimeout(type, 3000); // pause at the end of word
+                } else {
+                    timer = setTimeout(type, 80 + Math.random() * 50);
+                }
+            } else {
+                setHeadingText(currentWord.substring(0, charIndex - 1));
+                charIndex--;
+
+                if (charIndex === 0) {
+                    isWriting = true;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    timer = setTimeout(type, 500); // pause before next word
+                } else {
+                    timer = setTimeout(type, 30 + Math.random() * 30);
+                }
+            }
+        };
+
+        timer = setTimeout(type, 500);
+
+        return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
@@ -81,13 +121,15 @@ export default function Hero() {
                 />
             </svg>
 
-            <div className={styles.cornerTopLeft}></div>
-            <div className={styles.cornerTopRight}></div>
-            <div className={styles.cornerBottomLeft}></div>
-            <div className={styles.cornerBottomRight}></div>
+            <div className={styles.containerFrame}>
+                <div className={`${styles.miniSquare} ${styles.miniSquareTopLeft}`}></div>
+                <div className={`${styles.miniSquare} ${styles.miniSquareTopRight}`}></div>
+                <div className={`${styles.miniSquare} ${styles.miniSquareBottomLeft}`}></div>
+                <div className={`${styles.miniSquare} ${styles.miniSquareBottomRight}`}></div>
+            </div>
 
             <h1 className={styles.name}>
-                Phinehas<br />Adams
+                {headingText}
                 <span className={`${styles.cursor} ${activeLine === 'name' ? styles.cursorActive : styles.cursorHidden}`}></span>
             </h1>
 

@@ -28,6 +28,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -54,10 +55,12 @@
 }
 
 @keyframes blink {
+
     0%,
     100% {
         opacity: 1;
     }
+
     50% {
         opacity: 0;
     }
@@ -151,40 +154,43 @@
     opacity: 0.6;
 }
 
-.cornerTopLeft,
-.cornerTopRight,
-.cornerBottomLeft,
-.cornerBottomRight {
+.containerFrame {
     position: absolute;
-    width: 2rem;
-    height: 2rem;
-    border-color: var(--fg-secondary);
-    border-style: solid;
-    opacity: 0.5;
-}
-
-.cornerTopLeft {
     top: 2rem;
     left: 2rem;
-    border-width: 1px 0 0 1px;
-}
-
-.cornerTopRight {
-    top: 2rem;
     right: 2rem;
-    border-width: 1px 1px 0 0;
+    bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    z-index: 5;
 }
 
-.cornerBottomLeft {
-    bottom: 2rem;
-    left: 2rem;
-    border-width: 0 0 1px 1px;
+.miniSquare {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: var(--nasa-blue);
+    border: 1px solid var(--bg-core);
 }
 
-.cornerBottomRight {
-    bottom: 2rem;
-    right: 2rem;
-    border-width: 0 1px 1px 0;
+.miniSquareTopLeft {
+    top: -4px;
+    left: -4px;
+}
+
+.miniSquareTopRight {
+    top: -4px;
+    right: -4px;
+}
+
+.miniSquareBottomLeft {
+    bottom: -4px;
+    left: -4px;
+}
+
+.miniSquareBottomRight {
+    bottom: -4px;
+    right: -4px;
 }
 
 .dataRow {
@@ -213,6 +219,7 @@
         opacity: 0;
         transform: translateX(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
