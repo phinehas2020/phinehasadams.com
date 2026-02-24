@@ -49,37 +49,37 @@ export default function CanvasBackground() {
                 y: Math.random() * height,
                 vx: (Math.random() - 0.5) * 0.3,
                 vy: (Math.random() - 0.5) * 0.3,
-                length: Math.random() * 50 + 20,
+                length: Math.random() * 150 + 50,
                 angle: Math.random() * Math.PI * 2,
-                rotationSpeed: (Math.random() - 0.5) * 0.01,
+                rotationSpeed: (Math.random() - 0.5) * 0.005,
                 opacity: Math.random() * 0.15 + 0.05
             });
         }
 
         // Rain
         const spawnRain = () => {
-            if (rain.length < 100) { // Max rain drops
+            if (rain.length < 300) { // Max rain drops
                 rain.push({
                     x: Math.random() * width,
-                    y: -50,
-                    vy: Math.random() * 10 + 15,
-                    length: Math.random() * 20 + 10,
-                    opacity: Math.random() * 0.2 + 0.1
+                    y: -100,
+                    vy: Math.random() * 15 + 25,
+                    length: Math.random() * 80 + 40,
+                    opacity: Math.random() * 0.3 + 0.15
                 });
             }
         };
 
         const createSplash = (x: number, y: number) => {
-            const numSplashes = Math.floor(Math.random() * 3) + 2;
+            const numSplashes = Math.floor(Math.random() * 4) + 3;
             for (let i = 0; i < numSplashes; i++) {
                 splashes.push({
                     x,
                     y,
-                    vx: (Math.random() - 0.5) * 4,
-                    vy: (Math.random() * -3) - 1,
+                    vx: (Math.random() - 0.5) * 2.5,
+                    vy: (Math.random() * -2) - 0.5,
                     life: 1,
-                    decay: Math.random() * 0.05 + 0.02,
-                    radius: Math.random() * 1.5 + 0.5
+                    decay: Math.random() * 0.015 + 0.01,
+                    radius: Math.random() * 5 + 3
                 });
             }
         };
@@ -89,7 +89,10 @@ export default function CanvasBackground() {
             ctx.clearRect(0, 0, width, height);
 
             // Spawn rain occasionally
-            if (Math.random() < 0.4) spawnRain();
+            if (Math.random() < 0.8) {
+                spawnRain();
+                spawnRain();
+            }
 
             // Draw Debris
             debris.forEach(d => {
@@ -149,6 +152,8 @@ export default function CanvasBackground() {
             }
 
             // Draw Splashes
+            ctx.filter = 'blur(1.5px)';
+            ctx.globalCompositeOperation = 'lighter';
             for (let i = splashes.length - 1; i >= 0; i--) {
                 const s = splashes[i];
                 s.x += s.vx;
@@ -162,10 +167,12 @@ export default function CanvasBackground() {
                 }
 
                 ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${s.life * 0.3})`;
+                ctx.arc(s.x, s.y, s.radius * 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.life * 0.4})`;
                 ctx.fill();
             }
+            ctx.filter = 'none';
+            ctx.globalCompositeOperation = 'source-over';
 
             animationFrameId = requestAnimationFrame(render);
         };
