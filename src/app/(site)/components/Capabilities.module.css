@@ -29,6 +29,19 @@
     border-bottom: 1px solid #1a1a1a;
     display: flex;
     align-items: center;
+    animation: fadeSlideIn 0.5s ease-out both;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .item::before {

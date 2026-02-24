@@ -10,11 +10,7 @@
   },
   "dependencies": {
     "@sanity/image-url": "^2.0.3",
-    "@studio-freight/react-lenis": "^0.0.47",
     "@vercel/analytics": "^1.6.1",
-    "animejs": "^4.3.5",
-    "framer-motion": "^12.23.25",
-    "geist": "^1.7.0",
     "next": "16.0.7",
     "next-sanity": "^12.1.0",
     "react": "19.2.0",
