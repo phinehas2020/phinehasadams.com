@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 
 export default function CanvasBackground() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const mouseRef = useRef({ x: -1000, y: -1000, active: false });
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -24,155 +25,212 @@ export default function CanvasBackground() {
         window.addEventListener('resize', setSize);
         setSize();
 
-        // Particles
-        const debris: any[] = [];
-        const lines: any[] = [];
-        const rain: any[] = [];
-        const splashes: any[] = [];
+        // Handle Mouse
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseRef.current.x = e.clientX;
+            mouseRef.current.y = e.clientY;
+            mouseRef.current.active = true;
+        };
+        const handleMouseLeave = () => {
+            mouseRef.current.active = false;
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseleave', handleMouseLeave);
 
-        // Initialize Debris
-        for (let i = 0; i < 50; i++) {
-            debris.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                radius: Math.random() * 1.5 + 0.5,
-                opacity: Math.random() * 0.3 + 0.1
-            });
-        }
+        // Simple 3D Value Noise for continents
+        const noise3D = (x: number, y: number, z: number) => {
+            const hash = (nx: number, ny: number, nz: number) => {
+                let n = Math.sin(nx * 12.9898 + ny * 78.233 + nz * 37.719) * 43758.5453;
+                return n - Math.floor(n);
+            };
 
-        // Initialize Lines
-        for (let i = 0; i < 20; i++) {
-            lines.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                length: Math.random() * 150 + 50,
-                angle: Math.random() * Math.PI * 2,
-                rotationSpeed: (Math.random() - 0.5) * 0.005,
-                opacity: Math.random() * 0.15 + 0.05
-            });
-        }
+            const ix = Math.floor(x);
+            const iy = Math.floor(y);
+            const iz = Math.floor(z);
 
-        // Rain
-        const spawnRain = () => {
-            if (rain.length < 300) { // Max rain drops
-                rain.push({
-                    x: Math.random() * width,
-                    y: -100,
-                    vy: Math.random() * 15 + 25,
-                    length: Math.random() * 80 + 40,
-                    opacity: Math.random() * 0.3 + 0.15
-                });
-            }
+            const fx = x - ix;
+            const fy = y - iy;
+            const fz = z - iz;
+
+            const ux = fx * fx * (3 - 2 * fx);
+            const uy = fy * fy * (3 - 2 * fy);
+            const uz = fz * fz * (3 - 2 * fz);
+
+            const n000 = hash(ix, iy, iz);
+            const n100 = hash(ix + 1, iy, iz);
+            const n010 = hash(ix, iy + 1, iz);
+            const n110 = hash(ix + 1, iy + 1, iz);
+            const n001 = hash(ix, iy, iz + 1);
+            const n101 = hash(ix + 1, iy, iz + 1);
+            const n011 = hash(ix, iy + 1, iz + 1);
+            const n111 = hash(ix + 1, iy + 1, iz + 1);
+
+            const ix0 = n000 * (1 - ux) + n100 * ux;
+            const ix1 = n010 * (1 - ux) + n110 * ux;
+            const ix2 = n001 * (1 - ux) + n101 * ux;
+            const ix3 = n011 * (1 - ux) + n111 * ux;
+
+            const iy0 = ix0 * (1 - uy) + ix1 * uy;
+            const iy1 = ix2 * (1 - uy) + ix3 * uy;
+
+            return iy0 * (1 - uz) + iy1 * uz;
         };
 
-        const createSplash = (x: number, y: number) => {
-            const numSplashes = Math.floor(Math.random() * 4) + 3;
-            for (let i = 0; i < numSplashes; i++) {
-                splashes.push({
-                    x,
-                    y,
-                    vx: (Math.random() - 0.5) * 2.5,
-                    vy: (Math.random() * -2) - 0.5,
-                    life: 1,
-                    decay: Math.random() * 0.015 + 0.01,
-                    radius: Math.random() * 5 + 3
+        const fbm = (x: number, y: number, z: number) => {
+            let value = 0;
+            let amp = 0.5;
+            for (let i = 0; i < 4; i++) {
+                value += noise3D(x, y, z) * amp;
+                x *= 2; y *= 2; z *= 2;
+                amp *= 0.5;
+            }
+            return value;
+        };
+
+        // Create particles (Earth Globe)
+        const particles: any[] = [];
+        const totalParticles = 7000;
+
+        for (let i = 0; i < totalParticles; i++) {
+            const phi = Math.acos(1 - 2 * (i + 0.5) / totalParticles);
+            const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+
+            let x = Math.cos(theta) * Math.sin(phi);
+            let y = Math.sin(theta) * Math.sin(phi);
+            let z = Math.cos(phi);
+
+            // Shape the continents using continuous noise to carve out oceans
+            let n = fbm(x * 1.5, y * 1.5, z * 1.5);
+
+            // Only add particle if it's "landmass" to make it look like an earth globe
+            if (n > 0.45) {
+                particles.push({
+                    x, y, z,
+                    baseAlpha: Math.random() * 0.5 + 0.5, // Brighter particles (base 0.5 - 1.0)
+                    size: Math.random() * 1.8 + 0.7,      // Slightly larger dots
+                });
+            } else if (Math.random() < 0.08) {
+                // Add sparse dots in "oceans" to keep the sphere shape visible
+                particles.push({
+                    x, y, z,
+                    baseAlpha: Math.random() * 0.2 + 0.1,
+                    size: Math.random() * 0.8 + 0.2,
                 });
             }
-        };
+        }
+
+        let time = 0;
 
         const render = () => {
             if (!ctx) return;
             ctx.clearRect(0, 0, width, height);
 
-            // Spawn rain occasionally
-            if (Math.random() < 0.8) {
-                spawnRain();
-                spawnRain();
-            }
+            time += 0.0015;
 
-            // Draw Debris
-            debris.forEach(d => {
-                d.x += d.vx;
-                d.y += d.vy;
-                if (d.x < 0) d.x = width;
-                if (d.x > width) d.x = 0;
-                if (d.y < 0) d.y = height;
-                if (d.y > height) d.y = 0;
+            const mx = mouseRef.current.x;
+            const my = mouseRef.current.y;
+            const mouseActive = mouseRef.current.active;
 
-                ctx.beginPath();
-                ctx.arc(d.x, d.y, d.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${d.opacity * 0.5})`;
-                ctx.fill();
-            });
+            // Base radius scales with screen size
+            const BASE_RADIUS = Math.min(width, height) * 0.4;
+            const PERSPECTIVE = 600;
 
-            // Draw Lines
-            lines.forEach(l => {
-                l.x += l.vx;
-                l.y += l.vy;
-                l.angle += l.rotationSpeed;
-                if (l.x < -100) l.x = width + 100;
-                if (l.x > width + 100) l.x = -100;
-                if (l.y < -100) l.y = height + 100;
-                if (l.y > height + 100) l.y = -100;
+            // Rotation matrices (Rotate Y axis, then slight X tilt)
+            const angleY = time;
+            const angleX = 0.25;
+            const cosY = Math.cos(angleY), sinY = Math.sin(angleY);
+            const cosX = Math.cos(angleX), sinX = Math.sin(angleX);
 
-                const x2 = l.x + Math.cos(l.angle) * l.length;
-                const y2 = l.y + Math.sin(l.angle) * l.length;
+            ctx.fillStyle = '#ffffff';
 
-                ctx.beginPath();
-                ctx.moveTo(l.x, l.y);
-                ctx.lineTo(x2, y2);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${l.opacity * 0.5})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            });
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
 
-            // Draw Rain
-            for (let i = rain.length - 1; i >= 0; i--) {
-                const r = rain[i];
-                r.y += r.vy;
+                // Rotate Y
+                let rz = p.z * cosY - p.x * sinY;
+                let rx = p.z * sinY + p.x * cosY;
+                let ry = p.y;
 
-                ctx.beginPath();
-                ctx.moveTo(r.x, r.y);
-                ctx.lineTo(r.x, r.y - r.length);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${r.opacity * 0.7})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
+                // Rotate X
+                let ry2 = ry * cosX - rz * sinX;
+                let rz2 = ry * sinX + rz * cosX;
 
-                // Check collision with "floor" or abstract layout positions
-                // We'll set a few collision thresholds to simulate hitting elements in the layout
-                const hitZone = height - (r.x % 200) - 50; // Dynamic hit zones creating a jagged landscape effect
-                if (r.y > hitZone) {
-                    createSplash(r.x, hitZone);
-                    rain.splice(i, 1);
-                }
-            }
+                // 2D Projection
+                const scale = PERSPECTIVE / (PERSPECTIVE + rz2 * BASE_RADIUS);
+                const x2D = width / 2 + rx * BASE_RADIUS * scale;
+                const y2D = height / 2 + ry2 * BASE_RADIUS * scale;
 
-            // Draw Splashes
-            ctx.filter = 'blur(1.5px)';
-            ctx.globalCompositeOperation = 'lighter';
-            for (let i = splashes.length - 1; i >= 0; i--) {
-                const s = splashes[i];
-                s.x += s.vx;
-                s.y += s.vy;
-                s.vy += 0.15; // Gravity
-                s.life -= s.decay;
-
-                if (s.life <= 0) {
-                    splashes.splice(i, 1);
-                    continue;
+                // Mouse interaction / brightness
+                let distanceToMouse = 9999;
+                if (mouseActive) {
+                    const dx = mx - x2D;
+                    const dy = my - y2D;
+                    distanceToMouse = Math.sqrt(dx * dx + dy * dy);
                 }
 
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius * 1.5, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${s.life * 0.4})`;
-                ctx.fill();
+                // Brightness near mouse
+                let hoverIntensity = 0;
+                if (distanceToMouse < 250) {
+                    hoverIntensity = 1 - (distanceToMouse / 250);
+                }
+
+                // Depth fading (back of the globe should be darker or invisible)
+                let depthAlpha = (1 - rz2) * 0.5;
+                // Don't render points too far back if they aren't interacting with mouse
+                if (depthAlpha < 0.1 && hoverIntensity < 0.1) continue;
+
+                let finalAlpha = p.baseAlpha * depthAlpha + hoverIntensity * 0.9;
+                if (finalAlpha > 1) finalAlpha = 1;
+
+                let finalSize = p.size * scale * (1 + hoverIntensity * 1.5);
+
+                ctx.globalAlpha = finalAlpha;
+                ctx.fillRect(x2D, y2D, finalSize, finalSize);
             }
-            ctx.filter = 'none';
-            ctx.globalCompositeOperation = 'source-over';
+
+            // --- Flashlight on borders ---
+            if (mouseActive) {
+                const glowDist = 350;
+
+                // Helper to draw border light
+                const drawGlowLine = (x1: number, y1: number, x2: number, y2: number, distance: number) => {
+                    let alpha = Math.max(0, 1 - (distance / glowDist));
+                    if (alpha <= 0) return;
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+
+                    // Create glow using shadow
+                    ctx.shadowColor = 'rgba(77, 150, 255, 0.8)';
+                    ctx.shadowBlur = 30;
+                    ctx.lineWidth = 1 + alpha * 2;
+                    ctx.strokeStyle = `rgba(200, 220, 255, ${alpha * 0.7})`;
+
+                    ctx.stroke();
+                    ctx.restore();
+                };
+
+                // Top border
+                drawGlowLine(0, 0, width, 0, my);
+                // Bottom border
+                drawGlowLine(0, height, width, height, height - my);
+                // Left border
+                drawGlowLine(0, 0, 0, height, mx);
+                // Right border
+                drawGlowLine(width, 0, width, height, width - mx);
+
+                // Add an ambient flashlight at the mouse cursor itself spanning wide over the globe
+                const grad = ctx.createRadialGradient(mx, my, 0, mx, my, 500);
+                grad.addColorStop(0, 'rgba(77, 150, 255, 0.05)');
+                grad.addColorStop(1, 'rgba(77, 150, 255, 0)');
+                ctx.globalAlpha = 1;
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, width, height);
+            }
+
+            ctx.globalAlpha = 1;
 
             animationFrameId = requestAnimationFrame(render);
         };
@@ -181,6 +239,8 @@ export default function CanvasBackground() {
 
         return () => {
             window.removeEventListener('resize', setSize);
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseleave', handleMouseLeave);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
@@ -196,7 +256,7 @@ export default function CanvasBackground() {
                 height: '100%',
                 pointerEvents: 'none',
                 zIndex: 0,
-                opacity: 0.8
+                opacity: 0.95
             }}
         />
     );
