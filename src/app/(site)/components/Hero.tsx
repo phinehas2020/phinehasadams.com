@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './Hero.module.css';
+import CanvasBackground from './CanvasBackground';
 
 export default function Hero() {
     const [time, setTime] = useState('');
@@ -48,6 +49,7 @@ export default function Hero() {
 
     return (
         <section className={styles.hero}>
+            <CanvasBackground />
             <div className={styles.noise}></div>
 
             {/* HUD Elements */}
