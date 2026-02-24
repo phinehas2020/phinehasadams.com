@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { createAnimatable } from 'animejs';
 import styles from './SignalGrid.module.css';
 
 const GRID_SIZE = 60;
@@ -55,13 +54,9 @@ export default function SignalGrid() {
     // Mouse tracking
     let mouseX = -1000;
     let mouseY = -1000;
+    let spotlightX = -1000;
+    let spotlightY = -1000;
     let mouseActive = false;
-
-    // Spotlight (anime.js animatable for silky cursor lag)
-    const spotlight = createAnimatable(spotlightEl, {
-      x: { duration: 400, ease: 'out(4)' },
-      y: { duration: 400, ease: 'out(4)' },
-    });
 
     // Boot animation state
     let bootProgress = prefersReducedMotion ? 1 : 0;
@@ -83,9 +78,9 @@ export default function SignalGrid() {
       if (!mouseActive) {
         spotlightEl.style.opacity = '1';
         mouseActive = true;
+        spotlightX = mouseX;
+        spotlightY = mouseY;
       }
-      spotlight.x(mouseX);
-      spotlight.y(mouseY);
     };
 
     const handleMouseLeave = () => {
@@ -106,6 +101,13 @@ export default function SignalGrid() {
     const frame = (now: number) => {
       rafId = requestAnimationFrame(frame);
       ctx.clearRect(0, 0, width, height);
+
+      // Update spotlight position
+      if (mouseActive) {
+        spotlightX += (mouseX - spotlightX) * 0.1;
+        spotlightY += (mouseY - spotlightY) * 0.1;
+        spotlightEl.style.transform = `translate(${spotlightX}px, ${spotlightY}px)`;
+      }
 
       // Boot progress (0 -> 1)
       if (bootProgress < 1) {
