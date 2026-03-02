@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import styles from './page.module.css';
 
 interface WebsitePreviewProps {
@@ -7,61 +6,38 @@ interface WebsitePreviewProps {
 }
 
 export function WebsitePreview({ url, title }: WebsitePreviewProps) {
-    const domain = getDomain(url);
-    const seed = getSeed(`${domain}-${title}`);
-    const hue = 162 + (seed % 52);
-    const serpScore = 88 + (seed % 11);
-    const conversionScore = 74 + ((seed >> 2) % 18);
-    const signalWidths = Array.from({ length: 5 }, (_, index) => {
-        return 44 + ((seed + index * 13) % 52);
-    });
+    const normalizedUrl = normalizeUrl(url);
+    const domain = getDomain(normalizedUrl);
+    const previewImageUrl = getPreviewImageUrl(normalizedUrl);
 
     return (
-        <div
-            className={styles.previewContainer}
-            style={
-                {
-                    '--preview-hue': `${hue}`,
-                    '--preview-hue-soft': `${Math.max(130, hue - 22)}`,
-                } as CSSProperties
-            }
-        >
-            <div className={styles.previewAura} aria-hidden />
-            <div className={styles.previewGrid} aria-hidden />
-            <div className={styles.previewPanel}>
-                <div className={styles.previewTopRow}>
-                    <span className={styles.previewTag}>Growth Ready</span>
-                    <span className={styles.previewDomain}>{domain}</span>
-                </div>
-
-                <div className={styles.previewStats}>
-                    <div className={styles.previewStat}>
-                        <span>SERP Score</span>
-                        <strong>{serpScore}%</strong>
-                    </div>
-                    <div className={styles.previewStat}>
-                        <span>Conversion Flow</span>
-                        <strong>{conversionScore}%</strong>
-                    </div>
-                </div>
-
-                <div className={styles.previewBarRail}>
-                    {signalWidths.map((width, index) => (
-                        <span
-                            key={`${domain}-${index}`}
-                            className={styles.previewBar}
-                            style={
-                                {
-                                    '--bar-width': `${width}%`,
-                                    '--bar-delay': `${index * 140}ms`,
-                                } as CSSProperties
-                            }
-                        />
-                    ))}
-                </div>
+        <div className={styles.previewContainer}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+                src={previewImageUrl}
+                alt={`${title} website preview`}
+                className={styles.previewImage}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+            />
+            <div className={styles.previewMeta}>
+                <span className={styles.previewDomain}>{domain}</span>
+                <span className={styles.previewHint}>Live Snapshot</span>
             </div>
         </div>
     );
+}
+
+function normalizeUrl(url: string): string {
+    if (/^https?:\/\//i.test(url)) {
+        return url;
+    }
+
+    return `https://${url}`;
+}
+
+function getPreviewImageUrl(url: string): string {
+    return `https://image.thum.io/get/width/1440/noanimate/${url}`;
 }
 
 function getDomain(url: string): string {
@@ -70,10 +46,4 @@ function getDomain(url: string): string {
     } catch {
         return url.replace(/^https?:\/\//, '').split('/')[0] || 'website';
     }
-}
-
-function getSeed(input: string): number {
-    return input.split('').reduce((total, char, index) => {
-        return (total + char.charCodeAt(0) * (index + 7)) % 9973;
-    }, 0);
 }
