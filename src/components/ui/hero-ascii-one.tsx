@@ -134,16 +134,16 @@ export default function AnimationPage() {
         <div className="container mx-auto px-4 lg:px-8 py-3 lg:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 lg:gap-4">
             <div className="font-mono text-white text-xl lg:text-2xl font-bold tracking-widest italic transform -skew-x-12">
-              UIMIX
+              PHINEHAS ADAMS
             </div>
             <div className="h-3 lg:h-4 w-px bg-white/40"></div>
-            <span className="text-white/60 text-[8px] lg:text-[10px] font-mono">EST. 2025</span>
+            <span className="text-white/60 text-[8px] lg:text-[10px] font-mono">SITE BUILT 2026</span>
           </div>
 
           <div className="hidden lg:flex items-center gap-3 text-[10px] font-mono text-white/60">
-            <span>LAT: 37.7749°</span>
+            <span>FOCUS: ENGINEERING + PRODUCT</span>
             <div className="w-1 h-1 bg-white/40 rounded-full"></div>
-            <span>LONG: 122.4194°</span>
+            <span>LOCATION: KANSAS CITY</span>
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@ export default function AnimationPage() {
             <div className="relative">
               <div className="hidden lg:block absolute -right-3 top-0 bottom-0 w-1 dither-pattern opacity-40"></div>
               <h1 className="text-2xl lg:text-5xl font-bold text-white mb-3 lg:mb-4 leading-tight font-mono tracking-wider whitespace-nowrap lg:-ml-[5%]" style={{ letterSpacing: '0.1em' }}>
-                ENDLESS PURSUIT
+                ENGINEERING FOR IMPACT
               </h1>
             </div>
 
@@ -183,7 +183,7 @@ export default function AnimationPage() {
             {/* Description with subtle grid pattern */}
             <div className="relative">
               <p className="text-xs lg:text-base text-gray-300 mb-5 lg:mb-6 leading-relaxed font-mono opacity-80">
-                Like Sisyphus, we push forward — not despite the struggle, but because of it. Every iteration, every pixel, every line of code is our boulder.
+                Systems, execution, and iteration. I build reliable web experiences and engineering workstreams for teams that need momentum, not hype.
               </p>
 
               {/* Technical corner accent - desktop only */}
@@ -197,11 +197,11 @@ export default function AnimationPage() {
               <button className="relative px-5 lg:px-6 py-2 lg:py-2.5 bg-transparent text-white font-mono text-xs lg:text-sm border border-white hover:bg-white hover:text-black transition-all duration-200 group">
                 <span className="hidden lg:block absolute -top-1 -left-1 w-2 h-2 border-t border-l border-white opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 <span className="hidden lg:block absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-white opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                BEGIN THE CLIMB
+                VIEW PROJECTS
               </button>
 
               <button className="relative px-5 lg:px-6 py-2 lg:py-2.5 bg-transparent border border-white text-white font-mono text-xs lg:text-sm hover:bg-white hover:text-black transition-all duration-200" style={{ borderWidth: '1px' }}>
-                EMBRACE THE JOURNEY
+                GET IN TOUCH
               </button>
             </div>
 
@@ -209,7 +209,7 @@ export default function AnimationPage() {
             <div className="hidden lg:flex items-center gap-2 mt-6 opacity-40">
               <span className="text-white text-[9px] font-mono">∞</span>
               <div className="flex-1 h-px bg-white"></div>
-              <span className="text-white text-[9px] font-mono">SISYPHUS.PROTOCOL</span>
+              <span className="text-white text-[9px] font-mono">SITE.PROTOCOL</span>
             </div>
           </div>
         </div>
@@ -236,7 +236,7 @@ export default function AnimationPage() {
               <div className="w-1 h-1 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
               <div className="w-1 h-1 bg-white/20 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
             </div>
-            <span className="hidden lg:inline">FRAME: ∞</span>
+            <span className="hidden lg:inline">FRAME: LIVE</span>
           </div>
         </div>
       </div>

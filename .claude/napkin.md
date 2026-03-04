@@ -21,3 +21,8 @@
 - 2026-03-04: Added src/components/ui/interactive-thermodynamic-grid.tsx with requested simulation logic and DOM/canvas effect.
 - 2026-03-04: Added thermal demo route at /src/app/(site)/demo/thermal/page.tsx using `ThermodynamicGrid` plus lucide icons.
 - 2026-03-04: Lint and build checks pass for new files; full production build passes.
+
+- 2026-03-04: Re-scoped implementation back to the first hero component for the website and personalized its copy/labels for Phinehas Adams.
+- 2026-03-04: Removed thermodynamic grid demo component and thermal demo route to keep site aligned to the requested first-component integration.
+- 2026-03-04: Uninstalled thermal-demo-only dependencies (lucide-react, clsx, tailwind-merge) that were no longer used.
+- 2026-03-04: Re-validated with `npm run build`.
