@@ -143,7 +143,7 @@ export default function AnimationPage() {
           <div className="hidden lg:flex items-center gap-3 text-[10px] font-mono text-white/60">
             <span>FOCUS: ENGINEERING + PRODUCT</span>
             <div className="w-1 h-1 bg-white/40 rounded-full"></div>
-            <span>LOCATION: KANSAS CITY</span>
+            <span>LOCATION: WACO, TEXAS</span>
           </div>
         </div>
       </div>
