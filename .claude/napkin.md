@@ -15,3 +15,9 @@
 - 2026-03-04: Added Tailwind v3 support (tailwind.config.js, postcss.config.js, @tailwind directives) so utility-class-heavy hero component can render.
 - 2026-03-04: Added src/components/ui/hero-ascii-one.tsx and updated homepage hero import to use it; added /demo route wrapper for the provided demo.tsx import example.
 - 2026-03-04: Fixed build error due duplicate `Home` symbol by renaming homepage import and fixed TS strict error in component by casting queried elements to `HTMLElement`.
+
+- 2026-03-04: Installed new component dependencies: lucide-react, clsx, tailwind-merge.
+- 2026-03-04: Added src/lib/utils.ts with shadcn-style `cn` utility for component usage.
+- 2026-03-04: Added src/components/ui/interactive-thermodynamic-grid.tsx with requested simulation logic and DOM/canvas effect.
+- 2026-03-04: Added thermal demo route at /src/app/(site)/demo/thermal/page.tsx using `ThermodynamicGrid` plus lucide icons.
+- 2026-03-04: Lint and build checks pass for new files; full production build passes.
