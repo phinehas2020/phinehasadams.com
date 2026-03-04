@@ -1,4 +1,4 @@
-import Hero from "./components/Hero";
+import HeroAsciiOne from "@/components/ui/hero-ascii-one";
 import About from "./components/About";
 import Process from "./components/Process";
 import Projects from "./components/Projects";
@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main>
-      <Hero />
+      <HeroAsciiOne />
       <Projects />
       <About />
       <Process />
