@@ -168,7 +168,7 @@ export default function AnimationPage() {
             {/* Title with dithered accent */}
             <div className="relative">
               <div className="hidden lg:block absolute -right-3 top-0 bottom-0 w-1 dither-pattern opacity-40"></div>
-              <h1 className="text-2xl lg:text-5xl font-bold text-white mb-3 lg:mb-4 leading-tight font-mono tracking-wider whitespace-nowrap lg:-ml-[5%]" style={{ letterSpacing: '0.1em' }}>
+              <h1 className="text-[clamp(1.75rem,4vw,3.5rem)] font-bold text-white mb-3 lg:mb-4 leading-[1.05] font-mono tracking-[0.08em] whitespace-normal max-w-[18ch] lg:-ml-[2%]">
                 ENGINEERING FOR IMPACT
               </h1>
             </div>

@@ -1,374 +1,366 @@
 .page {
-  position: relative;
   min-height: 100dvh;
-  color: var(--fg-primary);
-  background:
-    radial-gradient(circle at 86% 8%, rgba(191, 140, 89, 0.09), transparent 48%),
-    var(--bg-core);
+  background: #f2ede3;
+  color: #181715;
 }
 
 .shell {
-  width: min(1160px, 100% - 2rem);
+  width: min(1180px, calc(100% - clamp(1.5rem, 5vw, 4.5rem)));
   margin: 0 auto;
 }
 
 .topBar {
-  border-bottom: 1px solid var(--line-soft);
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  backdrop-filter: blur(7px);
-  background: color-mix(in srgb, var(--bg-core) 78%, transparent);
+  border-bottom: 1px solid rgba(24, 23, 21, 0.14);
+  padding: 1rem 0;
+}
+
+.topBarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brandmark,
+.topLink,
+.sectionNumber,
+.areaIndex,
+.instrumentLabel {
+  font-family: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
 }
 
 .brandmark {
-  height: 3.8rem;
-  display: grid;
-  place-items: center start;
-  font-size: 0.74rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
+  margin: 0;
+  color: #5b554d;
+  font-size: 0.9rem;
+}
+
+.topLink {
+  border-bottom: 1px solid rgba(24, 23, 21, 0.2);
+  color: #181715;
+  font-size: 0.9rem;
+  padding-bottom: 0.15rem;
+  text-decoration: none;
+  transition: transform 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out;
 }
 
 .main {
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(4rem, 8vw, 6.5rem);
+}
+
+.sectionShell {
   display: grid;
+  gap: 1rem;
+}
+
+.sectionNumber {
+  margin: 0;
+  color: #8a7763;
+  font-size: 0.84rem;
 }
 
 .hero {
-  padding: clamp(2.6rem, 7vw, 5.6rem) 0 clamp(2rem, 4vw, 3.6rem);
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(4rem, 8vw, 7rem);
 }
 
 .heroGrid {
   display: grid;
-  gap: clamp(1.2rem, 4vw, 2.6rem);
+  gap: clamp(2rem, 7vw, 5rem);
+  align-items: end;
 }
 
 .heroText {
   display: grid;
-  gap: 0.8rem;
-}
-
-.eyebrow {
-  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  max-width: 44rem;
 }
 
 .title {
   margin: 0;
-  max-width: 12ch;
-  font-family: var(--font-display), "Baskerville", "Baskerville Old Face", "Times New Roman", serif;
-  font-size: clamp(3.2rem, 12vw, 8rem);
-  line-height: 0.93;
-  letter-spacing: -0.035em;
-  color: #f7f1e5;
+  max-width: 8ch;
+  color: #181715;
+  font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  font-size: clamp(4rem, 14vw, 8.75rem);
+  line-height: 0.9;
+  text-wrap: balance;
 }
 
 .lead {
-  margin-top: 0.2rem;
+  margin: 0;
   max-width: 14ch;
-  font-size: clamp(1.3rem, 2.4vw, 2.1rem);
-  line-height: 1.1;
-  color: var(--fg-primary);
+  color: #302d28;
+  font-size: clamp(1.35rem, 2.8vw, 2.35rem);
+  line-height: 1.08;
+  text-wrap: balance;
 }
 
-.support {
-  max-width: 34ch;
-  color: var(--fg-secondary);
-  font-size: clamp(1rem, 1.25vw, 1.2rem);
-  line-height: 1.7;
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+  color: #5b554d;
+  font-size: 0.95rem;
 }
 
-.visual {
+.metaRow span {
+  min-width: 7rem;
+  border-top: 1px solid rgba(24, 23, 21, 0.14);
+  padding-top: 0.7rem;
+}
+
+.instrument {
   position: relative;
-  min-height: clamp(17rem, 38vw, 20rem);
-  border: 1px solid var(--line-soft);
-  border-radius: 26px;
-  background:
-    linear-gradient(145deg, rgba(241, 233, 220, 0.06), rgba(11, 10, 10, 0.88)),
-    var(--bg-surface);
+  display: grid;
+  min-height: clamp(19rem, 34vw, 24rem);
   overflow: hidden;
+  align-content: space-between;
+  gap: 1rem;
+  border: 1px solid rgba(24, 23, 21, 0.16);
+  background: #ebe5d8;
+  padding: clamp(1.25rem, 2.4vw, 1.8rem);
 }
 
-.visual::before,
-.visual::after {
-  content: "";
+.instrument::after {
   position: absolute;
-  inset: 10%;
-  border: 1px solid rgba(243, 237, 226, 0.08);
+  inset: 0.75rem;
+  border: 1px solid rgba(24, 23, 21, 0.1);
+  content: "";
   pointer-events: none;
 }
 
-.visual::after {
-  inset: 19%;
-  border: 1px dashed rgba(243, 237, 226, 0.06);
+.instrumentLabel {
+  position: relative;
+  z-index: 1;
+  color: #635b50;
+  font-size: 0.84rem;
 }
 
-.gridNode {
+.instrumentDiagram {
+  position: relative;
+  min-height: clamp(12rem, 22vw, 15rem);
+}
+
+.instrumentAxis {
   position: absolute;
-  width: 9px;
-  aspect-ratio: 1;
+  background: rgba(24, 23, 21, 0.16);
+}
+
+.instrumentAxisHorizontal {
+  top: 52%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.instrumentAxisVertical {
+  top: 14%;
+  bottom: 14%;
+  left: 58%;
+  width: 1px;
+}
+
+.instrumentRing {
+  position: absolute;
+  border: 1px solid rgba(24, 23, 21, 0.18);
+  border-radius: 999px;
+}
+
+.instrumentRingOuter {
+  inset: 8% 14% 16% 8%;
+}
+
+.instrumentRingInner {
+  inset: 32% 30% 30% 24%;
+}
+
+.instrumentPoint {
+  position: absolute;
+  width: 0.65rem;
+  height: 0.65rem;
   border-radius: 50%;
-  background: #f3ede2;
-  box-shadow: 0 0 0 5px rgba(243, 237, 226, 0.14);
-  transition: transform 260ms ease;
+  background: #181715;
+  box-shadow: 0 0 0 0.35rem rgba(24, 23, 21, 0.08);
 }
 
-.gridNodeA {
-  top: 24%;
-  left: 17%;
+.instrumentPointA {
+  top: 20%;
+  left: 26%;
 }
 
-.gridNodeB {
+.instrumentPointB {
   top: 48%;
   left: 57%;
 }
 
-.gridNodeC {
-  top: 72%;
-  left: 80%;
+.instrumentPointC {
+  right: 19%;
+  bottom: 21%;
 }
 
-.visual:hover .gridNode {
-  transform: scale(1.2);
+.instrumentCaption {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 16ch;
+  color: #302d28;
+  font-size: 1rem;
+  line-height: 1.3;
+  text-wrap: balance;
 }
 
-.gridLine {
-  position: absolute;
-  opacity: 0.52;
-  border-top: 1px solid rgba(243, 237, 226, 0.35);
-  background: linear-gradient(90deg, transparent, rgba(243, 237, 226, 0.5), transparent);
-  transition: transform 240ms ease, opacity 240ms ease;
-}
-
-.gridLineA {
-  top: 36%;
-  left: 19%;
-  width: 62%;
-}
-
-.gridLineB {
-  top: 53%;
-  right: 16%;
-  width: 72%;
-  transform: rotate(12deg);
-  transform-origin: center;
-}
-
-.gridLineC {
-  bottom: 30%;
-  left: 22%;
-  width: 45%;
-  transform: rotate(-17deg);
-  transform-origin: center;
-}
-
-.visual:hover .gridLine {
-  opacity: 0.74;
-  transform: scaleX(0.96);
-}
-
-.archWord,
-.archWordTwo {
-  position: absolute;
-  color: rgba(243, 237, 226, 0.42);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-size: 0.65rem;
-  white-space: nowrap;
-}
-
-.archWord {
-  top: 14%;
-  left: 5.8%;
-}
-
-.archWordTwo {
-  right: 6%;
-  top: 78%;
-}
-
-.statement {
-  border-top: 1px solid var(--line-soft);
-  padding: clamp(1.8rem, 4.4vw, 3rem) 0;
+.statement,
+.areas,
+.contact {
+  border-top: 1px solid rgba(24, 23, 21, 0.14);
+  padding-top: clamp(1.75rem, 4vw, 3rem);
 }
 
 .statementText {
-  max-width: 67ch;
-  color: var(--fg-secondary);
-  font-size: clamp(1.18rem, 2.1vw, 1.55rem);
-  line-height: 1.34;
+  margin: 0;
+  max-width: 28ch;
+  color: #1d1b18;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  line-height: 1.05;
+  text-wrap: balance;
 }
 
-.areas {
-  border-top: 1px solid var(--line-soft);
-  padding: clamp(2rem, 5vw, 3.4rem) 0 0;
+.sectionIntro {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
 }
 
 .sectionLabel {
-  margin-bottom: 1.05rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
+  margin: 0;
+  color: #302d28;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .areasGrid {
   display: grid;
-  border: 1px solid var(--line-soft);
-  border-top: 0;
-  background: var(--line-soft);
-  margin-bottom: 2.2rem;
+  gap: 1px;
+  border: 1px solid rgba(24, 23, 21, 0.14);
+  background: rgba(24, 23, 21, 0.14);
 }
 
 .areaCard {
   display: grid;
-  gap: 0.65rem;
-  background: var(--bg-core);
-  padding: clamp(1.1rem, 3vw, 1.7rem);
-  min-height: 100%;
-  transition: border-color 240ms ease, transform 240ms ease, background 240ms ease;
+  min-height: clamp(12rem, 22vw, 15rem);
+  align-content: end;
+  gap: 0.75rem;
+  background: #f7f3eb;
+  padding: clamp(1.25rem, 3vw, 1.9rem);
+  transition: transform 180ms ease-out, background-color 180ms ease-out;
 }
 
-.areaCard + .areaCard {
-  border-top: 1px solid var(--line-soft);
+.areaIndex {
+  color: #8a7763;
+  font-size: 0.84rem;
 }
 
 .areaTitle {
   margin: 0;
-  font-size: clamp(1.32rem, 2vw, 1.72rem);
-  letter-spacing: -0.01em;
+  color: #181715;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.05;
+  text-wrap: balance;
 }
 
 .areaBody {
   margin: 0;
-  color: var(--fg-secondary);
-  font-size: clamp(0.96rem, 1.3vw, 1.05rem);
-  line-height: 1.65;
-  max-width: 44ch;
-}
-
-.areaCard:hover {
-  background: var(--bg-surface);
-  transform: translateY(-2px);
-}
-
-.buySection {
-  border-top: 1px solid var(--line-soft);
-  padding: clamp(2rem, 5vw, 3.4rem) 0;
-}
-
-.buyCopy {
-  margin: 0 0 1.1rem;
-  max-width: 58ch;
-  color: var(--fg-secondary);
-  font-size: clamp(1rem, 1.25vw, 1.3rem);
+  max-width: 22ch;
+  color: #4a443d;
+  font-size: 1rem;
   line-height: 1.45;
-}
-
-.buyLink {
-  display: inline-flex;
-  color: var(--fg-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.11em;
-  font-size: 0.78rem;
-  border-bottom: 1px solid rgba(243, 237, 226, 0.48);
-  transition: border-color 220ms ease, transform 220ms ease;
-}
-
-.buyLink:hover,
-.buyLink:focus-visible {
-  border-color: var(--fg-primary);
-  transform: translateY(-1px);
+  text-wrap: pretty;
 }
 
 .contact {
-  border-top: 1px solid var(--line-soft);
-  padding: clamp(2rem, 5vw, 3.3rem) 0 clamp(3rem, 6vw, 4.4rem);
+  padding-bottom: clamp(0.5rem, 2vw, 1rem);
+}
+
+.contactContent {
+  display: grid;
+  max-width: 38rem;
+  gap: 1rem;
 }
 
 .contactCopy {
-  margin: 0 0 0.95rem;
-  max-width: 21ch;
-  font-size: clamp(1.35rem, 2.1vw, 2rem);
-  line-height: 1.35;
-  color: #f5eee0;
+  margin: 0;
+  color: #302d28;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 .contactLink {
-  font-size: 0.85rem;
-  color: var(--fg-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.11em;
-  border-bottom: 1px solid rgba(243, 237, 226, 0.48);
-  transition: color 220ms ease, border-color 220ms ease, transform 220ms ease;
-  display: inline-flex;
+  width: fit-content;
+  border-bottom: 1px solid rgba(24, 23, 21, 0.24);
+  color: #181715;
+  font-size: clamp(1.6rem, 3.6vw, 2.75rem);
+  line-height: 1;
+  padding-bottom: 0.15rem;
+  text-decoration: none;
+  transition: transform 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out;
+  word-break: break-word;
 }
 
-.contactLink:hover,
-.contactLink:focus-visible {
-  border-color: var(--fg-primary);
-  transform: translateY(-1px);
-}
-
-.footer {
-  border-top: 1px solid var(--line-soft);
-  padding: 1rem 0 1.3rem;
-}
-
-.footer .shell {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.footerText {
-  color: var(--fg-muted);
-  font-size: 0.72rem;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
-@media (min-width: 780px) {
-  .shell {
-    width: min(1160px, 100% - 3.75rem);
+@media (min-width: 900px) {
+  .sectionShell {
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
   }
 
   .heroGrid {
-    grid-template-columns: 1.12fr 0.88fr;
-    align-items: stretch;
-  }
-
-  .visual {
-    min-height: 0;
-    aspect-ratio: 1.03;
-    justify-self: end;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
   }
 
   .areasGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
-  .areaCard + .areaCard {
-    border-top: 0;
-    border-left: 1px solid var(--line-soft);
+@media (max-width: 899px) {
+  .instrument {
+    max-width: 30rem;
   }
 }
 
-@media (max-width: 779px) {
-  .areas {
-    padding-top: 1.7rem;
+@media (max-width: 640px) {
+  .topBar {
+    padding: 0.85rem 0;
   }
 
-  .areaCard {
-    padding: 1rem;
+  .title {
+    max-width: 7ch;
   }
 
-  .visual {
-    order: 2;
+  .contactLink {
+    font-size: clamp(1.5rem, 8vw, 2.1rem);
+  }
+}
+
+@media (hover: hover) {
+  .topLink:hover,
+  .contactLink:hover {
+    border-color: #181715;
+    color: #181715;
+    transform: translateX(2px);
+  }
+
+  .areaCard:hover {
+    background: #fbf8f1;
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topLink,
+  .areaCard,
+  .contactLink {
+    transition: none;
   }
 }
