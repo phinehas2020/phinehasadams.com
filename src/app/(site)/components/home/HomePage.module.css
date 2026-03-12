@@ -288,6 +288,12 @@
   gap: 1rem;
 }
 
+.contactActions {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: start;
+}
+
 .contactCopy {
   margin: 0;
   color: #302d28;
@@ -306,6 +312,16 @@
   text-decoration: none;
   transition: transform 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out;
   word-break: break-word;
+}
+
+.secondaryLink {
+  width: fit-content;
+  color: #5b554d;
+  font-size: 0.98rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(24, 23, 21, 0.18);
+  padding-bottom: 0.15rem;
+  transition: transform 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out;
 }
 
 @media (min-width: 900px) {
@@ -345,7 +361,8 @@
 
 @media (hover: hover) {
   .topLink:hover,
-  .contactLink:hover {
+  .contactLink:hover,
+  .secondaryLink:hover {
     border-color: #181715;
     color: #181715;
     transform: translateX(2px);
@@ -360,7 +377,8 @@
 @media (prefers-reduced-motion: reduce) {
   .topLink,
   .areaCard,
-  .contactLink {
+  .contactLink,
+  .secondaryLink {
     transition: none;
   }
 }

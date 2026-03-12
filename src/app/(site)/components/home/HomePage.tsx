@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./HomePage.module.css";
 
 interface HomePageProps {
@@ -134,9 +135,14 @@ export function HomePage({ websites = [] }: HomePageProps) {
                 <p className={styles.contactCopy}>
                   For selected work and thoughtful conversations.
                 </p>
-                <a className={styles.contactLink} href="mailto:contact@phinehasadams.com">
-                  contact@phinehasadams.com
-                </a>
+                <div className={styles.contactActions}>
+                  <a className={styles.contactLink} href="mailto:contact@phinehasadams.com">
+                    contact@phinehasadams.com
+                  </a>
+                  <Link className={styles.secondaryLink} href="/websites-for-sale">
+                    Buy a website
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

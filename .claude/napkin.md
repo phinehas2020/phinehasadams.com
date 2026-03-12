@@ -40,3 +40,4 @@
 - 2026-03-12: Completed another full homepage rebuild per design brief: replaced legacy home sections with a name-first ultra-minimal one-page composition (hero, short positioning, three concise work pillars, refined contact), refreshed theme-level variables for the premium dark tone, and verified production build succeeds.
 - 2026-03-12: Softened homepage copy in `src/app/(site)/components/home/HomePage.tsx` after it read too corporate. Better direction: shorter sentences, plainspoken verbs, fewer abstract nouns, less sales language.
 - 2026-03-12: Shifted the homepage away from dark “premium SaaS” cues into a lighter editorial/technical direction. Better result: fewer decorative effects, stricter grid, one restrained schematic, and less copy overall.
+- 2026-03-12: Added a subtle homepage path to `/websites-for-sale` in the contact section instead of reintroducing a full sales block. Keeps the landing page sparse while still giving people a way to buy a site.
