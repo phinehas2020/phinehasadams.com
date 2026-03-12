@@ -37,3 +37,4 @@
 
 - 2026-03-06: Repeated the parentheses path mistake again while checking homepage CSS classes. Quote every src/app/(site)/... path, even for quick `rg` lookups.
 - 2026-03-12: Rebuilt the home landing page component with a minimal, premium one-page design focused on hero, positioning, 3 work pillars, and contact; updated CSS module to match the restrained technical-aesthetic direction. Build passes after fixing a CSS-module purity issue; lint still fails only on pre-existing `CanvasBackground.tsx` constraints.
+- 2026-03-12: Completed another full homepage rebuild per design brief: replaced legacy home sections with a name-first ultra-minimal one-page composition (hero, short positioning, three concise work pillars, refined contact), refreshed theme-level variables for the premium dark tone, and verified production build succeeds.

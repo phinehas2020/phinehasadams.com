@@ -1,123 +1,90 @@
 import styles from "./HomePage.module.css";
-import Link from "next/link";
 
 interface HomePageProps {
   websites?: unknown[];
 }
 
-const focusAreas = [
+const areas = [
   {
     title: "Strategy",
-    body: "Framing decisions with clarity so teams can move with fewer assumptions.",
+    body:
+      "Define the right problem, sequence, and measurement before moving from talk to delivery.",
   },
   {
     title: "Systems",
-    body: "Connecting marketing, IT, and R&D into one operating logic and one rhythm.",
+    body: "Create operational architecture so disciplines and teams share one clear operating logic.",
   },
   {
     title: "Build",
-    body: "Shipping outcomes that are robust, practical, and easy to keep improving.",
+    body: "Ship outcomes that are clean in design, resilient in use, and easy to extend.",
   },
 ];
 
-const positioningCopy =
-  "Built with taste. Driven by thinking.";
+const positioning =
+  "I work at the intersection where ambitious ideas, operational reality, and technical rigor must agree.";
 
 export function HomePage({ websites = [] }: HomePageProps) {
   void websites;
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
+      <header className={styles.topBar}>
         <div className={styles.shell}>
-          <div className={styles.headerInner}>
-            <Link href="/" className={styles.wordmark}>
-              <span className={styles.wordmarkName}>Phinehas Adams</span>
-              <span className={styles.wordmarkMeta}>Marketing. IT. R&amp;D.</span>
-            </Link>
-          </div>
+          <p className={styles.brandmark}>Phinehas Adams</p>
         </div>
       </header>
 
       <main className={styles.main}>
         <section className={styles.hero} aria-labelledby="hero-title">
-          <div className={`${styles.shell} ${styles.heroShell}`}>
+          <div className={styles.shell}>
             <div className={styles.heroGrid}>
-              <div className={styles.heroCopy}>
-                <p className={styles.heroKicker}>Marketing. IT. R&amp;D.</p>
-                <h1 id="hero-title" className={styles.heroTitle}>
+              <div className={styles.heroText}>
+                <p className={styles.eyebrow}>Marketing · IT · R&amp;D</p>
+                <h1 id="hero-title" className={styles.title}>
                   Phinehas Adams
                 </h1>
-                <p className={styles.heroPosition}>Clarity, systems, and execution.</p>
-                <p className={styles.heroSupport}>{positioningCopy}</p>
+                <p className={styles.lead}>Clarity, systems, and execution.</p>
+                <p className={styles.support}>
+                  Built with taste. Driven by thinking.
+                </p>
               </div>
-
-              <div className={styles.schematicWrap} aria-hidden="true">
-                <svg
-                  className={styles.schematic}
-                  viewBox="0 0 640 360"
-                  preserveAspectRatio="none"
-                >
-                  <defs>
-                    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
-                      <path d="M26 0H0V26" />
-                    </pattern>
-                  </defs>
-                  <rect className={styles.schematicGrid} width="640" height="360" fill="url(#grid)" />
-                  <g className={styles.schematicLines}>
-                    <line x1="44" y1="300" x2="176" y2="136" />
-                    <line x1="176" y1="136" x2="304" y2="204" />
-                    <line x1="304" y1="204" x2="456" y2="92" />
-                    <line x1="456" y1="92" x2="596" y2="132" />
-                    <line x1="44" y1="300" x2="44" y2="340" />
-                    <line x1="304" y1="204" x2="304" y2="330" />
-                    <line x1="596" y1="132" x2="596" y2="330" />
-                    <circle cx="44" cy="300" r="6" />
-                    <circle cx="176" cy="136" r="6" />
-                    <circle cx="304" cy="204" r="6" />
-                    <circle cx="456" cy="92" r="6" />
-                    <circle cx="596" cy="132" r="6" />
-                  </g>
-                  <text className={styles.schematicLabel} x="22" y="36">
-                    signal
-                  </text>
-                  <text className={styles.schematicLabel} x="244" y="344">
-                    structure
-                  </text>
-                </svg>
+              <div className={styles.visual} aria-hidden="true">
+                <span className={`${styles.gridNode} ${styles.gridNodeA}`} />
+                <span className={`${styles.gridNode} ${styles.gridNodeB}`} />
+                <span className={`${styles.gridNode} ${styles.gridNodeC}`} />
+                <span className={`${styles.gridLine} ${styles.gridLineA}`} />
+                <span className={`${styles.gridLine} ${styles.gridLineB}`} />
+                <span className={`${styles.gridLine} ${styles.gridLineC}`} />
+                <span className={styles.archWord}>logic</span>
+                <span className={styles.archWordTwo}>signal</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section className={styles.statement} aria-label="positioning">
           <div className={styles.shell}>
-            <p className={styles.sectionEyebrow}>Positioning</p>
-            <h2 className={styles.sectionTitle}>Built for hard, interdisciplinary problems.</h2>
-            <p className={styles.sectionCopy}>
-              I move between narrative, architecture, and experiment design so teams can ship with less
-              drag and more confidence.
-            </p>
+            <p className={styles.statementText}>{positioning}</p>
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section className={styles.areas} aria-label="areas of work">
           <div className={styles.shell}>
-            <p className={styles.sectionEyebrow}>Areas of work</p>
+            <p className={styles.sectionLabel}>Areas of work</p>
             <div className={styles.areasGrid}>
-              {focusAreas.map((area) => (
+              {areas.map((area) => (
                 <article key={area.title} className={styles.areaCard}>
-                  <h3 className={styles.areaTitle}>{area.title}</h3>
-                  <p>{area.body}</p>
+                  <h2 className={styles.areaTitle}>{area.title}</h2>
+                  <p className={styles.areaBody}>{area.body}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="contact" className={styles.contactSection}>
+        <section className={styles.contact} id="contact" aria-label="contact">
           <div className={styles.shell}>
-            <p className={styles.contactIntro}>
+            <p className={styles.contactCopy}>
               For selected projects, consulting, and sharp conversations.
             </p>
             <a className={styles.contactLink} href="mailto:contact@phinehasadams.com">
@@ -129,10 +96,8 @@ export function HomePage({ websites = [] }: HomePageProps) {
 
       <footer className={styles.footer}>
         <div className={styles.shell}>
-          <div className={styles.footerInner}>
-            <span>Phinehas Adams</span>
-            <span>Waco, Texas</span>
-          </div>
+          <span className={styles.footerText}>Phinehas Adams</span>
+          <span className={styles.footerText}>Portfolio focused. Operating quietly.</span>
         </div>
       </footer>
     </div>

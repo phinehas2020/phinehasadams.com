@@ -3,15 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --bg-core: #050505;
-  --fg-primary: #F0F0F0;
-  --fg-secondary: #888888;
-  --accent: #FF3B30;
-  /* Slightly more vibrant aerospace red */
-  --nasa-blue: #4D96FF;
-  /* HUD Blue */
-  --grid-color: rgba(255, 255, 255, 0.03);
-  --tech-mono: var(--font-jetbrains-mono);
+  --font-sans: "Avenir Next", "Avenir", "Segoe UI", "Noto Sans", sans-serif;
+  --font-display: "Baskerville", "Baskerville Old Face", "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+
+  --bg-core: #0b0a0a;
+  --bg-surface: #12100f;
+  --bg-elevated: #171514;
+  --fg-primary: #f3ede2;
+  --fg-secondary: #b4aa9a;
+  --fg-muted: #8f867a;
+  --accent: #bf8c59;
+  --accent-soft: rgba(191, 140, 89, 0.14);
+  --line-soft: rgba(243, 237, 226, 0.12);
+  --line-strong: rgba(243, 237, 226, 0.26);
+  --shadow-soft: 0 28px 90px rgba(0, 0, 0, 0.32);
 }
 
 * {
@@ -30,8 +36,13 @@ body {
   overflow-x: hidden;
   background-color: var(--bg-core);
   color: var(--fg-primary);
+  font-family: var(--font-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
 }
 
 a {
@@ -41,7 +52,7 @@ a {
 
 /* Keyboard focus visibility */
 :focus-visible {
-  outline: 2px solid var(--nasa-blue);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -55,6 +66,11 @@ a {
   color: var(--bg-core);
 }
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
 /* Utility for screen reader only content */
 .sr-only {
   position: absolute;
@@ -66,4 +82,19 @@ a {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

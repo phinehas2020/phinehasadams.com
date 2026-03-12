@@ -1,28 +1,13 @@
-import HeroAsciiOne from "@/components/ui/hero-ascii-one";
-import About from "./components/About";
-import Process from "./components/Process";
-import Projects from "./components/Projects";
-import Photography from "./components/Photography";
-import Capabilities from "./components/Capabilities";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Vulnerability from "./components/Vulnerability";
-import { getImages } from "./utils/getImages";
+import { HomePage } from "./components/home/HomePage";
+import { sanityFetch } from "@/sanity/lib/live";
+import { WEBSITES_QUERY, type SanityWebsite } from "@/sanity/lib/queries";
 
-export default function Home() {
-  const photos = getImages();
+export default async function Home() {
+  const { data: websites } = await sanityFetch<SanityWebsite[]>({
+    query: WEBSITES_QUERY,
+  });
 
   return (
-    <main>
-      <HeroAsciiOne />
-      <Projects />
-      <About />
-      <Process />
-      <Photography photos={photos} />
-      <Vulnerability />
-      <Capabilities />
-      <Contact />
-      <Footer />
-    </main>
+    <HomePage websites={websites ?? []} />
   );
 }

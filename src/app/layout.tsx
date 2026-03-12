@@ -3,7 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Phinehas Adams",
-  description: "NASA-vibe systems design, engineering, automation, and production.",
+  description:
+    "Phinehas Adams works across marketing, IT, and R&D to turn strategy, systems, and experimentation into operating leverage.",
   metadataBase: new URL("https://phinehasadams.com"),
   alternates: {
     canonical: "/",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://phinehasadams.com",
     title: "Phinehas Adams",
-    description: "Systems. Execution. Engineering.",
+    description:
+      "Strategy, systems, and experimentation built into a sharper operating reality.",
     siteName: "Phinehas Adams",
     images: [
       {
@@ -26,7 +28,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Phinehas Adams",
-    description: "Systems. Execution. Engineering.",
+    description:
+      "Strategy, systems, and experimentation built into a sharper operating reality.",
     images: ["/images/PM_A0843.jpg"],
   },
   icons: {
