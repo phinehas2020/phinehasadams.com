@@ -21,7 +21,7 @@ const focusAreas = [
 ];
 
 const positioningCopy =
-  "I work across marketing, IT, and R&D to turn complexity into measurable progress. No theatrical process, just disciplined execution.";
+  "Built with taste. Driven by thinking.";
 
 export function HomePage({ websites = [] }: HomePageProps) {
   void websites;
