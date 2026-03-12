@@ -1,4 +1,5 @@
 import styles from "./HomePage.module.css";
+import Link from "next/link";
 
 interface HomePageProps {
   websites?: unknown[];
@@ -79,6 +80,19 @@ export function HomePage({ websites = [] }: HomePageProps) {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className={styles.buySection} aria-label="sites for sale">
+          <div className={styles.shell}>
+            <p className={styles.sectionLabel}>Buy-ready websites</p>
+            <p className={styles.buyCopy}>
+              If you need a polished site fast, we have a curated selection ready to
+              customize and launch.
+            </p>
+            <Link href="/websites-for-sale" className={styles.buyLink}>
+              Explore available websites
+            </Link>
           </div>
         </section>
 

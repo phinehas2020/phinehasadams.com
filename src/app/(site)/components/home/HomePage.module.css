@@ -255,6 +255,35 @@
   transform: translateY(-2px);
 }
 
+.buySection {
+  border-top: 1px solid var(--line-soft);
+  padding: clamp(2rem, 5vw, 3.4rem) 0;
+}
+
+.buyCopy {
+  margin: 0 0 1.1rem;
+  max-width: 58ch;
+  color: var(--fg-secondary);
+  font-size: clamp(1rem, 1.25vw, 1.3rem);
+  line-height: 1.45;
+}
+
+.buyLink {
+  display: inline-flex;
+  color: var(--fg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-size: 0.78rem;
+  border-bottom: 1px solid rgba(243, 237, 226, 0.48);
+  transition: border-color 220ms ease, transform 220ms ease;
+}
+
+.buyLink:hover,
+.buyLink:focus-visible {
+  border-color: var(--fg-primary);
+  transform: translateY(-1px);
+}
+
 .contact {
   border-top: 1px solid var(--line-soft);
   padding: clamp(2rem, 5vw, 3.3rem) 0 clamp(3rem, 6vw, 4.4rem);
