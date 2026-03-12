@@ -26,3 +26,14 @@
 - 2026-03-04: Removed thermodynamic grid demo component and thermal demo route to keep site aligned to the requested first-component integration.
 - 2026-03-04: Uninstalled thermal-demo-only dependencies (lucide-react, clsx, tailwind-merge) that were no longer used.
 - 2026-03-04: Re-validated with `npm run build`.
+
+- 2026-03-04: Confirmed user wanted hero personalization only; restored removed thermodynamic files and kept them in project, preserved website-specific hero copy in `src/components/ui/hero-ascii-one.tsx`, and verified `npm run build` succeeds.
+- 2026-03-04: Hero title clipping regression came from `whitespace-nowrap` + oversized tracked heading in a constrained right-column container. Fixed by switching to fluid `clamp()` sizing, allowing wraps with `whitespace-normal`, adding `max-w-[18ch]`, and reducing aggressive left offset.
+- 2026-03-04: Repeated a known zsh pitfall by running `sed` on `src/app/(site)/page.tsx` without quotes; parentheses were treated as a glob pattern. Always quote paths that contain parentheses.
+
+- 2026-03-06: Repeated the known zsh parentheses issue while reading homepage files. Always quote paths under src/app/(site)/... in shell commands.
+- 2026-03-06: Homepage redesign: external `image.thum.io` previews were too unreliable for featured work cards (slow/hanging fetches and black frames in captures). Better pattern: generate local screenshots with `npx -y playwright@latest screenshot --browser=chromium --device="Desktop Chrome" <url> public/images/work-*.png` and use those for premium, deterministic previews.
+- 2026-03-06: The repo Playwright skill wrapper currently fails because `playwright-cli` is not available from the invoked package path. Direct `npx -y playwright@latest screenshot ...` works for visual QA and asset capture.
+
+- 2026-03-06: Repeated the parentheses path mistake again while checking homepage CSS classes. Quote every src/app/(site)/... path, even for quick `rg` lookups.
+- 2026-03-12: Rebuilt the home landing page component with a minimal, premium one-page design focused on hero, positioning, 3 work pillars, and contact; updated CSS module to match the restrained technical-aesthetic direction. Build passes after fixing a CSS-module purity issue; lint still fails only on pre-existing `CanvasBackground.tsx` constraints.
