@@ -1,71 +1,48 @@
 import type { Metadata } from "next";
+import { PolicyPage } from "../components/site/PolicyPage";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Phinehas Adams",
   description:
-    "Privacy policy for messages and lead capture workflows for phinehasadams.com.",
+    "Privacy policy for messages, lead capture, and website inquiries for phinehasadams.com.",
 };
 
-const details = {
-  email: "support@phinehasadams.com",
-  company: "Phinehas Adams",
-  address: "United States",
-};
+const sections = [
+  {
+    heading: "Information we collect",
+    body:
+      "We collect information you send directly through forms, email, or other inquiry flows, including your name, email address, phone number, and project details.",
+  },
+  {
+    heading: "How information is used",
+    body:
+      "That information is used to respond to inquiries, scope work, coordinate services, operate message notifications, and improve the website experience.",
+  },
+  {
+    heading: "Communications and SMS",
+    body:
+      "If you choose to share a phone number and consent to messaging, you may receive transactional or project-related SMS communication. Message frequency depends on the conversation or service being delivered.",
+  },
+  {
+    heading: "Opt-out",
+    body:
+      "You can opt out of SMS at any time by replying STOP to a message or by emailing support directly. Marketing messages will not continue after an opt-out request is received.",
+  },
+  {
+    heading: "Contact",
+    body:
+      "For privacy-related questions or requests, email support@phinehasadams.com. This policy applies to interactions with phinehasadams.com and related inquiry workflows.",
+  },
+];
 
 export default function PrivacyPolicyPage() {
   return (
-    <main style={{ padding: "4rem 1.5rem", maxWidth: 860, margin: "0 auto" }}>
-      <h1 style={{ fontSize: "2rem", marginBottom: "1rem", color: "var(--accent)" }}>Privacy Policy</h1>
-      <p style={{ marginBottom: "1rem", color: "var(--fg-secondary)" }}>
-        This Privacy Policy explains how <strong>{details.company}</strong> collects, uses, and protects personal information
-        when visitors interact with our website at {" "}
-        <a href="https://phinehasadams.com" style={{ color: "var(--nasa-blue)" }}>
-          phinehasadams.com
-        </a>
-        .
-      </p>
-
-      <section style={{ marginBottom: "1.5rem" }}>
-        <h2 style={{ marginBottom: "0.5rem" }}>Information We Collect</h2>
-        <p>
-          We collect information you submit directly through forms and lead-capture tools, including your name,
-          phone number, email address, and message details.
-        </p>
-      </section>
-
-      <section style={{ marginBottom: "1.5rem" }}>
-        <h2 style={{ marginBottom: "0.5rem" }}>How We Use Information</h2>
-        <p>
-          We use collected information to respond to inquiries, deliver requested services, operate message
-          notifications, and improve site functionality.
-        </p>
-      </section>
-
-      <section style={{ marginBottom: "1.5rem" }}>
-        <h2 style={{ marginBottom: "0.5rem" }}>Communications</h2>
-        <p>
-          By sharing your phone number and consenting, you agree we may send you transactional and campaign-related
-          SMS messages, including updates and lead notifications.
-        </p>
-      </section>
-
-      <section style={{ marginBottom: "1.5rem" }}>
-        <h2 style={{ marginBottom: "0.5rem" }}>SMS Consent and Opt-Out</h2>
-        <p>
-          You can opt out of SMS messages at any time by replying <strong>STOP</strong> to any message. We respect your
-          preference and will not continue marketing messages after opt-out.
-        </p>
-      </section>
-
-      <section>
-        <h2 style={{ marginBottom: "0.5rem" }}>Contact</h2>
-        <p>
-          For privacy requests, contact us at <a href={`mailto:${details.email}`} style={{ color: "var(--nasa-blue)" }}>{details.email}</a>.
-        </p>
-        <p style={{ marginTop: "0.5rem", color: "var(--fg-secondary)" }}>
-          Mailing address: {details.address}
-        </p>
-      </section>
-    </main>
+    <PolicyPage
+      eyebrow="Legal / Privacy"
+      title="Privacy policy"
+      intro="This policy explains how inquiry and communication data is handled when someone interacts with phinehasadams.com."
+      sections={sections}
+      contactEmail="support@phinehasadams.com"
+    />
   );
 }

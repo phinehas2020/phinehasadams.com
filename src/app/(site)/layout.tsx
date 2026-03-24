@@ -1,5 +1,6 @@
 import { Instrument_Serif, JetBrains_Mono, Sora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SiteChrome } from "./components/site/SiteChrome";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ export default function SiteLayout({
 }>) {
   return (
     <div className={`${instrumentSerif.variable} ${sora.variable} ${jetbrainsMono.variable}`}>
-      {children}
+      <SiteChrome>{children}</SiteChrome>
       <Analytics />
     </div>
   );

@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# phinehasadams.com
 
-## Getting Started
+Marketing site and ready-made website catalog for Phinehas Adams, built with Next.js App Router and Sanity.
 
-First, run the development server:
+## Stack
+- Next.js 16
+- React 19
+- Sanity for website inventory content
+- CSS modules for page-level styling
+
+## Key routes
+- `/` main positioning page
+- `/websites-for-sale` ready-made website inventory
+- `/privacy-policy`
+- `/terms-and-conditions`
+- `/studio/[[...tool]]` Sanity Studio
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing content
+- Homepage copy and layout: `src/app/(site)/components/home/HomePage.tsx`
+- Catalog framing and card layout: `src/app/(site)/websites-for-sale/page.tsx`
+- Shared public shell: `src/app/(site)/components/site/SiteChrome.tsx`
+- Inventory data: Sanity `website` documents via the Studio route
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See `CONTENT_UPDATE_GUIDE.md` for the current content ownership map.
 
-## Learn More
+## Verification
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+./.agent/verify.sh
+npm run lint
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Durable workflow
+This repo uses the `.agent/` workspace for planning, contracts, reports, and milestone documentation. Start with:
+- `.agent/Prompt.md`
+- `.agent/Plan.md`
+- `.agent/contracts/current.md`
+- `.agent/Documentation.md`
