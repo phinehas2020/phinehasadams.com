@@ -1,7 +1,9 @@
 # Content Update Guide
 
-## Overview
-This site is built with Next.js App Router and Sanity. The main sales narrative lives in code, while the ready-made website inventory lives in Sanity `website` documents.
+## Overview (Post 2026-04 Brutalist Redesign)
+This site is now a full **Industrial Brutalist (Tactical Telemetry)** system. All public marketing surfaces follow DESIGN.md.
+
+Main sales narrative lives in code (brutalist language). Ready-made inventory still lives in Sanity `website` documents.
 
 ## Where to edit what
 

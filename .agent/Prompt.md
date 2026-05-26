@@ -1,7 +1,13 @@
 # Project Prompt
 
 ## Overview
-Remake `/Users/phinehasadams/phinehasadams.com` into a coherent personal-business site that sells Phinehas Adams as the person you hire when you need a sharper public-facing website, cleaner internal systems, and more reliable delivery. The site should unify the current editorial homepage, the ready-made websites catalog, and the underlying proof into one clear story instead of three partially competing directions.
+**Ground-up redesign (2026-04)**: Completely rebuild the public marketing surfaces of phinehasadams.com in **Industrial Brutalist (Tactical Telemetry)** visual language.
+
+The site must feel like a precise, declassified R&D / telemetry system for the person you hire when you need sharper websites, cleaner operating systems, and reliable delivery with less sprawl. Rigid grids, zero border-radius, heavy uppercase neo-grotesk + dominant monospace, single hazard red accent on dark CRT substrate, visible structural lines, registration marks, and a fully evolved version of the signature interactive canvas (now a "Brutalist Telemetry / Signal Map" with the exact same physics but rendered in blueprint/phosphor/hazard language with registration overlays and HUD elements).
+
+The homepage and /websites-for-sale must read as one tactical system. Live Sanity inventory, dual funnels (custom + ready-made), legal pages, and all existing functionality are preserved exactly. Light IA refinements are allowed only if they strengthen the "operating clarity" story (e.g. structured evidence/reference plates using existing photography).
+
+This is a full visual and structural reset from the prior warm editorial unification — no residue of glass, blur, pills, or previous accent palette is acceptable in public marketing routes.
 
 ## Current-state audit
 - The homepage is rendered from [`src/app/(site)/page.tsx`] and [`src/app/(site)/components/home/HomePage.tsx`], with live website inventory fetched from Sanity and featured on the page.
@@ -71,12 +77,24 @@ Remake `/Users/phinehasadams/phinehasadams.com` into a coherent personal-busines
 - A cleanup plan for legacy unused components and stale docs.
 - A verification baseline documenting what passes today and what is already broken.
 
-## Design direction
-- Warm editorial-industrial rather than cold tech demo.
-- Calm, high-judgment, materially grounded, and precise.
-- Keep the strongest parts of the current home page: serif-led authority, breathable spacing, and restrained premium tone.
-- Bring the websites-for-sale page into the same family: less like a separate campaign microsite, more like a productized branch of the same brand.
-- Avoid hacker-terminal cosplay, default SaaS gradients, or animation for its own sake.
+## Design direction (Ground-up 2026-04 — Brutalist)
+**Industrial Brutalist — Tactical Telemetry (dark)** is the locked language:
+- Rigid blueprint grids, visible 1-2px structural lines, zero border-radius on all marketing surfaces.
+- Heavy uppercase neo-grotesk for macro/structural typography + JetBrains Mono (or equivalent) as the dominant typeface.
+- Single hazard red (#E61919 / #FF2A2A) as the only accent on dark CRT substrate (#0A0A0A / #121212).
+- Registration marks, bracket/slash syntax, and data-plate framing as structural elements.
+- Photography treated as declassified reference plates with mono captions ("PLATE 07 — PM_A0843 — PRINCIPAL / 2026").
+- The signature canvas is preserved and evolved (exact physics, new telemetry visual language with canvas-drawn registration marks, crosshairs, scale rulers, and live HUD readouts). No thermal/magma residue.
+- No glass, blur, soft shadows, pills, warm accents, or previous editorial softness anywhere in public routes.
+- Swiss light print variant exists only as a documented future option (not v1).
+
+This is a complete reset. The prior warm editorial unification (M02 era) is the baseline being replaced, not evolved.
+
+## Hard Requirements
+- Evolved canvas interaction (physics 100% identical) must ship in M01 foundation.
+- All existing Sanity `website` documents, queries, pricing, sold states, and Stripe flows remain untouched.
+- Dual funnels (custom inquiry + ready-made catalog) stay equally prominent.
+- Legal pages and /studio continue to function without change to content ownership.
 
 ## Success signals
 - A new visitor can explain the offer after one screen without guessing.

@@ -1,6 +1,16 @@
 # phinehasadams.com
 
-Marketing site and ready-made website catalog for Phinehas Adams, built with Next.js App Router and Sanity.
+**Industrial Brutalist (Tactical Telemetry) redesign — 2026-04**
+
+Ground-up brutalist redesign of the personal business site for Phinehas Adams.
+
+- Rigid grids, zero border-radius, heavy uppercase neo-grotesk + dominant monospace
+- Single hazard red accent on dark CRT substrate
+- Signature evolved telemetry canvas (physics preserved)
+- Live Sanity inventory as "Reference Plates" and "Inventory Readout"
+- Dual funnels preserved (custom + ready-made)
+
+Full DESIGN.md at root. All public marketing surfaces rewritten in the new system.
 
 ## Stack
 - Next.js 16

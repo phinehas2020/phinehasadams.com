@@ -87,15 +87,13 @@ export default async function WebsitesForSale() {
         <div className={styles.shell}>
           <div className={styles.heroGrid}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>Ready-made websites</p>
-              <h1 className={styles.title}>A faster route to a site that still feels considered.</h1>
+              <p className={styles.eyebrow}>READY-MADE UNITS</p>
+              <h1 className={styles.title}>LIVE FOUNDATIONS. FASTER THAN ZERO. CLEANER THAN TEMPLATES.</h1>
               <p className={styles.lead}>
-                These are live website foundations that can be adapted to your business
-                instead of starting from a blank canvas every time.
+                Deployed systems ready for your brand, copy, offers, and domain.
               </p>
               <p className={styles.support}>
-                Good if you want something sharper than a template, faster than a full
-                custom build, and clear about what happens next.
+                3-day turnaround. Real structure. No half-finished handoff.
               </p>
 
               <div className={styles.heroActions}>
@@ -166,10 +164,9 @@ export default async function WebsitesForSale() {
           <div className={styles.sectionHeader}>
             <p className={styles.sectionNumber}>01</p>
             <div className={styles.sectionLead}>
-              <h2 className={styles.sectionTitle}>How this works</h2>
+              <h2 className={styles.sectionTitle}>PROCEDURE</h2>
               <p className={styles.sectionCopy}>
-                A quicker route when the goal is to get live cleanly without pretending every
-                project needs to start from zero.
+                Acquire base. Customize. Ship clean. No theater.
               </p>
             </div>
           </div>
@@ -191,9 +188,9 @@ export default async function WebsitesForSale() {
           <div className={styles.sectionHeader}>
             <p className={styles.sectionNumber}>02</p>
             <div className={styles.sectionLead}>
-              <h2 className={styles.sectionTitle}>Inventory</h2>
+              <h2 className={styles.sectionTitle}>INVENTORY READOUT</h2>
               <p className={styles.sectionCopy}>
-                Live previews, real pricing, and clear sold vs. available status.
+                Live units. Real pricing. Status clear.
               </p>
             </div>
           </div>
@@ -288,7 +285,7 @@ export default async function WebsitesForSale() {
             <div className={styles.customCopy}>
               <p className={styles.eyebrow}>Custom still available</p>
               <h2 className={styles.customTitle}>
-                If the catalog gets you close but not all the way there, start custom.
+                CATALOG NOT ENOUGH? INITIATE CUSTOM SPEC.
               </h2>
               <p className={styles.customBody}>
                 The ready-made sites are there to shorten the path, not to box you into the

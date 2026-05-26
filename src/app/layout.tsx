@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Phinehas Adams",
   description:
-    "Phinehas Adams works across marketing, IT, and R&D to turn strategy, systems, and experimentation into operating leverage.",
+    "Websites, systems, and operating clarity for businesses that need sharper delivery and less sprawl.",
   metadataBase: new URL("https://phinehasadams.com"),
   alternates: {
     canonical: "/",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     url: "https://phinehasadams.com",
     title: "Phinehas Adams",
     description:
-      "Strategy, systems, and experimentation built into a sharper operating reality.",
+      "Websites, systems, and operating clarity for businesses that need sharper delivery and less sprawl.",
     siteName: "Phinehas Adams",
     images: [
       {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Phinehas Adams",
     description:
-      "Strategy, systems, and experimentation built into a sharper operating reality.",
+      "Websites, systems, and operating clarity for businesses that need sharper delivery and less sprawl.",
     images: ["/images/PM_A0843.jpg"],
   },
   icons: {

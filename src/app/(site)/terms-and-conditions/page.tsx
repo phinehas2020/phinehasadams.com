@@ -38,9 +38,9 @@ const sections = [
 export default function TermsAndConditionsPage() {
   return (
     <PolicyPage
-      eyebrow="Legal / Terms"
-      title="Terms and conditions"
-      intro="These terms cover use of the site, communication expectations, and basic conditions around inquiry and messaging flows."
+      eyebrow="DOC / LEGAL-02"
+      title="TERMS OF ENGAGEMENT"
+      intro="Operating rules for custom and ready-made work."
       sections={sections}
       contactEmail="support@phinehasadams.com"
     />

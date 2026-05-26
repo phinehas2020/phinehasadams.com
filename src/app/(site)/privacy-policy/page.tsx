@@ -38,9 +38,9 @@ const sections = [
 export default function PrivacyPolicyPage() {
   return (
     <PolicyPage
-      eyebrow="Legal / Privacy"
-      title="Privacy policy"
-      intro="This policy explains how inquiry and communication data is handled when someone interacts with phinehasadams.com."
+      eyebrow="DOC / LEGAL-01"
+      title="PRIVACY PROTOCOL"
+      intro="Minimal collection. Clear use. No theater."
       sections={sections}
       contactEmail="support@phinehasadams.com"
     />

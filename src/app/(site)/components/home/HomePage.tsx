@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import type { SanityWebsite } from "@/sanity/lib/queries";
 import {
@@ -5,6 +7,7 @@ import {
   getWebsitePreview,
   normalizeWebsiteUrl,
 } from "../../utils/websites";
+import BrutalistTelemetryGrid from "@/components/ui/brutalist-telemetry-grid";
 import styles from "./HomePage.module.css";
 
 interface HomePageProps {
@@ -41,6 +44,12 @@ export function HomePage({ websites = [] }: HomePageProps) {
   return (
     <div className={styles.page}>
       <section className={styles.hero} aria-labelledby="hero-title">
+        <div className={styles.heroBackdrop}>
+          <BrutalistTelemetryGrid resolution={24} coolingFactor={0.96} />
+        </div>
+        <div className={styles.heroGridOverlay} />
+        <div className={styles.heroVignette} />
+
         <div className={styles.shell}>
           <p className={styles.heroTag}>Phinehas Adams / Marketing, IT, R&amp;D</p>
 
@@ -101,7 +110,7 @@ export function HomePage({ websites = [] }: HomePageProps) {
       <main className={styles.main}>
         <section className={styles.ticker} aria-label="Operating lanes">
           <div className={styles.tickerTrack}>
-            {[...operatingLanes, ...operatingLanes].map((lane, index) => (
+            {[...operatingLanes, ...operatingLanes, ...operatingLanes, ...operatingLanes].map((lane, index) => (
               <span key={`${lane}-${index}`} className={styles.tickerItem}>
                 {lane}
               </span>
@@ -141,13 +150,13 @@ export function HomePage({ websites = [] }: HomePageProps) {
         <section className={styles.work} id="work" aria-labelledby="work-title">
           <div className={styles.shell}>
             <div className={styles.sectionHeader}>
-              <p className={styles.sectionNumber}>03</p>
+              <p className={styles.sectionNumber}>02</p>
               <div className={styles.sectionLead}>
                 <h2 id="work-title" className={styles.sectionLabel}>
-                  Selected websites
+                  REFERENCE PLATES
                 </h2>
                 <p className={styles.sectionCopy}>
-                  A few live builds from the inventory already tied into this site.
+                  Deployed units and live systems pulled from the current inventory.
                 </p>
               </div>
             </div>
@@ -170,23 +179,22 @@ export function HomePage({ websites = [] }: HomePageProps) {
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={previewImage}
-                            alt={`${site.title} preview`}
+                            alt={`${site.title} reference`}
                             className={styles.workImage}
                             loading="lazy"
                             referrerPolicy="no-referrer"
                           />
-                          {site.sold ? <span className={styles.soldBadge}>Sold</span> : null}
+                          {site.sold ? <span className={styles.soldBadge}>ARCHIVED</span> : null}
                         </div>
 
                         <div className={styles.workBody}>
                           <div className={styles.workMeta}>
                             <span>{getWebsiteDomain(url)}</span>
-                            <span>{site.sold ? "Archived" : "Available"}</span>
+                            <span>{site.sold ? "ARCHIVED" : "LIVE"}</span>
                           </div>
                           <h3 className={styles.workTitle}>{site.title}</h3>
                           <p className={styles.workDescription}>
-                            {site.description ||
-                              "Live website preview pulled from the current catalog."}
+                            {site.description || "Live deployed unit from current catalog."}
                           </p>
                         </div>
                       </a>
@@ -197,17 +205,13 @@ export function HomePage({ websites = [] }: HomePageProps) {
                 <article className={styles.workCard}>
                   <div className={styles.workBody}>
                     <div className={styles.workMeta}>
-                      <span>Inventory</span>
-                      <span>Empty</span>
+                      <span>INVENTORY</span>
+                      <span>QUIET</span>
                     </div>
-                    <h3 className={styles.workTitle}>No websites loaded yet.</h3>
+                    <h3 className={styles.workTitle}>NO ACTIVE PLATES</h3>
                     <p className={styles.workDescription}>
-                      The page is wired for live website entries from Sanity. Once those are
-                      present, they will appear here automatically.
+                      Sanity inventory will appear here automatically when populated.
                     </p>
-                    <Link className={styles.inlineLink} href="/websites-for-sale">
-                      Go to the websites page
-                    </Link>
                   </div>
                 </article>
               )}
@@ -222,13 +226,13 @@ export function HomePage({ websites = [] }: HomePageProps) {
         >
           <div className={styles.shell}>
             <div className={styles.sectionHeader}>
-              <p className={styles.sectionNumber}>04</p>
+              <p className={styles.sectionNumber}>03</p>
               <div className={styles.sectionLead}>
                 <h2 id="approach-title" className={styles.sectionLabel}>
-                  Approach
+                  PROCEDURE
                 </h2>
                 <p className={styles.sectionCopy}>
-                  A tighter version of strategy, systems, and build.
+                  Tight sequence for strategy, systems, and clean delivery.
                 </p>
               </div>
             </div>
@@ -249,9 +253,9 @@ export function HomePage({ websites = [] }: HomePageProps) {
           <div className={styles.shell}>
             <div className={styles.contactCard}>
               <div className={styles.contactIntro}>
-                <p className={styles.sectionNumber}>05</p>
+                <p className={styles.sectionNumber}>04</p>
                 <h2 id="contact-title" className={styles.contactTitle}>
-                  If you need the site, the structure, or both.
+                  TRANSMIT — SITE OR SYSTEM OR BOTH
                 </h2>
               </div>
 
@@ -260,7 +264,7 @@ export function HomePage({ websites = [] }: HomePageProps) {
                   contact@phinehasadams.com
                 </a>
                 <Link className={styles.contactSecondary} href="/websites-for-sale">
-                  See websites for sale
+                  VIEW INVENTORY
                 </Link>
               </div>
             </div>

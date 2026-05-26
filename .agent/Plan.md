@@ -1,7 +1,13 @@
 # Project Plan
 
-## Goal
-Turn `phinehasadams.com` into a coherent personal-business site where the homepage, ready-made website inventory, and proof all reinforce the same story.
+## Goal (Ground-up Redesign — 2026-04)
+Completely rebuild the public marketing surfaces (`/`, `/websites-for-sale`, legal) of phinehasadams.com in **Industrial Brutalist (Tactical Telemetry)** language per the approved DESIGN.md and session plan.
+
+The result must feel like one precise tactical system: rigid grids, zero border-radius, heavy mono + structural uppercase typography, single hazard red on dark CRT substrate, visible blueprint structure, registration marks, and a fully evolved version of the signature interactive canvas (telemetry/signal map with identical physics but new visual language).
+
+Preserve 100% of existing functionality (Sanity inventory, pricing, sold states, Stripe, dual funnels, routes, legal). Light IA refinements allowed only where they strengthen the "operating clarity / systems" story using existing assets.
+
+This is a full visual and structural reset — no leakage of the prior warm editorial unification is acceptable.
 
 ## Non-goals
 - Do not redesign unrelated demo routes unless a milestone explicitly includes them.

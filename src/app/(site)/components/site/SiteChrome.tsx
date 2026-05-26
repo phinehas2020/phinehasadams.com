@@ -46,7 +46,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         <div className={styles.shell}>
           <div className={styles.topBarInner}>
             <Link href="/" className={styles.brandmark}>
-              Phinehas Adams
+              [ P / A ]
             </Link>
 
             <nav className={styles.nav} aria-label="Primary">
@@ -70,7 +70,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
             </nav>
 
             <a className={styles.headerCta} href="mailto:contact@phinehasadams.com">
-              Start a project
+              TRANSMIT
             </a>
           </div>
         </div>
@@ -82,11 +82,12 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         <div className={styles.shell}>
           <div className={styles.footerGrid}>
             <div className={styles.footerIntro}>
-              <p className={styles.footerEyebrow}>Phinehas Adams</p>
-              <h2 className={styles.footerTitle}>Websites, systems, and operating clarity.</h2>
+              <p className={styles.footerEyebrow}>PHINEHAS ADAMS — OPERATOR</p>
+              <h2 className={styles.footerTitle}>WEBSITES • SYSTEMS • OPERATING CLARITY</h2>
+              <hr className={styles.structuralRule} />
               <p className={styles.footerCopy}>
-                Built for businesses that need sharper public-facing work, cleaner
-                structure underneath it, and less delivery drift.
+                Precision builds for founder-led teams that need sharper public work and
+                internal systems that actually hold under load.
               </p>
             </div>
 
@@ -104,8 +105,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
                   contact@phinehasadams.com
                 </a>
                 <p className={styles.footerNote}>
-                  Custom work available. Ready-made websites can be customized and shipped
-                  to your domain.
+                  READY-MADE UNITS AVAILABLE FOR CUSTOMIZATION + SHIP TO YOUR DOMAIN.
                 </p>
               </div>
             </div>
