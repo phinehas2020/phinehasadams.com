@@ -1,0 +1,82 @@
+.section {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(6rem, 12vh, 10rem) var(--gutter);
+  border-top: 1px solid var(--line);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.index {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: var(--label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+.indexNum {
+  color: var(--ember);
+}
+
+.headline {
+  max-width: 22ch;
+  font-size: clamp(1.9rem, 4.4vw, 3.6rem);
+  font-weight: 560;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+}
+
+.figure {
+  color: var(--ember);
+  font-variant-numeric: tabular-nums;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.more {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.moreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.05rem;
+  font-weight: 540;
+  color: var(--fg);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line-strong);
+  transition: gap 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth);
+}
+
+.moreLink:hover {
+  gap: 1.2rem;
+  border-color: var(--ember);
+}
+
+.moreIcon {
+  color: var(--ember);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 30rem;
+  }
+}

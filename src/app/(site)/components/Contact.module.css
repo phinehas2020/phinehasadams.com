@@ -1,0 +1,100 @@
+.section {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(7rem, 16vh, 13rem) var(--gutter);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 3.5vw, 3rem);
+}
+
+.index {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: var(--label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+.indexNum {
+  color: var(--ember);
+}
+
+.big {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(3.2rem, 12vw, 11rem);
+  line-height: 0.86;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+}
+
+.email {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 1.1rem);
+  width: fit-content;
+  font-size: clamp(1.3rem, 3.2vw, 2.6rem);
+  font-weight: 580;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--fg);
+  transition: color 0.5s var(--ease-smooth);
+}
+
+.emailText {
+  background-image: linear-gradient(var(--ember), var(--ember));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size 0.6s var(--ease-out-expo);
+}
+
+.email:hover {
+  color: var(--ember);
+}
+
+.email:hover .emailText {
+  background-size: 100% 2px;
+}
+
+.emailIcon {
+  font-size: 0.7em;
+  color: var(--ember);
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.email:hover .emailIcon {
+  transform: translate(0.2em, -0.2em);
+}
+
+.avail {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ember);
+}
+
+@media (max-width: 560px) {
+  .email {
+    word-break: break-word;
+  }
+  .avail {
+    flex-wrap: wrap;
+  }
+}

@@ -1,13 +1,32 @@
-import { HomePage } from "./components/home/HomePage";
-import { sanityFetch } from "@/sanity/lib/live";
-import { WEBSITES_QUERY, type SanityWebsite } from "@/sanity/lib/queries";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Story from "./components/Story";
+import Process from "./components/Process";
+import Projects from "./components/Projects";
+import Interlude from "./components/Interlude";
+import Photography from "./components/Photography";
+import Capabilities from "./components/Capabilities";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import Vulnerability from "./components/Vulnerability";
+import { getImages } from "./utils/getImages";
 
-export default async function Home() {
-  const { data: websites } = await sanityFetch<SanityWebsite[]>({
-    query: WEBSITES_QUERY,
-  });
+export default function Home() {
+  const photos = getImages();
 
   return (
-    <HomePage websites={websites ?? []} />
+    <main>
+      <Hero />
+      <Projects />
+      <About />
+      <Story />
+      <Process />
+      <Interlude />
+      <Photography photos={photos} />
+      <Vulnerability />
+      <Capabilities />
+      <Contact />
+      <Footer />
+    </main>
   );
 }

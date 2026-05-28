@@ -1,0 +1,123 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  transition: background 0.5s var(--ease-smooth),
+    border-color 0.5s var(--ease-smooth), backdrop-filter 0.5s var(--ease-smooth);
+  border-bottom: 1px solid transparent;
+}
+
+.scrolled {
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border-bottom: 1px solid var(--line);
+}
+
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.05rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.mark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0.34rem;
+  color: var(--fg);
+}
+
+.markName {
+  font-weight: 650;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+
+.markRole {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+}
+
+.link {
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  color: var(--fg-soft);
+  transition: color 0.4s var(--ease-smooth);
+}
+
+.link:hover {
+  color: var(--fg);
+}
+
+.linkIndex {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--fg-faint);
+  letter-spacing: 0.1em;
+}
+
+.cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg);
+  padding: 0.5rem 1.05rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  transition: color 0.45s var(--ease-smooth),
+    border-color 0.45s var(--ease-smooth), background 0.45s var(--ease-smooth);
+}
+
+.ctaDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ember);
+  transition: transform 0.45s var(--ease-smooth);
+}
+
+.cta:hover {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: #fff;
+}
+
+.cta:hover .ctaDot {
+  transform: scale(1.6);
+  background: #fff;
+}
+
+@media (max-width: 720px) {
+  .markRole {
+    display: none;
+  }
+  .link {
+    display: none;
+  }
+  .inner {
+    padding: 0.85rem var(--gutter);
+  }
+}

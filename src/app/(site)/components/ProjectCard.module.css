@@ -1,0 +1,116 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg-raised);
+  transition: transform 0.6s var(--ease-out-expo),
+    box-shadow 0.6s var(--ease-out-expo), border-color 0.6s var(--ease-out-expo);
+}
+
+.card:hover .frame {
+  transform: translateY(-6px);
+  border-color: var(--line-strong);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+.frameIndex {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.9rem;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+.iframeContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.iframe {
+  width: 1440px;
+  height: 1080px;
+  border: 0;
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.soldOverlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--bg) 64%, transparent);
+  backdrop-filter: blur(2px);
+}
+
+.soldBadge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ember);
+  border: 1px solid var(--ember);
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+}
+
+.sold .frame {
+  opacity: 0.85;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.arrow {
+  color: var(--fg-faint);
+  transition: transform 0.4s var(--ease-smooth), color 0.4s var(--ease-smooth);
+}
+
+.card:hover .arrow {
+  transform: translate(2px, -2px);
+  color: var(--ember);
+}
+
+.soldTag {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  border: 1px solid var(--line);
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+}
+
+.desc {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--fg-soft);
+  max-width: 38ch;
+}

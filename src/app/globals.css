@@ -1,65 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ============================================================
+   PHINEHAS ADAMS — Cinematic / photographic system
+   Near-black + cream + ember. Monumental display (Anton),
+   grotesque body (Archivo), mono annotations (JetBrains Mono).
+   ============================================================ */
 
 :root {
-  /* ============================================================
-     BRUTALIST TACTICAL TELEMETRY TOKENS (2026-04 ground-up redesign)
-     See DESIGN.md for the complete living system.
-     These are the ONLY tokens that should be used in new/rewritten
-     public marketing components (SiteChrome, HomePage, websites-for-sale, PolicyPage).
-     Old warm editorial tokens below are legacy and will be purged
-     as components are rewritten in M01–M04.
-     ============================================================ */
+  /* Surfaces */
+  --bg: #0d0b09;
+  --bg-raised: #15110d;
+  --bg-deep: #080705;
 
-  /* Substrate — Tactical Dark (locked for v1) */
-  --bg-crt: #0A0A0A;
-  --bg-elevated: #121212;
-  --ink-phosphor: #EAEAEA;
-  --ink-highlight: #F5F5F5;
-  --ink-muted: #8A8A8A;
-  --hazard: #E61919;           /* ONLY accent — status, CTAs, registration, active signal */
-  --grid-line: #2A2A2A;
-  --terminal-green: #4AF626;   /* ONE USE ONLY (e.g. single "OPERATIONAL" status) */
+  /* Ink (on dark) */
+  --fg: #f4efe7;
+  --fg-soft: rgba(244, 239, 231, 0.66);
+  --fg-faint: rgba(244, 239, 231, 0.4);
 
-  /* Typography vars (will be populated by next/font in layout) */
-  --font-display-brutal: "Bricolage Grotesque", "Archivo Black", "Inter", system-ui, sans-serif; /* heavy neo-grotesk for structural uppercase */
-  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  /* Accent — oxidized ember */
+  --ember: #e2683a;
+  --ember-deep: #c1481f;
 
-  /* ============================================================
-     LEGACY WARM EDITORIAL TOKENS (pre-2026-04 unification)
-     DO NOT USE IN NEW BRUTALIST CODE.
-     ============================================================ */
-  --font-sans: "Avenir Next", "Avenir", "Segoe UI", "Noto Sans", sans-serif;
-  --font-display: "Baskerville", "Baskerville Old Face", "Times New Roman", serif;
-  /* (old mono kept above for now) */
+  /* Lines */
+  --line: rgba(244, 239, 231, 0.14);
+  --line-strong: rgba(244, 239, 231, 0.3);
 
-  --bg-core: #0b0a0a;
-  --bg-surface: #12100f;
-  --bg-elevated: #171514;
-  --fg-primary: #f3ede2;
-  --fg-secondary: #b4aa9a;
-  --fg-muted: #8f867a;
-  --accent: #bf8c59;
-  --accent-soft: rgba(191, 140, 89, 0.14);
-  --line-soft: rgba(243, 237, 226, 0.12);
-  --line-strong: rgba(243, 237, 226, 0.26);
-  --shadow-soft: 0 28px 90px rgba(0, 0, 0, 0.32);
+  /* Type — --font-display / --font-sans / --font-mono are provided by
+     next/font on <html>. Fallbacks live in the usages below. */
 
-  --site-bg: #050505;
-  --site-bg-strong: #0d0d0d;
-  --site-paper: rgba(25, 25, 25, 0.4);
-  --site-paper-strong: rgba(38, 38, 38, 0.72);
-  --site-ink: #f5efe4;
-  --site-muted: rgba(245, 239, 228, 0.68);
-  --site-muted-soft: rgba(245, 239, 228, 0.48);
-  --site-line: rgba(245, 239, 228, 0.08);
-  --site-line-strong: rgba(245, 239, 228, 0.18);
-  --site-accent: #ff5522;
-  --site-accent-soft: rgba(255, 85, 34, 0.12);
-  --site-success: #10b981;
-  --site-warning: #f59e0b;
-  --site-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Layout */
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --maxw: 88rem;
+
+  --label: 0.66rem;
 }
 
 * {
@@ -68,37 +43,22 @@
   margin: 0;
 }
 
-/* Brutalist base typography (M01) — structural uppercase + mono dominance */
-h1, .title, .heroTitle, .footerTitle {
-  font-family: var(--font-display-brutal);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-}
-
-h2, h3 {
-  font-family: var(--font-display-brutal);
-  font-weight: 900;
-  letter-spacing: -0.015em;
-}
-
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--bg-core);
-  color: var(--fg-primary);
-  font-family: var(--font-sans), sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  min-height: 100dvh;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -106,28 +66,16 @@ a {
   text-decoration: none;
 }
 
-/* Keyboard focus visibility */
+::selection {
+  background: var(--ember);
+  color: #fff;
+}
+
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ember);
   outline-offset: 3px;
 }
 
-/* Avoid double outlines when we already style a focused component */
-.sr-only:focus-visible {
-  outline: none;
-}
-
-::selection {
-  background: var(--accent);
-  color: var(--bg-core);
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-/* Utility for screen reader only content */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -140,17 +88,52 @@ img {
   border-width: 0;
 }
 
+/* ---- Fixed film-grain overlay ---- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   MOTION PRIMITIVES (driven by ScrollMotion via data-attrs).
+   Hidden states apply only once <html> gets .js-motion, so the
+   page is fully visible without JS.
+   ============================================================ */
+
+.js-motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.95s var(--ease-out-expo),
+    transform 0.95s var(--ease-out-expo),
+    filter 0.95s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: transform, opacity;
+}
+
+.js-motion [data-reveal="blur"] {
+  filter: blur(10px);
+}
+
+.js-motion [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .js-motion [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
   }
 }

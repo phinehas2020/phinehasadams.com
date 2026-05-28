@@ -1,16 +1,17 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import styles from './page.module.css';
+import styles from './ProjectCard.module.css';
 
 interface WebsitePreviewProps {
     url: string;
     title: string;
+    sold?: boolean;
 }
 
-export function WebsitePreview({ url, title }: WebsitePreviewProps) {
+export function WebsitePreviewCard({ url, title, sold }: WebsitePreviewProps) {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [scale, setScale] = useState(0.28);
+    const [scale, setScale] = useState(0.25);
 
     useEffect(() => {
         const updateScale = () => {
@@ -28,7 +29,7 @@ export function WebsitePreview({ url, title }: WebsitePreviewProps) {
     }, []);
 
     return (
-        <div ref={containerRef} className={styles.previewContainer}>
+        <div ref={containerRef} className={styles.iframeContainer}>
             <iframe
                 src={url}
                 className={styles.iframe}
@@ -37,6 +38,11 @@ export function WebsitePreview({ url, title }: WebsitePreviewProps) {
                 tabIndex={-1}
                 loading="lazy"
             />
+            {sold && (
+                <div className={styles.soldOverlay}>
+                    <span className={styles.soldBadge}>SOLD</span>
+                </div>
+            )}
         </div>
     );
 }

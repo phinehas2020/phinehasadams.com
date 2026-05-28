@@ -1,5 +1,6 @@
 import { type QueryParams } from 'next-sanity';
 import { client } from './client';
+import { sanityConfigured } from '../env';
 
 export async function sanityFetch<T>({
   query,
@@ -10,6 +11,9 @@ export async function sanityFetch<T>({
   params?: QueryParams;
   tags?: string[];
 }): Promise<{ data: T }> {
+  if (!sanityConfigured) {
+    return { data: [] as unknown as T };
+  }
   try {
     const data = await client.fetch<T>(query, params, {
       next: {

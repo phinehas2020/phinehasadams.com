@@ -1,307 +1,210 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
 import { WEBSITES_QUERY, type SanityWebsite } from "@/sanity/lib/queries";
-import { getWebsiteDomain, normalizeWebsiteUrl } from "../utils/websites";
-import { WebsitePreview } from "./WebsitePreview";
 import styles from "./page.module.css";
-
-const processSteps = [
-  {
-    title: "Pick a base",
-    body: "Choose a site that already matches the tone, category, or structure you need.",
-  },
-  {
-    title: "Make it yours",
-    body: "We swap in your brand, your copy, your offers, your photos, and your domain.",
-  },
-  {
-    title: "Ship cleanly",
-    body: "The finished site goes live with the right handoff instead of leaving you with a half-finished template.",
-  },
-];
-
-const foundationRows = [
-  {
-    label: "Turnaround",
-    value: "About 3 days to customize and ship",
-  },
-  {
-    label: "Starting point",
-    value: "Live site systems, not flat mockups",
-  },
-  {
-    label: "Best fit",
-    value: "Businesses that need something fast without looking rushed",
-  },
-];
+import Link from "next/link";
+import { WebsitePreview } from "./WebsitePreview";
 
 export const metadata: Metadata = {
-  title: "Ready-made Websites | Phinehas Adams",
+  title: "Buy a Website | Phinehas Adams",
   description:
-    "Browse ready-made websites that can be customized for your business, shipped on your domain, and refined without starting from zero.",
+    "A site customized for your business, shipped on your domain in 3 days, and ranking on the first page of Google in 10.",
   openGraph: {
-    title: "Ready-made Websites | Phinehas Adams",
+    title: "Buy a Website — On the First Page of Google",
     description:
-      "Ready-made websites customized for your business, shipped on your domain, and built to feel considered from day one.",
+      "A site customized for your business, shipped on your domain in 3 days, and ranking on the first page of Google in 10.",
     images: [
       {
         url: "/og-websites.png",
         width: 1400,
         height: 860,
-        alt: "Ready-made websites by Phinehas Adams",
+        alt: "Buy a Website — Your business online, on the first page of Google.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ready-made Websites | Phinehas Adams",
+    title: "Buy a Website — On the First Page of Google",
     description:
-      "Browse ready-made websites that can be customized for your business and shipped without starting from scratch.",
+      "A site customized for your business, shipped on your domain in 3 days, and ranking on the first page of Google in 10.",
     images: ["/og-websites.png"],
   },
 };
 
-function getStartingPrice(sites: SanityWebsite[]) {
-  const prices = sites
-    .filter((site) => !site.sold && typeof site.purchasePrice === "number")
-    .map((site) => site.purchasePrice as number);
-
-  if (prices.length === 0) {
-    return null;
-  }
-
-  return Math.min(...prices);
-}
+const steps = [
+  {
+    n: "01",
+    title: "Pick a site",
+    desc: "Browse the collection below and choose a design that fits your business.",
+  },
+  {
+    n: "02",
+    title: "We customize it",
+    desc: "Your brand, your copy, your photos — fully tailored to your business and domain.",
+  },
+  {
+    n: "03",
+    title: "Live & ranking",
+    desc: "Shipped to your domain, optimized for Google, and ranking locally within days.",
+  },
+];
 
 export default async function WebsitesForSale() {
-  const { data: websites } = await sanityFetch<SanityWebsite[]>({ query: WEBSITES_QUERY });
+  const { data: websites } = await sanityFetch<SanityWebsite[]>({
+    query: WEBSITES_QUERY,
+  });
   const sites = websites ?? [];
-  const soldCount = sites.filter((site) => site.sold).length;
-  const availableCount = sites.length - soldCount;
-  const startingPrice = getStartingPrice(sites);
 
   return (
-    <main className={styles.page}>
-      <section className={styles.hero}>
-        <div className={styles.shell}>
-          <div className={styles.heroGrid}>
-            <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>READY-MADE UNITS</p>
-              <h1 className={styles.title}>LIVE FOUNDATIONS. FASTER THAN ZERO. CLEANER THAN TEMPLATES.</h1>
-              <p className={styles.lead}>
-                Deployed systems ready for your brand, copy, offers, and domain.
-              </p>
-              <p className={styles.support}>
-                3-day turnaround. Real structure. No half-finished handoff.
-              </p>
+    <main className={styles.container}>
+      <Link href="/" className={styles.back}>
+        <span aria-hidden="true">←</span> Back to home
+      </Link>
 
-              <div className={styles.heroActions}>
-                <a className={styles.primaryAction} href="#inventory">
-                  Browse inventory
-                </a>
-                <Link className={styles.secondaryAction} href="/#contact">
-                  Start a custom project
-                </Link>
-              </div>
+      {/* ── Hero ── */}
+      <header className={styles.hero}>
+        <span className={styles.eyebrow} data-reveal>
+          <span className={styles.eyebrowMark} />
+          Buy a website
+        </span>
+        <h1 className={styles.title} data-reveal>
+          Your business online.
+          <br />
+          <span className={styles.titleAccent}>On the first page of Google.</span>
+        </h1>
+        <p className={styles.subtitle} data-reveal>
+          Pick a site below. I customize it for your brand, ship it on your
+          domain, and get you ranking on the first page of Google for your local
+          area.
+        </p>
+      </header>
+
+      {/* ── Metrics ── */}
+      <div className={styles.metrics}>
+        <div className={styles.metric} data-reveal>
+          <span className={styles.metricNum}>3</span>
+          <span className={styles.metricUnit}>days</span>
+          <p className={styles.metricDesc}>Customized &amp; shipped on your domain</p>
+        </div>
+        <div className={styles.metric} data-reveal>
+          <span className={styles.metricNum}>10</span>
+          <span className={styles.metricUnit}>days</span>
+          <p className={styles.metricDesc}>Ranking on the first page of Google</p>
+        </div>
+        <div className={styles.metric} data-reveal>
+          <span className={styles.metricNum}>Local</span>
+          <span className={styles.metricUnit}>SEO</span>
+          <p className={styles.metricDesc}>Optimized to rank for your area</p>
+        </div>
+      </div>
+
+      {/* ── How it works ── */}
+      <section className={styles.steps}>
+        <span className={styles.sectionLabel} data-reveal>
+          How it works
+        </span>
+        <div className={styles.stepsGrid}>
+          {steps.map((step) => (
+            <div key={step.n} className={styles.step} data-reveal>
+              <span className={styles.stepNum}>{step.n}</span>
+              <h3 className={styles.stepTitle}>{step.title}</h3>
+              <p className={styles.stepDesc}>{step.desc}</p>
             </div>
-
-            <aside className={styles.heroPanel} aria-label="Offer summary">
-              <div className={styles.panelHeader}>
-                <span className={styles.panelEyebrow}>Offer summary</span>
-                <span className={styles.panelStatus}>Live inventory</span>
-              </div>
-
-              <div className={styles.panelRows}>
-                {foundationRows.map((row) => (
-                  <div key={row.label} className={styles.panelRow}>
-                    <span>{row.label}</span>
-                    <strong>{row.value}</strong>
-                  </div>
-                ))}
-              </div>
-
-              <p className={styles.panelNote}>
-                If none of the starting points fit, custom work is still available.
-              </p>
-            </aside>
-          </div>
+          ))}
         </div>
       </section>
 
-      <section className={styles.summary}>
-        <div className={styles.shell}>
-          <div className={styles.summaryGrid}>
-            <article className={styles.summaryCard}>
-              <span className={styles.summaryLabel}>Available now</span>
-              <strong className={styles.summaryValue}>{availableCount}</strong>
-              <p className={styles.summaryCopy}>
-                Live starting points ready to customize and ship.
-              </p>
-            </article>
-            <article className={styles.summaryCard}>
-              <span className={styles.summaryLabel}>Already sold</span>
-              <strong className={styles.summaryValue}>{soldCount}</strong>
-              <p className={styles.summaryCopy}>
-                Proof that the catalog is moving, not a static mood board.
-              </p>
-            </article>
-            <article className={styles.summaryCard}>
-              <span className={styles.summaryLabel}>Starting from</span>
-              <strong className={styles.summaryValue}>
-                {startingPrice ? `$${startingPrice.toLocaleString()}` : "Ask"}
-              </strong>
-              <p className={styles.summaryCopy}>
-                Final price depends on the amount of adaptation and added work.
-              </p>
-            </article>
-          </div>
-        </div>
+      {/* ── Custom CTA ── */}
+      <section className={styles.customCta} data-reveal>
+        <span className={styles.sectionLabel}>Important</span>
+        <h3 className={styles.ctaHeadline}>
+          These are starting points —{" "}
+          <span className={styles.titleAccent}>not finished products.</span>
+        </h3>
+        <p className={styles.ctaText}>
+          Every site gets fully rebuilt around your business — your brand, your
+          content, your domain. Want something completely custom from scratch?
+        </p>
+        <a href="mailto:contact@phinehasadams.com" className={styles.ctaButton}>
+          <span>Get a custom quote</span>
+          <span className={styles.ctaIcon} aria-hidden="true">
+            ↗
+          </span>
+        </a>
       </section>
 
-      <section className={styles.process}>
-        <div className={styles.shell}>
-          <div className={styles.sectionHeader}>
-            <p className={styles.sectionNumber}>01</p>
-            <div className={styles.sectionLead}>
-              <h2 className={styles.sectionTitle}>PROCEDURE</h2>
-              <p className={styles.sectionCopy}>
-                Acquire base. Customize. Ship clean. No theater.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.processGrid}>
-            {processSteps.map((step, index) => (
-              <article key={step.title} className={styles.processCard}>
-                <span className={styles.processIndex}>0{index + 1}</span>
-                <h3 className={styles.processTitle}>{step.title}</h3>
-                <p className={styles.processBody}>{step.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.inventory} id="inventory">
-        <div className={styles.shell}>
-          <div className={styles.sectionHeader}>
-            <p className={styles.sectionNumber}>02</p>
-            <div className={styles.sectionLead}>
-              <h2 className={styles.sectionTitle}>INVENTORY READOUT</h2>
-              <p className={styles.sectionCopy}>
-                Live units. Real pricing. Status clear.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.inventoryMeta}>
-            <p className={styles.inventoryNote}>
-              Every available site includes customization for your business, not a raw handoff.
-            </p>
-            <Link className={styles.inventoryLink} href="/#contact">
-              Need a more specific build?
-            </Link>
-          </div>
-
-          <div className={styles.inventoryGrid}>
-            {sites.length > 0 ? (
-              sites.map((site) => (
-                <article
-                  key={site._id}
-                  className={styles.siteCard}
-                  data-sold={site.sold ? "true" : "false"}
-                >
-                  <a
-                    className={styles.previewLink}
-                    href={site.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <WebsitePreview site={site} />
-                  </a>
-
-                  <div className={styles.siteBody}>
-                    <div className={styles.siteHeader}>
-                      <div>
-                        <div className={styles.siteStatusRow}>
-                          <span className={styles.siteStatus} data-sold={site.sold ? "true" : "false"}>
-                            {site.sold ? "Sold" : "Available"}
-                          </span>
-                          <span className={styles.siteDomain}>
-                            {getWebsiteDomain(normalizeWebsiteUrl(site.url))}
-                          </span>
-                        </div>
-                        <h3 className={styles.siteTitle}>{site.title}</h3>
-                      </div>
-                    </div>
-
-                    <p className={styles.siteDescription}>
-                      {site.description ||
-                        "Live website foundation available for brand, content, and offer adaptation."}
-                    </p>
-
-                    <div className={styles.siteFooter}>
-                      <div className={styles.pricing}>
-                        {site.purchasePrice ? (
-                          <span className={styles.priceTag}>
-                            ${site.purchasePrice.toLocaleString()}
-                          </span>
-                        ) : null}
-                        {site.monthlyPrice ? (
-                          <span className={styles.monthlyTag}>+${site.monthlyPrice}/mo</span>
-                        ) : null}
-                      </div>
-
-                      <div className={styles.siteActions}>
-                        {site.stripeLink && !site.sold ? (
-                          <a
-                            href={site.stripeLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.buyButton}
-                          >
-                            Buy now
-                          </a>
-                        ) : null}
-                        <Link className={styles.secondaryLink} href="/#contact">
-                          {site.sold ? "Request something similar" : "Custom fit"}
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              ))
-            ) : (
-              <div className={styles.emptyState}>No websites listed at the moment.</div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.custom}>
-        <div className={styles.shell}>
-          <div className={styles.customCard}>
-            <div className={styles.customCopy}>
-              <p className={styles.eyebrow}>Custom still available</p>
-              <h2 className={styles.customTitle}>
-                CATALOG NOT ENOUGH? INITIATE CUSTOM SPEC.
-              </h2>
-              <p className={styles.customBody}>
-                The ready-made sites are there to shorten the path, not to box you into the
-                wrong shape.
-              </p>
-            </div>
-
-            <div className={styles.customActions}>
-              <Link className={styles.primaryAction} href="/#contact">
-                Talk through the project
-              </Link>
-              <a className={styles.secondaryAction} href="mailto:contact@phinehasadams.com">
-                contact@phinehasadams.com
+      {/* ── Website grid ── */}
+      <section className={styles.gridSection}>
+        <span className={styles.sectionLabel} data-reveal>
+          Available websites
+        </span>
+        <div className={styles.grid}>
+          {sites.map((site) => (
+            <div
+              key={site._id}
+              className={`${styles.card} ${site.sold ? styles.soldCard : ""}`}
+              data-reveal
+            >
+              <a
+                href={site.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.visitLink}
+              >
+                <span className="sr-only">Visit {site.title}</span>
               </a>
+
+              <div className={styles.cardFrame}>
+                {site.sold && (
+                  <div className={styles.soldOverlay}>
+                    <span className={styles.soldBadge}>Sold</span>
+                  </div>
+                )}
+                <WebsitePreview url={site.url} title={site.title} />
+              </div>
+
+              <div className={styles.info}>
+                <div>
+                  <h2 className={styles.siteTitle}>{site.title}</h2>
+                  {site.description && (
+                    <p className={styles.siteDesc}>{site.description}</p>
+                  )}
+                </div>
+                <div className={styles.infoFooter}>
+                  {(site.purchasePrice || site.monthlyPrice) && (
+                    <div className={styles.pricing}>
+                      {site.purchasePrice && (
+                        <span className={styles.priceTag}>
+                          ${site.purchasePrice.toLocaleString()}
+                        </span>
+                      )}
+                      {site.monthlyPrice && (
+                        <span className={styles.monthlyTag}>
+                          +${site.monthlyPrice}/mo
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  {site.stripeLink && !site.sold && (
+                    <a
+                      href={site.stripeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.buyButton}
+                    >
+                      Buy now
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
+
+          {sites.length === 0 && (
+            <div className={styles.emptyState}>
+              No websites listed at the moment.
+            </div>
+          )}
         </div>
       </section>
     </main>

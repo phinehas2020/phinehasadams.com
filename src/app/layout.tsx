@@ -1,10 +1,30 @@
 import type { Metadata } from "next";
+import { Anton, Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
+  display: "swap",
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Phinehas Adams",
+  title: "Phinehas Adams — Systems & Design",
   description:
-    "Websites, systems, and operating clarity for businesses that need sharper delivery and less sprawl.",
+    "I engineer systems — bridging automation, infrastructure, and design. Built end to end and shipped to production.",
   metadataBase: new URL("https://phinehasadams.com"),
   alternates: {
     canonical: "/",
@@ -12,9 +32,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://phinehasadams.com",
-    title: "Phinehas Adams",
-    description:
-      "Websites, systems, and operating clarity for businesses that need sharper delivery and less sprawl.",
+    title: "Phinehas Adams — Systems & Design",
+    description: "Automation, infrastructure, and design — built end to end.",
     siteName: "Phinehas Adams",
     images: [
       {
@@ -28,8 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Phinehas Adams",
-    description:
-      "Websites, systems, and operating clarity for businesses that need sharper delivery and less sprawl.",
+    description: "Systems. Execution. Engineering.",
     images: ["/images/PM_A0843.jpg"],
   },
   icons: {
@@ -43,7 +61,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${anton.variable} ${archivo.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <body>{children}</body>
     </html>
   );
