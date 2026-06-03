@@ -24,6 +24,11 @@ const sections = [
       "If you choose to share a phone number and consent to messaging, you may receive transactional or project-related SMS communication. Message frequency depends on the conversation or service being delivered.",
   },
   {
+    heading: "SMS consent and mobile information",
+    body:
+      "Mobile opt-in data, SMS consent records, and phone numbers collected for messaging are not shared, sold, rented, or disclosed to third parties or affiliates for their marketing or promotional purposes. This includes text messaging originator opt-in data and consent.",
+  },
+  {
     heading: "Opt-out",
     body:
       "You can opt out of SMS at any time by replying STOP to a message or by emailing support directly. Marketing messages will not continue after an opt-out request is received.",

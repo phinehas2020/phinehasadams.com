@@ -20,13 +20,26 @@ const sections = [
   },
   {
     heading: "SMS program terms",
-    body:
-      "If you opt in to SMS communication, message frequency varies based on the work or inquiry in progress. Standard carrier messaging and data rates may apply.",
+    body: (
+      <>
+        The Phinehas Adams project updates SMS program sends transactional and
+        project-related messages about inquiries, estimates, scheduling, active work,
+        and follow-up. Message frequency varies based on the work or inquiry in
+        progress. Standard carrier message and data rates may apply. Reply{" "}
+        <strong>HELP</strong> for help or contact support@phinehasadams.com. Reply{" "}
+        <strong>STOP</strong> to opt out.
+      </>
+    ),
   },
   {
     heading: "Opt-out rights",
-    body:
-      "You can stop SMS communication at any time by replying STOP or by contacting support directly. That request will be respected going forward.",
+    body: (
+      <>
+        You can stop SMS communication at any time by replying <strong>STOP</strong>{" "}
+        or by contacting support directly. That request will be respected going
+        forward.
+      </>
+    ),
   },
   {
     heading: "Contact",

@@ -1,9 +1,10 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import styles from "./PolicyPage.module.css";
 
 interface PolicySection {
   heading: string;
-  body: string;
+  body: ReactNode;
 }
 
 interface PolicyPageProps {
