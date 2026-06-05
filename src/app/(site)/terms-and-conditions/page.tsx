@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PolicyPage } from "../components/site/PolicyPage";
 
 export const metadata: Metadata = {
@@ -25,9 +26,10 @@ const sections = [
         The Phinehas Adams project updates SMS program sends transactional and
         project-related messages about inquiries, estimates, scheduling, active work,
         and follow-up. Message frequency varies based on the work or inquiry in
-        progress. Standard carrier message and data rates may apply. Reply{" "}
-        <strong>HELP</strong> for help or contact support@phinehasadams.com. Reply{" "}
-        <strong>STOP</strong> to opt out.
+        progress. Consent is collected through the optional{" "}
+        <Link href="/sms-consent">SMS consent page</Link>. Standard carrier message and
+        data rates may apply. Reply <strong>HELP</strong> for help or contact
+        support@phinehasadams.com. Reply <strong>STOP</strong> to opt out.
       </>
     ),
   },

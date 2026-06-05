@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PolicyPage } from "../components/site/PolicyPage";
 
 export const metadata: Metadata = {
@@ -20,8 +21,14 @@ const sections = [
   },
   {
     heading: "Communications and SMS",
-    body:
-      "If you choose to share a phone number and consent to messaging, you may receive transactional or project-related SMS communication. Message frequency depends on the conversation or service being delivered.",
+    body: (
+      <>
+        If you choose to share a phone number and consent to messaging through the{" "}
+        <Link href="/sms-consent">SMS consent page</Link>, you may receive
+        transactional or project-related SMS communication. Message frequency depends on
+        the conversation or service being delivered.
+      </>
+    ),
   },
   {
     heading: "SMS consent and mobile information",

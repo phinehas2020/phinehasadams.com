@@ -16,6 +16,12 @@ export default function Footer() {
           <a href="mailto:contact@phinehasadams.com" className={styles.link}>
             Email
           </a>
+          <Link href="/sms-consent" className={styles.link}>
+            SMS
+          </Link>
+          <Link href="/privacy-policy" className={styles.link}>
+            Privacy
+          </Link>
         </nav>
         <span className={styles.copy}>
           © {new Date().getFullYear()} — Built end to end
