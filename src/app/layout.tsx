@@ -24,7 +24,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Phinehas Adams — Systems & Design",
   description:
-    "I engineer systems — bridging automation, infrastructure, and design. Built end to end and shipped to production.",
+    "Raised on a homestead. I build business systems end to end — storefronts, automations, infrastructure, and the wiring in between.",
   metadataBase: new URL("https://phinehasadams.com"),
   alternates: {
     canonical: "/",
@@ -33,7 +33,8 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://phinehasadams.com",
     title: "Phinehas Adams — Systems & Design",
-    description: "Automation, infrastructure, and design — built end to end.",
+    description:
+      "Business systems built end to end — storefront, automations, infrastructure.",
     siteName: "Phinehas Adams",
     images: [
       {
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Phinehas Adams",
-    description: "Systems. Execution. Engineering.",
+    description: "Business systems built end to end — no hand-offs.",
     images: ["/images/PM_A0843.jpg"],
   },
   icons: {
@@ -66,7 +67,16 @@ export default function RootLayout({
       className={`${anton.variable} ${archivo.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        {/* Pre-paint so entrance choreography starts on first frame; without
+            JS this never runs and the page renders fully visible. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js-motion')",
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

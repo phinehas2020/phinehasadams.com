@@ -5,8 +5,20 @@
   right: 0;
   z-index: 60;
   transition: background 0.5s var(--ease-smooth),
-    border-color 0.5s var(--ease-smooth), backdrop-filter 0.5s var(--ease-smooth);
+    border-color 0.5s var(--ease-smooth),
+    backdrop-filter 0.5s var(--ease-smooth),
+    transform 0.55s var(--ease-out-expo);
   border-bottom: 1px solid transparent;
+}
+
+.hidden {
+  transform: translateY(-101%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
 }
 
 .scrolled {

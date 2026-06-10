@@ -33,6 +33,10 @@
   color: var(--fg);
 }
 
+.broken {
+  color: var(--ember);
+}
+
 .email {
   display: inline-flex;
   align-items: center;

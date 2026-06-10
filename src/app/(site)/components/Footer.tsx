@@ -22,9 +22,12 @@ export default function Footer() {
           <Link href="/privacy-policy" className={styles.link}>
             Privacy
           </Link>
+          <Link href="/terms-and-conditions" className={styles.link}>
+            Terms
+          </Link>
         </nav>
         <span className={styles.copy}>
-          © {new Date().getFullYear()} — Built end to end
+          © {new Date().getFullYear()} — Designed, shot &amp; built by me
         </span>
       </div>
     </footer>

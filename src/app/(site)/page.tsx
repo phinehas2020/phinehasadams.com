@@ -9,11 +9,8 @@ import Capabilities from "./components/Capabilities";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Vulnerability from "./components/Vulnerability";
-import { getImages } from "./utils/getImages";
 
 export default function Home() {
-  const photos = getImages();
-
   return (
     <main>
       <Hero />
@@ -22,7 +19,7 @@ export default function Home() {
       <Story />
       <Process />
       <Interlude />
-      <Photography photos={photos} />
+      <Photography />
       <Vulnerability />
       <Capabilities />
       <Contact />

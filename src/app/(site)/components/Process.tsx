@@ -1,10 +1,22 @@
 import styles from "./Process.module.css";
 
 const steps = [
-  { tag: "Build", desc: "Software, hardware — whatever the problem actually needs." },
-  { tag: "Integrate", desc: "Disparate systems wired into a single, coherent pipeline." },
-  { tag: "Iterate", desc: "Debug. Refactor. Ship. Repeat until it's right." },
-  { tag: "Deploy", desc: "From local to production. The whole pipeline, owned end to end." },
+  {
+    tag: "Walk the fence line",
+    desc: "Find what's actually broken before touching anything.",
+  },
+  {
+    tag: "Build the fix",
+    desc: "Software, hardware, or both — whatever the problem calls for.",
+  },
+  {
+    tag: "Wire it together",
+    desc: "One system that talks to itself, not seventeen browser tabs.",
+  },
+  {
+    tag: "Stand watch",
+    desc: "Shipped, monitored, maintained. I don't disappear after launch.",
+  },
 ];
 
 export default function Process() {
@@ -15,17 +27,21 @@ export default function Process() {
         Process
       </span>
 
-      <ol className={styles.list}>
+      <ol className={styles.flow} data-scrub>
         {steps.map((step, i) => (
           <li
             key={step.tag}
-            className={styles.item}
+            className={styles.row}
             data-reveal
             style={{ "--reveal-delay": `${i * 0.07}s` } as React.CSSProperties}
           >
-            <span className={styles.num}>{String(i + 1).padStart(2, "0")}</span>
-            <h3 className={styles.tag}>{step.tag}</h3>
-            <p className={styles.desc}>{step.desc}</p>
+            <span className={styles.num} aria-hidden="true">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div className={styles.rowBody}>
+              <h3 className={styles.tag}>{step.tag}</h3>
+              <p className={styles.desc}>{step.desc}</p>
+            </div>
           </li>
         ))}
       </ol>

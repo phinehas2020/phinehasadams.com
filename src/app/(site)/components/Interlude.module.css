@@ -1,9 +1,15 @@
 .interlude {
   position: relative;
-  width: 100%;
-  height: clamp(34rem, 88vh, 56rem);
-  overflow: hidden;
-  background: var(--bg-deep);
+  height: 175vh;
+  background: var(--bg);
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: clip;
+  background: var(--bg);
   isolation: isolate;
   display: flex;
   align-items: flex-end;
@@ -29,9 +35,12 @@
   );
 }
 
+/* Image drifts up and settles from 1.16→1 as the gate opens */
 .media {
   position: absolute;
-  inset: -12% 0;
+  inset: -6% 0;
+  transform: translateY(calc((0.5 - var(--scrub, 1)) * 5%))
+    scale(calc(1.16 - min(var(--scrub, 1) * 1.6, 1) * 0.16));
   will-change: transform;
 }
 
@@ -54,13 +63,18 @@
   );
 }
 
+/* Copy lands once the gate is mostly open */
 .content {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   width: 100%;
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 var(--gutter) clamp(3rem, 7vw, 5.5rem);
+  --t: clamp(0, calc((var(--scrub, 1) - 0.42) * 3), 1);
+  opacity: var(--t);
+  transform: translateY(calc((1 - var(--t)) * 48px));
+  will-change: opacity, transform;
 }
 
 .caption {
@@ -86,4 +100,53 @@
 
 .em {
   color: var(--ember);
+}
+
+/* The film gate — pure transforms, composited */
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 39.5%;
+  background: var(--bg);
+  z-index: 4;
+  will-change: transform;
+}
+
+.barTop {
+  top: 0;
+  border-bottom: 1px solid var(--line);
+  transform: translateY(calc(min(var(--scrub, 1) * 1.55, 1) * -102%));
+}
+
+.barBot {
+  bottom: 0;
+  border-top: 1px solid var(--line);
+  transform: translateY(calc(min(var(--scrub, 1) * 1.55, 1) * 102%));
+}
+
+@media (max-width: 640px) {
+  .interlude {
+    height: 160vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interlude {
+    height: auto;
+  }
+  .stage {
+    position: relative;
+    height: clamp(34rem, 88vh, 56rem);
+  }
+  .media,
+  .content {
+    transform: none;
+  }
+  .content {
+    opacity: 1;
+  }
+  .bar {
+    display: none;
+  }
 }

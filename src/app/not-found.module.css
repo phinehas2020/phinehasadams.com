@@ -1,0 +1,51 @@
+.wrap {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.2rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: var(--label);
+  letter-spacing: 0.26em;
+  color: var(--ember);
+}
+
+.line {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 10vw, 9rem);
+  line-height: 0.9;
+  color: var(--fg);
+}
+
+.sub {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--fg-soft);
+  max-width: 44ch;
+}
+
+.home {
+  margin-top: 0.8rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-weight: 540;
+  color: var(--fg);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--line-strong);
+  transition: border-color 0.4s var(--ease-smooth), color 0.4s var(--ease-smooth);
+}
+
+.home:hover {
+  color: var(--ember);
+  border-color: var(--ember);
+}

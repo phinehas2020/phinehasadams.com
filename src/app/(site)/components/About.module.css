@@ -23,10 +23,10 @@
 }
 
 .statement {
-  max-width: 24ch;
+  max-width: 28ch;
   font-size: clamp(2.2rem, 6vw, 5rem);
   font-weight: 500;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--fg);
   margin-left: clamp(0rem, 12vw, 14rem);

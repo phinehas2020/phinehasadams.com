@@ -57,13 +57,20 @@ export default function Hero() {
         </span>
 
         <h1 className={styles.name}>
-          <span className={styles.nameLine}>Phinehas</span>
-          <span className={styles.nameLine}>Adams</span>
+          <span className={styles.nameMask}>
+            <span className={`${styles.nameLine} ${styles.nameA}`}>
+              Phinehas
+            </span>
+          </span>
+          <span className={styles.nameMask}>
+            <span className={`${styles.nameLine} ${styles.nameB}`}>Adams</span>
+          </span>
         </h1>
 
         <p className={styles.statement}>
-          Raised on a homestead. Now I engineer the systems that keep places
-          like it running — <span className={styles.em}>built by hand, to last.</span>
+          Raised on a homestead, where broken things don&rsquo;t wait for a
+          specialist. I build business systems the same way —{" "}
+          <span className={styles.em}>end to end, no hand-offs.</span>
         </p>
       </div>
 

@@ -98,9 +98,23 @@
   margin-left: -0.04em;
   color: var(--fg);
 }
+.nameMask {
+  display: block;
+  overflow: clip;
+  padding-block-end: 0.06em;
+  margin-block-end: -0.06em;
+}
 .nameLine {
   display: block;
   font-size: clamp(4.5rem, 16vw, 15rem);
+  will-change: transform;
+}
+/* The two lines drift apart as the hero scrolls away */
+.nameA {
+  transform: translateX(calc(var(--hero-progress, 0) * -3vw));
+}
+.nameB {
+  transform: translateX(calc(var(--hero-progress, 0) * 3.5vw));
 }
 
 .statement {
@@ -195,10 +209,84 @@
   }
 }
 
+/* ============================================================
+   Entrance choreography — plays once on load, only when JS has
+   marked <html> with .js-motion (added pre-paint). Every
+   animation uses fill-mode "backwards" so that when it finishes,
+   the scroll-driven calc() values in the stylesheet take over
+   without a jump.
+   ============================================================ */
+
+:global(.js-motion) .media {
+  animation: heroMediaIn 1.7s var(--ease-smooth) 0.1s backwards;
+}
+
+:global(.js-motion) .nameLine {
+  animation: heroLineUp 1.25s var(--ease-out-expo) 0.25s backwards;
+}
+:global(.js-motion) .nameB {
+  animation-delay: 0.38s;
+}
+
+:global(.js-motion) .eyebrow {
+  animation: heroSoftRise 0.9s var(--ease-out-expo) 0.85s backwards;
+}
+
+:global(.js-motion) .statement {
+  animation: heroSoftRise 0.9s var(--ease-out-expo) 1s backwards;
+}
+
+:global(.js-motion) .rail {
+  animation: heroFadeIn 1.1s var(--ease-smooth) 1.25s backwards;
+}
+
+@keyframes heroMediaIn {
+  from {
+    filter: brightness(0.2);
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+
+@keyframes heroLineUp {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroSoftRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .media,
+  .mediaInner,
   .track,
-  .enterArrow {
+  .enterArrow,
+  .nameLine,
+  .eyebrow,
+  .statement,
+  .rail {
     animation: none;
   }
 }

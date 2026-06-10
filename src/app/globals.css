@@ -126,6 +126,48 @@ a {
   filter: none;
 }
 
+/* Shutter wipe — opens from a widescreen slit, for imagery */
+.js-motion [data-reveal="clip"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(42% 4% 42% 4%);
+  transition: clip-path 1.3s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.js-motion [data-reveal="clip"].is-visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---- Masked line reveals ----
+   <h2 data-lines>
+     <span data-line-mask><span data-line style="--li:0">…</span></span>
+   </h2>
+   Lines rise from behind their mask, staggered by --li. The tiny
+   padding/margin pair keeps descenders from clipping at tight
+   line-heights without changing layout. */
+[data-line-mask] {
+  display: block;
+  overflow: clip;
+  padding-block-end: 0.1em;
+  margin-block-end: -0.1em;
+}
+
+[data-line] {
+  display: block;
+}
+
+.js-motion [data-lines] [data-line] {
+  transform: translateY(118%);
+  transition: transform 1.15s var(--ease-out-expo);
+  transition-delay: calc(var(--lines-delay, 0s) + var(--li, 0) * 0.085s);
+  will-change: transform;
+}
+
+.js-motion [data-lines].is-visible [data-line] {
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -134,6 +176,11 @@ a {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .js-motion [data-lines] [data-line] {
+    transform: none !important;
     transition: none !important;
   }
 }

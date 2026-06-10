@@ -19,9 +19,9 @@ export default async function Projects() {
           Work — Websites
         </span>
         <h2 className={styles.headline} data-reveal>
-          Customized and shipped on your domain in{" "}
-          <span className={styles.figure}>3 days</span>. Ranking on the first
-          page of Google in <span className={styles.figure}>10 days</span>.
+          Live on your domain in{" "}
+          <span className={styles.figure}>3 days</span>. On the first page of
+          Google in <span className={styles.figure}>10</span>.
         </h2>
       </header>
 
@@ -64,7 +64,7 @@ export default async function Projects() {
 
       <div className={styles.more} data-reveal>
         <Link href="/websites-for-sale" className={styles.moreLink}>
-          <span>View all websites</span>
+          <span>See the full inventory</span>
           <span className={styles.moreIcon} aria-hidden="true">
             ↗
           </span>
