@@ -1,6 +1,6 @@
 .interlude {
   position: relative;
-  height: 175vh;
+  height: 145vh;
   background: var(--bg);
 }
 
@@ -35,12 +35,12 @@
   );
 }
 
-/* Image drifts up and settles from 1.16→1 as the gate opens */
+/* Image settles quickly as the gate opens */
 .media {
   position: absolute;
   inset: -6% 0;
-  transform: translateY(calc((0.5 - var(--scrub, 1)) * 5%))
-    scale(calc(1.16 - min(var(--scrub, 1) * 1.6, 1) * 0.16));
+  transform: translateY(calc((0.38 - var(--scrub, 1)) * 4%))
+    scale(calc(1.1 - min(var(--scrub, 1) * 2.25, 1) * 0.1));
   will-change: transform;
 }
 
@@ -71,9 +71,9 @@
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 var(--gutter) clamp(3rem, 7vw, 5.5rem);
-  --t: clamp(0, calc((var(--scrub, 1) - 0.42) * 3), 1);
+  --t: clamp(0, calc((var(--scrub, 1) - 0.24) * 4.4), 1);
   opacity: var(--t);
-  transform: translateY(calc((1 - var(--t)) * 48px));
+  transform: translateY(calc((1 - var(--t)) * 36px));
   will-change: opacity, transform;
 }
 
@@ -107,7 +107,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  height: 39.5%;
+  height: 38%;
   background: var(--bg);
   z-index: 4;
   will-change: transform;
@@ -116,18 +116,18 @@
 .barTop {
   top: 0;
   border-bottom: 1px solid var(--line);
-  transform: translateY(calc(min(var(--scrub, 1) * 1.55, 1) * -102%));
+  transform: translateY(calc(min(var(--scrub, 1) * 2.25, 1) * -102%));
 }
 
 .barBot {
   bottom: 0;
   border-top: 1px solid var(--line);
-  transform: translateY(calc(min(var(--scrub, 1) * 1.55, 1) * 102%));
+  transform: translateY(calc(min(var(--scrub, 1) * 2.25, 1) * 102%));
 }
 
 @media (max-width: 640px) {
   .interlude {
-    height: 160vh;
+    height: 135vh;
   }
 }
 
