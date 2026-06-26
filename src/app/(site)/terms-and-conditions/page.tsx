@@ -5,7 +5,7 @@ import { PolicyPage } from "../components/site/PolicyPage";
 export const metadata: Metadata = {
   title: "Terms and Conditions | Phinehas Adams",
   description:
-    "Terms governing site use, inquiries, and SMS communications for phinehasadams.com.",
+    "Terms governing site use, website lead alerts, inquiries, and SMS communications for phinehasadams.com.",
 };
 
 const sections = [
@@ -17,16 +17,17 @@ const sections = [
   {
     heading: "Project and communication terms",
     body:
-      "Inquiry responses, project timelines, and availability depend on scope and current workload. Information on the site is provided to help visitors understand the offer and start a conversation.",
+      "Inquiry responses, website setup, lead alert delivery, project timelines, and availability depend on scope and current workload. Information on the site is provided to help visitors understand the offer and start a conversation.",
   },
   {
     heading: "SMS program terms",
     body: (
       <>
-        The Phinehas Adams project updates SMS program sends transactional and
-        project-related messages about inquiries, estimates, scheduling, active work,
-        and follow-up. Message frequency varies based on the work or inquiry in
-        progress. Consent is collected through the optional{" "}
+        The Phinehas Adams website lead alerts SMS program sends transactional messages
+        to opted-in website clients about new website leads, inquiries, form
+        submissions, site setup, and related support follow-up. Message frequency
+        varies based on website activity and support needs. Consent is collected through
+        the optional{" "}
         <Link href="/sms-consent">SMS consent page</Link>. Standard carrier message and
         data rates may apply. Reply <strong>HELP</strong> for help or contact
         support@phinehasadams.com. Reply <strong>STOP</strong> to opt out.

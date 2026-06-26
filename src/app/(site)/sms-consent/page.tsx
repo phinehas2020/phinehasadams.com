@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "SMS Consent | Phinehas Adams",
   description:
-    "Optional SMS consent form and disclosures for project-related text messages from Phinehas Adams.",
+    "Optional SMS consent form and disclosures for website lead alert text messages from Phinehas Adams.",
 };
 
 export default function SmsConsentPage() {
@@ -16,25 +16,25 @@ export default function SmsConsentPage() {
         <div className={styles.heroGrid}>
           <div className={styles.copy}>
             <h1 id="sms-consent-title" className={styles.title}>
-              SMS PROJECT UPDATES
+              SMS LEAD ALERTS
             </h1>
             <p className={styles.intro}>
-              Use this page to request optional one-to-one text updates from Phinehas
-              Adams about a project inquiry, estimate, schedule, active job, or support
-              follow-up.
+              Use this page to request optional text alerts from Phinehas Adams when
+              your website receives a new lead, inquiry, form submission, or related
+              site follow-up.
             </p>
           </div>
 
           <aside className={styles.identity} aria-label="Program details">
             <p className={styles.identityLabel}>Program name</p>
-            <p className={styles.identityValue}>Phinehas Adams project updates</p>
+            <p className={styles.identityValue}>Phinehas Adams website lead alerts</p>
             <p className={styles.identityLabel}>Support</p>
             <a className={styles.identityLink} href="mailto:support@phinehasadams.com">
               support@phinehasadams.com
             </a>
             <p className={styles.identityFine}>
-              Messaging is optional. You can use the site, email, and project services
-              without agreeing to SMS.
+              Messaging is optional. Website clients can receive leads by email or
+              another non-SMS route without agreeing to text alerts.
             </p>
           </aside>
         </div>
@@ -70,7 +70,7 @@ export default function SmsConsentPage() {
 
           <div className={styles.fieldGroup}>
             <label className={styles.label} htmlFor="project">
-              Project or job details
+              Website or business name
             </label>
             <textarea className={styles.textarea} id="project" name="project" rows={5} />
           </div>
@@ -80,13 +80,13 @@ export default function SmsConsentPage() {
               id="sms-consent"
               name="sms_consent"
               type="checkbox"
-              value="I agree to receive optional SMS project updates from Phinehas Adams."
+              value="I agree to receive optional SMS website lead alerts from Phinehas Adams."
             />
             <span>
-              I agree to receive optional SMS messages from Phinehas Adams about my
-              inquiry, estimate, schedule, active job, or project follow-up. Message
-              frequency varies. Message and data rates may apply. Reply HELP for help
-              and STOP to opt out.
+              I agree to receive optional SMS messages from Phinehas Adams about new
+              website leads, inquiries, form submissions, site setup, and related
+              support follow-up. Message frequency varies. Message and data rates may
+              apply. Reply HELP for help and STOP to opt out.
             </span>
           </label>
 
@@ -105,10 +105,10 @@ export default function SmsConsentPage() {
           <section className={styles.detailSection}>
             <h2>What texts are for</h2>
             <p>
-              Messages are limited to one-to-one project communication: inquiry
-              responses, estimate follow-up, scheduling, job updates, and support
-              replies. This program is not used for bulk marketing or third-party lead
-              generation.
+              Messages are limited to transactional website-client communication: new
+              lead alerts, inquiry notifications, form submission alerts, site setup
+              updates, and support replies. This program is not used for bulk
+              marketing, cold outreach, or third-party lead selling.
             </p>
           </section>
 

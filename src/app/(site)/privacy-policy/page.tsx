@@ -5,19 +5,19 @@ import { PolicyPage } from "../components/site/PolicyPage";
 export const metadata: Metadata = {
   title: "Privacy Policy | Phinehas Adams",
   description:
-    "Privacy policy for messages, lead capture, and website inquiries for phinehasadams.com.",
+    "Privacy policy for lead alerts, messages, and website inquiries for phinehasadams.com.",
 };
 
 const sections = [
   {
     heading: "Information we collect",
     body:
-      "We collect information you send directly through forms, email, or other inquiry flows, including your name, email address, phone number, and project details.",
+      "We collect information you send directly through forms, email, or other inquiry flows, including your name, email address, phone number, website or business name, opt-in preferences, and inquiry details.",
   },
   {
     heading: "How information is used",
     body:
-      "That information is used to respond to inquiries, scope work, coordinate services, operate message notifications, and improve the website experience.",
+      "That information is used to respond to inquiries, scope work, coordinate services, operate website lead alert notifications, support website clients, and improve the website experience.",
   },
   {
     heading: "Communications and SMS",
@@ -25,8 +25,9 @@ const sections = [
       <>
         If you choose to share a phone number and consent to messaging through the{" "}
         <Link href="/sms-consent">SMS consent page</Link>, you may receive
-        transactional or project-related SMS communication. Message frequency depends on
-        the conversation or service being delivered.
+        transactional SMS communication about new website leads, inquiries, form
+        submissions, site setup, or related support. Message frequency depends on the
+        website activity or service being delivered.
       </>
     ),
   },
