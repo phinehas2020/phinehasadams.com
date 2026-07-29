@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   turbopack: {
-    root: "/Users/phinehasadams/Documents/phinehasadams.com",
+    root: import.meta.dirname,
   },
   images: {
     remotePatterns: [
