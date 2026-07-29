@@ -36,18 +36,8 @@
   color: var(--ember);
 }
 
-.note {
-  margin-left: clamp(0rem, 12vw, 14rem);
-  font-family: var(--font-mono);
-  font-size: var(--label);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fg-faint);
-}
-
 @media (max-width: 760px) {
-  .statement,
-  .note {
+  .statement {
     margin-left: 0;
   }
 }

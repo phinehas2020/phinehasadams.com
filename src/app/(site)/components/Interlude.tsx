@@ -29,12 +29,10 @@ export default function Interlude() {
         <div className={styles.scrim} />
 
         <div className={styles.content}>
-          <span className={styles.caption}>From the field to the server</span>
-          <h2 className={styles.statement}>
-            Same hands.
-            <br />
-            <span className={styles.em}>Different tools.</span>
-          </h2>
+          <span className={styles.caption}>
+            <span className={styles.capId}>FR 9258</span> — Bringing in the
+            grain
+          </span>
         </div>
 
         <div className={`${styles.bar} ${styles.barTop}`} aria-hidden="true" />

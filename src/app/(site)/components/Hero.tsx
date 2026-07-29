@@ -4,17 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Hero.module.css";
 
-const MARQUEE = [
-  "Automation",
-  "Infrastructure",
-  "Odoo & Manufacturing",
-  "Shopify",
-  "CNC & Fabrication",
-  "Networks",
-  "Brand & Design",
-  "Photography",
-];
-
 export default function Hero() {
   const [time, setTime] = useState("");
 
@@ -68,9 +57,8 @@ export default function Hero() {
         </h1>
 
         <p className={styles.statement}>
-          Raised on a homestead, where broken things don&rsquo;t wait for a
-          specialist. I build business systems the same way —{" "}
-          <span className={styles.em}>end to end, no hand-offs.</span>
+          I build business systems{" "}
+          <span className={styles.em}>end to end — no hand-offs.</span>
         </p>
       </div>
 
@@ -78,16 +66,9 @@ export default function Hero() {
         <a href="#work" className={styles.enter}>
           <span className={styles.enterArrow}>↓</span> Enter
         </a>
-        <div className={styles.marquee} aria-hidden="true">
-          <div className={styles.track}>
-            {[...MARQUEE, ...MARQUEE].map((m, i) => (
-              <span key={i} className={styles.mItem}>
-                {m}
-                <span className={styles.mSep}>/</span>
-              </span>
-            ))}
-          </div>
-        </div>
+        <span className={styles.frameRef} aria-hidden="true">
+          FR 5781 — The cornfield
+        </span>
         <span className={styles.clock}>{time || "--:--"} CST</span>
       </div>
     </section>

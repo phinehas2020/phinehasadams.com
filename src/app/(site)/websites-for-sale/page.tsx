@@ -35,17 +35,17 @@ const steps = [
   {
     n: "01",
     title: "Pick a site",
-    desc: "Browse the collection below and choose a design that fits your business.",
+    desc: "Choose a starting point that fits your business.",
   },
   {
     n: "02",
-    title: "We customize it",
-    desc: "Your brand, your copy, your photos — fully tailored to your business and domain.",
+    title: "I rebuild it",
+    desc: "Your brand, your copy, your photos — tailored to your domain.",
   },
   {
     n: "03",
     title: "Live & ranking",
-    desc: "Shipped to your domain, optimized for Google, and ranking locally within days.",
+    desc: "Shipped on your domain, ranking locally within days.",
   },
 ];
 
@@ -73,9 +73,8 @@ export default async function WebsitesForSale() {
           <span className={styles.titleAccent}>On the first page of Google.</span>
         </h1>
         <p className={styles.subtitle} data-reveal>
-          Pick a site below. I customize it for your brand, ship it on your
-          domain, and get you ranking on the first page of Google for your local
-          area.
+          Pick a site below. I rebuild it around your business and ship it on
+          your domain.
         </p>
       </header>
 
@@ -122,8 +121,8 @@ export default async function WebsitesForSale() {
           <span className={styles.titleAccent}>not finished products.</span>
         </h3>
         <p className={styles.ctaText}>
-          Every site gets fully rebuilt around your business — your brand, your
-          content, your domain. Want something completely custom from scratch?
+          Every site is rebuilt around your business. Want one built from
+          scratch instead?
         </p>
         <a href="mailto:contact@phinehasadams.com" className={styles.ctaButton}>
           <span>Get a custom quote</span>

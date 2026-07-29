@@ -30,10 +30,9 @@ export default function Story() {
             alive.
           </p>
           <p className={styles.body} data-reveal>
-            Now I build the digital kind: the{" "}
-            <span className={styles.accent}>automations</span> and
-            infrastructure that keep a business fed and watered while everyone
-            sleeps.
+            Now I build the digital kind —{" "}
+            <span className={styles.accent}>automation</span> and infrastructure
+            that keep a business fed and watered while everyone sleeps.
           </p>
         </div>
 
@@ -54,7 +53,7 @@ export default function Story() {
             data-reveal
             style={{ "--reveal-delay": "0.35s" } as React.CSSProperties}
           >
-            <span className={styles.capId}>IMG — 014</span>
+            <span className={styles.capId}>FR 2968</span>
             Tennessee
           </figcaption>
         </figure>

@@ -32,10 +32,6 @@ export default function About() {
           </span>
         </span>
       </p>
-
-      <span className={styles.note} data-reveal>
-        Software · Hardware · Whatever it takes
-      </span>
     </section>
   );
 }

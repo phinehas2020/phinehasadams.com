@@ -24,7 +24,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Phinehas Adams — Systems & Design",
   description:
-    "Raised on a homestead. I build business systems end to end — storefronts, automations, infrastructure, and the wiring in between.",
+    "I build business systems end to end — storefronts, automation, infrastructure, and the wiring in between. No hand-offs.",
   metadataBase: new URL("https://phinehasadams.com"),
   alternates: {
     canonical: "/",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     url: "https://phinehasadams.com",
     title: "Phinehas Adams — Systems & Design",
     description:
-      "Business systems built end to end — storefront, automations, infrastructure.",
+      "Business systems built end to end — storefront, automation, infrastructure. No hand-offs.",
     siteName: "Phinehas Adams",
     images: [
       {

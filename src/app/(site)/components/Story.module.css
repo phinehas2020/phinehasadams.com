@@ -47,6 +47,7 @@
   max-width: 46ch;
   font-size: clamp(1rem, 1.3vw, 1.15rem);
   line-height: 1.6;
+  text-wrap: pretty;
   color: var(--fg-soft);
 }
 

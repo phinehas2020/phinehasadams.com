@@ -51,7 +51,7 @@ All motion is declared with data-attributes on server components; one client com
 
 **Signature moments** (keep these; don't add more without removing one):
 1. Hero entrance — film fade-in, name lines rise from masks; lines drift apart on scroll-out.
-2. Interlude letterbox — sticky stage, bars part like a film gate (`--scrub`), "Same hands. Different tools." lands late.
+2. Interlude letterbox — sticky stage, bars part like a film gate (`--scrub`), the frame caption (`FR 9258 — Bringing in the grain`) lands late. No statement copy: the image is the sentence.
 3. Process rail — ember line draws down the offset rail with scroll; ghost outline numerals fill ember on hover.
 
 **Rules**: transform/opacity only (bars, not clip-path, for the letterbox); rAF-throttled; every effect has a no-JS and reduced-motion end state that reads as a finished page.

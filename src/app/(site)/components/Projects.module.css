@@ -33,6 +33,7 @@
   font-weight: 560;
   line-height: 1.05;
   letter-spacing: -0.03em;
+  text-wrap: balance;
   color: var(--fg);
 }
 
