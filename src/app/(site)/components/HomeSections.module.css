@@ -36,7 +36,7 @@
 .catalogHead > p { font-size: 1.15rem; line-height: 1.6; }
 .catalogNote { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 2rem; line-height: 1.6; color: var(--fg-soft); }
 .catalogGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; margin-top: 2.5rem; }
-.preview { border: 1px solid var(--line); }
+.preview { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); }
 .catalogItem h3 { font-size: 1.6rem; margin-top: 1.2rem; line-height: 1.2; }
 .catalogItem p { margin-top: 0.75rem; font-size: 1.05rem; line-height: 1.6; }
 .catalog > .link { margin-top: 1rem; }
