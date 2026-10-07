@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { sanityFetch } from "@/sanity/lib/live";
 import { WEBSITES_QUERY, type SanityWebsite } from "@/sanity/lib/queries";
 import styles from "./page.module.css";
@@ -6,28 +7,11 @@ import Link from "next/link";
 import { WebsitePreview } from "./WebsitePreview";
 
 export const metadata: Metadata = {
-  title: "Buy a Website | Phinehas Adams",
+  title: "Website Starting Points | Phinehas Adams",
   description:
-    "A site customized for your business, shipped on your domain in 3 days, and ranking on the first page of Google in 10.",
-  openGraph: {
-    title: "Buy a Website — On the First Page of Google",
-    description:
-      "A site customized for your business, shipped on your domain in 3 days, and ranking on the first page of Google in 10.",
-    images: [
-      {
-        url: "/og-websites.png",
-        width: 1400,
-        height: 860,
-        alt: "Buy a Website — Your business online, on the first page of Google.",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Buy a Website — On the First Page of Google",
-    description:
-      "A site customized for your business, shipped on your domain in 3 days, and ranking on the first page of Google in 10.",
-    images: ["/og-websites.png"],
+    "Website starting points I can rebuild with your copy, photos, and branding, then help get live on your domain.",
+  alternates: {
+    canonical: "/websites-for-sale",
   },
 };
 
@@ -35,17 +19,17 @@ const steps = [
   {
     n: "01",
     title: "Pick a site",
-    desc: "Choose a starting point that fits your business.",
+    desc: "Browse the layouts and find a starting point for your business.",
   },
   {
     n: "02",
     title: "I rebuild it",
-    desc: "Your brand, your copy, your photos — tailored to your domain.",
+    desc: "Your copy, photos, and branding go into the site.",
   },
   {
     n: "03",
-    title: "Live & ranking",
-    desc: "Shipped on your domain, ranking locally within days.",
+    title: "Get it live",
+    desc: "We agree on the scope and timing, then get it onto your domain.",
   },
 ];
 
@@ -58,44 +42,25 @@ export default async function WebsitesForSale() {
   return (
     <main className={styles.container}>
       <Link href="/" className={styles.back}>
-        <span aria-hidden="true">←</span> Back to home
+        <ArrowLeftIcon size={18} aria-hidden="true" /> Back to home
       </Link>
 
       {/* ── Hero ── */}
       <header className={styles.hero}>
         <span className={styles.eyebrow} data-reveal>
           <span className={styles.eyebrowMark} />
-          Buy a website
+          Websites
         </span>
         <h1 className={styles.title} data-reveal>
-          Your business online.
+          A starting point
           <br />
-          <span className={styles.titleAccent}>On the first page of Google.</span>
+          <span className={styles.titleAccent}>for your website.</span>
         </h1>
         <p className={styles.subtitle} data-reveal>
-          Pick a site below. I rebuild it around your business and ship it on
-          your domain.
+          Browse the sites below. I can rebuild one with your copy, photos,
+          and branding, then help get it live on your domain.
         </p>
       </header>
-
-      {/* ── Metrics ── */}
-      <div className={styles.metrics}>
-        <div className={styles.metric} data-reveal>
-          <span className={styles.metricNum}>3</span>
-          <span className={styles.metricUnit}>days</span>
-          <p className={styles.metricDesc}>Customized &amp; shipped on your domain</p>
-        </div>
-        <div className={styles.metric} data-reveal>
-          <span className={styles.metricNum}>10</span>
-          <span className={styles.metricUnit}>days</span>
-          <p className={styles.metricDesc}>Ranking on the first page of Google</p>
-        </div>
-        <div className={styles.metric} data-reveal>
-          <span className={styles.metricNum}>Local</span>
-          <span className={styles.metricUnit}>SEO</span>
-          <p className={styles.metricDesc}>Optimized to rank for your area</p>
-        </div>
-      </div>
 
       {/* ── How it works ── */}
       <section className={styles.steps}>
@@ -115,20 +80,17 @@ export default async function WebsitesForSale() {
 
       {/* ── Custom CTA ── */}
       <section className={styles.customCta} data-reveal>
-        <span className={styles.sectionLabel}>Important</span>
+        <span className={styles.sectionLabel}>A different starting point</span>
         <h3 className={styles.ctaHeadline}>
-          These are starting points —{" "}
-          <span className={styles.titleAccent}>not finished products.</span>
+          Need something{" "}
+          <span className={styles.titleAccent}>built from scratch?</span>
         </h3>
         <p className={styles.ctaText}>
-          Every site is rebuilt around your business. Want one built from
-          scratch instead?
+          Tell me what the site needs to do and what you already have.
         </p>
         <a href="mailto:contact@phinehasadams.com" className={styles.ctaButton}>
-          <span>Get a custom quote</span>
-          <span className={styles.ctaIcon} aria-hidden="true">
-            ↗
-          </span>
+          <span>Talk about a website</span>
+          <ArrowRightIcon size={24} className={styles.ctaIcon} aria-hidden="true" />
         </a>
       </section>
 

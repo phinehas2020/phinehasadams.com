@@ -1,104 +1,17 @@
 .section {
-  max-width: var(--maxw);
+  width: calc(100% - var(--gutter) * 2); max-width: calc(var(--maxw) - var(--gutter) * 2);
   margin: 0 auto;
-  padding: clamp(7rem, 16vh, 13rem) var(--gutter);
-  border-top: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.75rem, 3.5vw, 3rem);
+  padding: clamp(1.75rem, 2.8vw, 2.75rem) 0 clamp(2rem, 3vw, 3rem);
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
 }
-
-.index {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  font-family: var(--font-mono);
-  font-size: var(--label);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--fg-soft);
-}
-
-.indexNum {
-  color: var(--ember);
-}
-
-.big {
-  font-family: var(--font-display);
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: clamp(3.2rem, 12vw, 11rem);
-  line-height: 0.86;
-  letter-spacing: 0.01em;
-  color: var(--fg);
-}
-
-.broken {
-  color: var(--ember);
-}
-
-.email {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(0.5rem, 1.5vw, 1.1rem);
-  width: fit-content;
-  font-size: clamp(1.3rem, 3.2vw, 2.6rem);
-  font-weight: 580;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: var(--fg);
-  transition: color 0.5s var(--ease-smooth);
-}
-
-.emailText {
-  background-image: linear-gradient(var(--ember), var(--ember));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 2px;
-  transition: background-size 0.6s var(--ease-out-expo);
-}
-
-.email:hover {
-  color: var(--ember);
-}
-
-.email:hover .emailText {
-  background-size: 100% 2px;
-}
-
-.emailIcon {
-  font-size: 0.7em;
-  color: var(--ember);
-  transition: transform 0.5s var(--ease-smooth);
-}
-
-.email:hover .emailIcon {
-  transform: translate(0.2em, -0.2em);
-}
-
-.avail {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  font-family: var(--font-mono);
-  font-size: var(--label);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--fg-faint);
-}
-
-.dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--ember);
-}
-
-@media (max-width: 560px) {
-  .email {
-    word-break: break-word;
-  }
-  .avail {
-    flex-wrap: wrap;
-  }
+.copy h2 { color: var(--blue); font-weight: 700; font-size: clamp(2rem, 4.2vw, 4rem); line-height: 1.02; letter-spacing: -0.04em; }
+.copy p { margin-top: 0.6rem; font-size: clamp(1.1rem, 2.2vw, 1.9rem); line-height: 1.3; }
+.link { display: inline-flex; align-items: center; gap: 1.25rem; color: var(--blue); font-weight: 700; font-size: clamp(1rem, 2.1vw, 1.75rem); white-space: nowrap; padding-block: 0.6rem; }
+.link:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+.link svg { flex-shrink: 0; }
+@media (max-width: 760px) {
+  .section { align-items: flex-start; flex-direction: column; gap: 1rem; padding-block: 2rem; }
+  .copy h2 { font-size: clamp(2rem, 7vw, 3rem); }
+  .copy p { margin-top: 0.7rem; font-size: 1.15rem; }
+  .link { max-width: 100%; white-space: normal; font-size: 1.1rem; }
 }

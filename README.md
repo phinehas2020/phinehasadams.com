@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# phinehasadams.com
 
-## Getting Started
+Phinehas Adams’s website: AI, websites and business automation. Built with Next.js 16, React 19 and optional Sanity inventory.
 
-First, run the development server:
+## Development
+
+Use Node 24 (Node 20.19+ or 22.12+ also meet the dependencies’ requirements).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+npm run dev -- --hostname 0.0.0.0 --port 3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The checked-in .npmrc preserves the repository’s legacy peer-dependency installation behavior.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npx tsc --noEmit --incremental false
+npm run build
+npm run start -- --hostname 0.0.0.0 --port 3000
+```
 
-## Learn More
+Fonts and the Apollo photograph are served locally; the public homepage needs no API key. See DESIGN.md for the selected direction and design-qa.md for browser verification.
 
-To learn more about Next.js, take a look at the following resources:
+## Integrations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sanity inventory is optional. Configure the project/dataset variables described in src/sanity/env.ts to use the catalog and Studio. With no project configured, the public catalog has an empty state. Existing external preview and Stripe purchase links are provided by the inventory data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contact links open an email client. The SMS consent page keeps its existing optional, unchecked checkbox and email request behavior. Vercel Analytics runs only in Vercel deployments.
 
-## Deploy on Vercel
+The fictional automation walkthrough is a local interactive demonstration. It does not call an AI service, look up prices or send messages.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Assets
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The selected design is in docs/design/blue-program.png. The actual NASA photograph and source credit are documented in public/images/README.md. Local font sources and licenses are in src/app/fonts.

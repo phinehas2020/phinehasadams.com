@@ -5,30 +5,14 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <span className={styles.mark}>Phinehas Adams</span>
+        <p className={styles.copy}>© {new Date().getFullYear()} Phinehas Adams</p>
         <nav className={styles.links} aria-label="Footer">
-          <Link href="/websites-for-sale" className={styles.link}>
-            Websites
-          </Link>
-          <a href="#photography" className={styles.link}>
-            Field
-          </a>
-          <a href="mailto:contact@phinehasadams.com" className={styles.link}>
-            Email
-          </a>
-          <Link href="/sms-consent" className={styles.link}>
-            SMS
-          </Link>
-          <Link href="/privacy-policy" className={styles.link}>
-            Privacy
-          </Link>
-          <Link href="/terms-and-conditions" className={styles.link}>
-            Terms
-          </Link>
+          <Link href="/websites-for-sale">Websites</Link>
+          <a href="mailto:contact@phinehasadams.com">Email</a>
+          <Link href="/sms-consent">SMS</Link>
+          <Link href="/privacy-policy">Privacy</Link>
+          <Link href="/terms-and-conditions">Terms</Link>
         </nav>
-        <span className={styles.copy}>
-          © {new Date().getFullYear()} — Designed, shot &amp; built by me
-        </span>
       </div>
     </footer>
   );

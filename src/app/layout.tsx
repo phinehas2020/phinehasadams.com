@@ -1,82 +1,41 @@
 import type { Metadata } from "next";
-import { Anton, Archivo, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const anton = Anton({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-display",
-  display: "swap",
-});
-
-const archivo = Archivo({
-  subsets: ["latin"],
+const sans = localFont({
+  src: [
+    { path: "./fonts/SiteSans-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/SiteSans-Bold.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-sans",
   display: "swap",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+const cover = localFont({
+  src: [{ path: "./fonts/CoverSans.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-cover",
   display: "swap",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
 });
+
+const description =
+  "I’m Phinehas. I build websites, AI tools, and business automations that help people get useful work done.";
 
 export const metadata: Metadata = {
-  title: "Phinehas Adams — Systems & Design",
-  description:
-    "I build business systems end to end — storefronts, automation, infrastructure, and the wiring in between. No hand-offs.",
+  title: "Phinehas Adams — AI, websites & automation",
+  description,
   metadataBase: new URL("https://phinehasadams.com"),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
-    url: "https://phinehasadams.com",
-    title: "Phinehas Adams — Systems & Design",
-    description:
-      "Business systems built end to end — storefront, automation, infrastructure. No hand-offs.",
+    title: "Phinehas Adams — AI, websites & automation",
+    description,
     siteName: "Phinehas Adams",
-    images: [
-      {
-        url: "/images/PM_A0843.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Phinehas Adams",
-      },
-    ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Phinehas Adams",
-    description: "Business systems built end to end — no hand-offs.",
-    images: ["/images/PM_A0843.jpg"],
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  twitter: { card: "summary_large_image", title: "Phinehas Adams", description },
+  icons: { icon: "/favicon.ico" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html
-      lang="en"
-      className={`${anton.variable} ${archivo.variable} ${mono.variable}`}
-      suppressHydrationWarning
-    >
-      <body>
-        {/* Pre-paint so entrance choreography starts on first frame; without
-            JS this never runs and the page renders fully visible. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js-motion')",
-          }}
-        />
-        {children}
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="en" className={`${sans.variable} ${cover.variable}`}><body>{children}</body></html>;
 }

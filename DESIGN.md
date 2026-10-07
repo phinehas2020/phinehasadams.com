@@ -1,77 +1,41 @@
-# DESIGN.md — phinehasadams.com
-**Cinematic Photographic System, v2**
-**Status**: Living document — source of truth for the public marketing site.
-(Supersedes the 2026-04 "Industrial Brutalist / Tactical Telemetry" system, which shipped and was then replaced by the cinematic redesign on `main`.)
+# Blue Program — phinehasadams.com
 
----
+The user selected this direction on October 6, 2026. It supersedes the earlier cinematic/farm and tactical-telemetry directions.
 
-## 1. Concept & Voice
+Visual target: [selected concept](docs/design/blue-program.png). The homepage follows its blue publication cover, large personal name, Earthrise band, worked example and direct contact prompt.
 
-The site reads like **a short film about a builder**: full-bleed photography, film grain, a letterboxed interlude, type that rises like title cards. One person, one story — homestead kid who now builds business systems end to end.
+## Purpose and voice
 
-**Copy rules (anti-slop):**
-- Concrete nouns over abstractions: fences, engines, irrigation, livestock, storefront, wiring — never "solutions," "seamless," "elevate," "bridging the space between."
-- Short declaratives. Sentence case. No exclamation marks.
-- The farm vocabulary is the brand: "Walk the fence line," "fed and watered," "Stand watch," "Tell me what's broken."
-- Every claim stays specific and checkable (3 days, 10 days, 08:00–18:00 CST, replies in under an hour).
+Phinehas is the builder. His focus is websites, AI and business automation. Use plain, concrete language and understandable examples. Lead with “I build with AI. I automate the repetitive parts.”
 
-## 2. Color
+Do not imply NASA, Tesla or SpaceX affiliation. Do not invent clients, results, delivery guarantees, Google rankings, response times or availability. Gristmill, the CAD test asset and farm photography are not anchors for this design.
 
-```css
---bg: #0d0b09;        /* near-black, warm */
---bg-raised: #15110d;
---bg-deep: #080705;
---fg: #f4efe7;        /* cream */
---fg-soft / --fg-faint: cream at 66% / 40% */
---ember: #e2683a;     /* the only accent */
---line: cream at 14%; --line-strong: 30%;
-```
+## Visual system
 
-One accent. Photography carries the rest of the color. All imagery gets the unified grade: `saturate(.8) contrast(1.06–1.08) sepia(.08–.1)` plus the fixed `.grain` overlay.
+- NASA blue #0032A0, white and black. Red #E4002B is a small accent.
+- Strong flush-left typography, simple rules, generous space and square controls.
+- Local Site Sans (Liberation Sans derivative) for body/navigation; local Cover Sans (Archivo derivative) for display. Font sources/licenses live in src/app/fonts.
+- Cover name uses the display face’s weight and width axes; never squeeze the whole layout or rasterize text.
+- Maximum content width 90rem; responsive gutter clamp(1.25rem, 4.8vw, 4.5rem).
+- Two-column desktop cover; stacked phone layout. Three visible navigation links without a hidden mobile menu.
+- No cinematic grain, entry animation, fake telemetry, generic rounded cards or invented engineering annotations. Reduced-motion preference disables smooth scrolling.
 
-## 3. Type
+## Imagery
 
-- **Display**: Anton 400, uppercase, line-height 0.84–0.95, used for name, section statements, big closes.
-- **Body**: Archivo (350–650), sentence case, max ~46ch.
-- **Annotations**: JetBrains Mono, uppercase, letter-spacing 0.1–0.26em, `--label` size — section indices (`01 Work`), frame ids (`FR 3006`), captions, clock.
+The hero uses the original Apollo 17 Earthrise photograph AS17-152-23272. See public/images/README.md for the archive source. Keep the visible credit and link. Preserve the original file; crop with object-fit. The concept generator flattened the horizon; the implementation deliberately keeps the true photographic geometry.
 
-## 4. Motion (ScrollMotion.tsx + globals.css)
+## Working example
 
-All motion is declared with data-attributes on server components; one client component drives everything. `.js-motion` is added to `<html>` pre-paint by an inline script — without JS the page renders fully visible, and `prefers-reduced-motion` collapses everything to static.
+The filter request is fictional. The browser walkthrough uses deterministic local state, not live AI, a customer database or an ordering integration. Optional made-up model/address inputs change the draft; price stays unknown. Nothing is sent. Keep the initial page readable without JavaScript and maintain labels, focus management and live step announcements.
 
-| Attribute | Effect |
-| --- | --- |
-| `data-reveal` | fade + rise on enter (`--reveal-delay` to stagger) |
-| `data-reveal="blur"` | adds a blur-in |
-| `data-reveal="clip"` | shutter-wipe open from a widescreen slit (imagery) |
-| `data-lines` + `[data-line-mask] > [data-line]` | masked lines rise, staggered by `--li` |
-| `data-parallax="0.15"` | counter-scroll translate |
-| `data-scrub` / `data-scrub="pin"` | exposes `--scrub` 0→1 (viewport pass / tall-section progress) |
-| `data-hero` | exposes `--hero-progress` 0→1 as the hero scrolls away |
+## Existing site behavior
 
-**Signature moments** (keep these; don't add more without removing one):
-1. Hero entrance — film fade-in, name lines rise from masks; lines drift apart on scroll-out.
-2. Interlude letterbox — sticky stage, bars part like a film gate (`--scrub`), the frame caption (`FR 9258 — Bringing in the grain`) lands late. No statement copy: the image is the sentence.
-3. Process rail — ember line draws down the offset rail with scroll; ghost outline numerals fill ember on hover.
+Shared navigation/footer connect the homepage, catalog and policy/consent pages. Preserve Sanity inventory, sold status, prices, external preview/purchase links and optional SMS consent semantics. Contact uses email. Vercel Analytics runs on Vercel deployments, not local previews.
 
-**Rules**: transform/opacity only (bars, not clip-path, for the letterbox); rAF-throttled; every effect has a no-JS and reduced-motion end state that reads as a finished page.
+## References
 
-## 5. Layout
+- 1976 NASA Graphics Standards Manual: https://www.nasa.gov/wp-content/uploads/2015/01/nasa_graphics_manual_nhb_1430-2_jan_1976.pdf
+- Official color guide: https://www.nasa.gov/wp-content/uploads/2023/07/nasa-insignia-colorguide.png
+- Apollo 17 Earthrise: https://images.nasa.gov/details/as17-152-23272
 
-- Container `--maxw: 88rem`, gutter `clamp(1.25rem, 4vw, 4rem)`.
-- Sections separated by 1px `--line` rules and indexed mono labels (01–07).
-- Asymmetry over symmetry: offset statements (About), staggered gallery columns, offset process rail. Never three equal cards (the Projects grid is the one sanctioned 3-up, it's an inventory).
-- Section padding `clamp(6rem, 12vh, 10rem)`+.
-
-## 6. Imagery
-
-- Personal photography only — portraits and field work. Work screenshots stay out of the Field gallery.
-- Captions are mono: real frame id (`FR 2974`) + a short title describing what's in frame. Alt text describes the image, never the filename.
-- Treatment: 4/5 or 4/3 frames, 10–12px radius, 1px line border, filmic vignette + local grain.
-
-## 7. Never
-
-- Purple/blue gradients, glassmorphism panels, more than one accent.
-- "Elevate / seamless / unleash / next-gen / delve" or any copy that could be on anyone else's site.
-- Scroll-jacking, cursor followers, sound effects, over-long pinned sections.
-- Lorem ipsum, filename alt text, placeholder names.
+Run visual and interaction QA against the selected target before changing the composition. The current report is design-qa.md.

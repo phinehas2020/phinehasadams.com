@@ -1,186 +1,64 @@
-/* ============================================================
-   PHINEHAS ADAMS — Cinematic / photographic system
-   Near-black + cream + ember. Monumental display (Anton),
-   grotesque body (Archivo), mono annotations (JetBrains Mono).
-   ============================================================ */
-
+/* Blue Program — publication typography, white space and aerospace blue. */
 :root {
-  /* Surfaces */
-  --bg: #0d0b09;
-  --bg-raised: #15110d;
-  --bg-deep: #080705;
-
-  /* Ink (on dark) */
-  --fg: #f4efe7;
-  --fg-soft: rgba(244, 239, 231, 0.66);
-  --fg-faint: rgba(244, 239, 231, 0.4);
-
-  /* Accent — oxidized ember */
-  --ember: #e2683a;
-  --ember-deep: #c1481f;
-
-  /* Lines */
-  --line: rgba(244, 239, 231, 0.14);
-  --line-strong: rgba(244, 239, 231, 0.3);
-
-  /* Type — --font-display / --font-sans / --font-mono are provided by
-     next/font on <html>. Fallbacks live in the usages below. */
-
-  /* Motion */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* Layout */
-  --gutter: clamp(1.25rem, 4vw, 4rem);
-  --maxw: 88rem;
-
-  --label: 0.66rem;
+  --blue: #0032a0;
+  --blue-deep: #002779;
+  --red: #e4002b;
+  --bg: #fff;
+  --bg-raised: #f4f6fa;
+  --bg-deep: #fff;
+  --fg: #111;
+  --fg-soft: #4b4b4b;
+  --fg-faint: #626262;
+  --ember: var(--blue);
+  --ember-deep: var(--blue-deep);
+  --line: #d4d4d4;
+  --line-strong: #111;
+  --site-ink: var(--fg);
+  --site-muted: var(--fg-soft);
+  --site-muted-soft: var(--fg-faint);
+  --site-accent: var(--blue);
+  --site-line: var(--line);
+  --site-line-strong: var(--line-strong);
+  --font-display: var(--font-cover);
+  --font-mono: "Courier New", monospace;
+  --gutter: clamp(1.25rem, 4.8vw, 4.5rem);
+  --maxw: 90rem;
+  --label: 0.875rem;
+  --ease-smooth: ease;
+  --ease-out-expo: ease-out;
 }
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-html,
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  background-color: var(--bg);
+  margin: 0;
+  background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-synthesis: none;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-::selection {
-  background: var(--ember);
-  color: #fff;
-}
-
-:focus-visible {
-  outline: 2px solid var(--ember);
-  outline-offset: 3px;
-}
-
+h1, h2, h3, p, figure, blockquote { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; }
+button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+img { display: block; max-width: 100%; }
+section[id] { scroll-margin-top: 1.5rem; }
+::selection { background: var(--blue); color: #fff; }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 5px; }
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
-
-/* ---- Fixed film-grain overlay ---- */
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  pointer-events: none;
-  opacity: 0.09;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.skip-link {
+  position: absolute; top: 1rem; left: var(--gutter); z-index: 100;
+  padding: 0.75rem 1rem; background: #fff; color: var(--blue);
+  transform: translateY(-200%);
 }
-
-/* ============================================================
-   MOTION PRIMITIVES (driven by ScrollMotion via data-attrs).
-   Hidden states apply only once <html> gets .js-motion, so the
-   page is fully visible without JS.
-   ============================================================ */
-
-.js-motion [data-reveal] {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity 0.95s var(--ease-out-expo),
-    transform 0.95s var(--ease-out-expo),
-    filter 0.95s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0s);
-  will-change: transform, opacity;
-}
-
-.js-motion [data-reveal="blur"] {
-  filter: blur(10px);
-}
-
-.js-motion [data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
-  filter: none;
-}
-
-/* Shutter wipe — opens from a widescreen slit, for imagery */
-.js-motion [data-reveal="clip"] {
-  opacity: 1;
-  transform: none;
-  clip-path: inset(42% 4% 42% 4%);
-  transition: clip-path 1.3s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0s);
-}
-
-.js-motion [data-reveal="clip"].is-visible {
-  clip-path: inset(0 0 0 0);
-}
-
-/* ---- Masked line reveals ----
-   <h2 data-lines>
-     <span data-line-mask><span data-line style="--li:0">…</span></span>
-   </h2>
-   Lines rise from behind their mask, staggered by --li. The tiny
-   padding/margin pair keeps descenders from clipping at tight
-   line-heights without changing layout. */
-[data-line-mask] {
-  display: block;
-  overflow: clip;
-  padding-block-end: 0.1em;
-  margin-block-end: -0.1em;
-}
-
-[data-line] {
-  display: block;
-}
-
-.js-motion [data-lines] [data-line] {
-  transform: translateY(118%);
-  transition: transform 1.15s var(--ease-out-expo);
-  transition-delay: calc(var(--lines-delay, 0s) + var(--li, 0) * 0.085s);
-  will-change: transform;
-}
-
-.js-motion [data-lines].is-visible [data-line] {
-  transform: none;
-}
-
+.skip-link:focus { transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .js-motion [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    clip-path: none !important;
-    transition: none !important;
-  }
-  .js-motion [data-lines] [data-line] {
-    transform: none !important;
-    transition: none !important;
-  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
 }

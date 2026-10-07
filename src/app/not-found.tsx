@@ -5,13 +5,12 @@ export default function NotFound() {
   return (
     <main className={styles.wrap}>
       <p className={styles.code}>404</p>
-      <h1 className={styles.line}>Nothing grows here.</h1>
+      <h1 className={styles.line}>Page not found.</h1>
       <p className={styles.sub}>
-        The page you&rsquo;re after was moved, sold, or never planted.
+        This address doesn&rsquo;t lead to a page. You can head back to the home page.
       </p>
       <Link href="/" className={styles.home}>
-        Back to the homestead
-        <span aria-hidden="true"> ↗</span>
+        Back to home
       </Link>
     </main>
   );

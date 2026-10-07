@@ -1,43 +1,47 @@
 .page {
-  width: min(1240px, calc(100% - clamp(1.4rem, 5vw, 4.5rem)));
+  max-width: var(--maxw);
   margin: 0 auto;
-  padding: clamp(3rem, 7vw, 5rem) 0 clamp(4rem, 8vw, 6rem);
+  padding: clamp(3rem, 6vw, 6rem) var(--gutter) clamp(4rem, 8vw, 8rem);
   color: var(--site-ink);
 }
 
 .hero {
   display: grid;
   gap: 1.5rem;
-  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-.eyebrow {
+.eyebrow,
+.panelLabel {
   margin: 0;
   color: var(--site-accent);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .heroGrid {
   display: grid;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 
 .heroCopy {
   display: grid;
-  gap: 0.85rem;
+  align-content: start;
+  gap: 1.3rem;
+  min-width: 0;
 }
 
 .title {
   margin: 0;
-  max-width: 12ch;
+  max-width: 14ch;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 5.4rem);
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
   color: var(--site-ink);
 }
 
@@ -45,109 +49,108 @@
   margin: 0;
   max-width: 34rem;
   color: var(--site-muted);
-  font-size: 1.05rem;
-  line-height: 1.75;
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  line-height: 1.5;
 }
 
 .panel {
   display: grid;
-  gap: 0.8rem;
+  gap: 1rem;
   align-content: start;
-  border: 1px solid var(--site-line);
-  background: rgba(14, 14, 14, 0.55);
-  backdrop-filter: blur(10px);
-  padding: clamp(1.2rem, 3vw, 1.7rem);
-}
-
-.panelLabel {
-  margin: 0;
-  color: var(--site-muted-soft);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  min-width: 0;
+  padding: 1.3rem 0 0;
+  border-top: 2px solid var(--site-accent);
 }
 
 .panelCopy {
   margin: 0;
+  max-width: 38ch;
   color: var(--site-muted);
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .panelLink,
 .panelSecondary {
-  width: fit-content;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 0.8rem 1.3rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease,
-    background-color 180ms ease,
-    box-shadow 180ms ease;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 2.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .panelLink {
+  padding: 0.9rem 1.1rem;
   background: var(--site-accent);
-  color: #050505;
+  color: #fff;
 }
 
 .panelLink:hover {
-  background-color: #ff6e3c;
-  box-shadow: 0 8px 20px rgba(255, 85, 34, 0.25);
-  transform: translateY(-1.5px);
+  background: var(--site-ink);
 }
 
 .panelSecondary {
-  border: 1px solid var(--site-line-strong);
-  color: var(--site-ink);
-  background: rgba(255, 255, 255, 0.02);
+  color: var(--site-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
 }
 
 .panelSecondary:hover {
-  border-color: var(--site-accent);
-  color: var(--site-accent);
-  background: rgba(255, 85, 34, 0.03);
-  transform: translateY(-1px);
+  color: var(--site-ink);
 }
 
 .body {
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .section {
   display: grid;
-  gap: 0.8rem;
-  border-top: 1px solid var(--site-line);
+  gap: 1rem;
+  border-top: 1px solid var(--site-ink);
   padding-top: 1.5rem;
 }
 
 .sectionHeading {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 3vw, 2.35rem);
-  font-weight: 400;
-  line-height: 1;
-  color: var(--site-ink);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
 }
 
 .sectionBody {
   margin: 0;
-  max-width: 52rem;
+  max-width: 65ch;
   color: var(--site-muted);
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.sectionBody a {
+  color: var(--site-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.sectionBody a:hover {
+  color: var(--site-ink);
 }
 
 @media (min-width: 960px) {
   .heroGrid {
-    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.75fr);
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
     align-items: start;
+    gap: clamp(3rem, 6vw, 6rem);
+  }
+
+  .section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: clamp(2rem, 5vw, 5rem);
   }
 }
