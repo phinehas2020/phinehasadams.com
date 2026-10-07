@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { siteSocialImage } from "@/lib/site-metadata";
 import "./globals.css";
 
 const sans = localFont({
@@ -31,8 +32,9 @@ export const metadata: Metadata = {
     title: "Phinehas Adams — AI, websites & automation",
     description,
     siteName: "Phinehas Adams",
+    images: [siteSocialImage],
   },
-  twitter: { card: "summary_large_image", title: "Phinehas Adams", description },
+  twitter: { card: "summary_large_image", title: "Phinehas Adams", description, images: [siteSocialImage.url] },
   icons: { icon: "/favicon.ico" },
 };
 

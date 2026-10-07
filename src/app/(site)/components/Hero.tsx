@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import styles from "./Hero.module.css";
 
@@ -12,10 +13,10 @@ export default function Hero() {
           </h1>
           <div className={styles.copy}>
             <h2>I build with AI.<br />I automate the<br className={styles.desktopBreak} /> repetitive parts.</h2>
-            <p>Websites and tools that help people get useful work done.</p>
-            <a className={styles.button} href="#contact">
+            <p>Websites people can use. Tools that connect the work behind them.</p>
+            <Link className={styles.button} href="/contact">
               Talk about a project <ArrowRightIcon size={30} weight="light" aria-hidden="true" />
-            </a>
+            </Link>
             <a className={styles.exampleLink} href="#examples">
               See an example <ArrowRightIcon size={26} weight="light" aria-hidden="true" />
             </a>

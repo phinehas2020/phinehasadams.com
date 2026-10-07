@@ -1,0 +1,110 @@
+.page { overflow-wrap: break-word; }
+.hero { background: var(--blue); color: #fff; }
+.heroInner, .section, .contact { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); }
+.heroInner { padding-block: clamp(3rem, 5.5vw, 5rem) clamp(3.5rem, 6.5vw, 6rem); }
+.eyebrow, .sectionLabel { font-size: 1rem; font-weight: 700; line-height: 1.3; }
+.eyebrow { margin-bottom: clamp(1.7rem, 3vw, 3rem); }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 4vw, 4rem); }
+.heroGrid > *, .sectionHeading > *, .workflows li > *, .inputOutput > *, .rulesGrid > *, .setupDetails > div > *, .processGrid > *, .steps li > *, .faqGrid > *, .contact > * { min-width: 0; }
+.hero h1 { font-family: var(--font-display), Arial, sans-serif; font-size: clamp(3.2rem, 6.8vw, 6.2rem); font-weight: 900; line-height: 1.04; letter-spacing: -0.055em; }
+.heroCopy { padding-top: 0.25rem; }
+.heroCopy > p { font-size: clamp(1.35rem, 2.1vw, 1.9rem); line-height: 1.24; letter-spacing: -0.025em; }
+.heroCopy > .heroDetail { margin-top: 1.2rem; font-size: clamp(1.05rem, 1.45vw, 1.3rem); line-height: 1.45; }
+.primaryLink { display: inline-flex; max-width: 100%; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 2rem; padding: 1.1rem 1.35rem; background: #fff; color: var(--blue); font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+.primaryLink svg, .textLink svg { flex-shrink: 0; }
+.primaryLink:hover { background: #e8eefc; }
+.hero .primaryLink:focus-visible, .contact .primaryLink:focus-visible { outline-color: #fff; }
+.section { padding-block: clamp(3.5rem, 6vw, 6rem); }
+.sectionLabel { color: var(--red); margin-bottom: 1.6rem; }
+.section h2, .contact h2 { font-family: var(--font-display), Arial, sans-serif; font-size: clamp(2.3rem, 4.3vw, 4rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.04em; }
+.sectionHeading { display: grid; grid-template-columns: 1.4fr 1fr; align-items: end; gap: 3rem; }
+.sectionHeading > p { font-size: 1.15rem; line-height: 1.5; max-width: 40ch; }
+.workflows { list-style: none; padding: 0; margin: 3rem 0 0; border-top: 2px solid var(--fg); }
+.workflows li { display: grid; grid-template-columns: 2.5rem minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; gap: clamp(1.4rem, 3vw, 3rem); padding-block: 2rem; border-bottom: 1px solid var(--line-strong); }
+.number { color: var(--blue); font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
+.workflowCopy h3 { font-size: clamp(1.5rem, 2.15vw, 2rem); line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1rem; }
+.workflowCopy > p { max-width: 43ch; font-size: 1.1rem; line-height: 1.5; }
+.inputOutput { display: grid; gap: 0.75rem; padding-left: 2rem; border-left: 1px solid var(--line); }
+.inputOutput > p { font-size: 1.05rem; line-height: 1.35; max-width: 25ch; }
+.inputOutput > p:last-child { color: var(--blue); font-size: 1.3rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+.inputOutput svg { color: var(--blue); }
+.rulesSection { background: var(--bg-raised); }
+.rulesGrid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 3rem; padding-block: 2rem; border-top: 2px solid var(--fg); }
+.rulesGrid > div:first-child { padding-right: 3rem; }
+.rulesGrid > div:last-child { border-left: 1px solid var(--fg); padding-left: 3rem; }
+.rulesGrid h3 { color: var(--blue); font-size: clamp(1.5rem, 2.25vw, 2rem); line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 1rem; }
+.rulesGrid p { font-size: 1.15rem; line-height: 1.45; max-width: 39ch; }
+.rulesGrid ul { margin: 1.2rem 0 0; padding-left: 1.15rem; font-size: 1.05rem; line-height: 1.5; }
+.rulesGrid li + li { margin-top: 0.55rem; }
+.reviewNote { padding-top: 1.7rem; border-top: 1px solid var(--fg); font-size: clamp(1.15rem, 1.8vw, 1.55rem); line-height: 1.4; letter-spacing: -0.015em; max-width: 60ch; }
+.demo { padding-bottom: clamp(3rem, 5vw, 5rem); }
+.demoNote { max-width: min(calc(var(--maxw) - var(--gutter) * 2), calc(100% - var(--gutter) * 2)); margin: 1.2rem auto 0; color: var(--fg-soft); font-size: 1rem; line-height: 1.45; }
+.setupSection { background: var(--blue); color: #fff; }
+.setupSection .sectionLabel { color: #fff; }
+.setupDetails { margin: 3rem 0 0; border-top: 2px solid #fff; }
+.setupDetails > div { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.5fr); gap: 3rem; padding-block: 1.9rem; border-bottom: 1px solid #ffffff70; }
+.setupDetails dt { font-size: clamp(1.5rem, 2.3vw, 2.15rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; }
+.setupDetails dd { margin: 0; max-width: 54ch; font-size: 1.1rem; line-height: 1.5; }
+.processGrid { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: clamp(3rem, 6vw, 6rem); }
+.processHeading > p:not(.sectionLabel) { margin-top: 1.5rem; max-width: 30ch; font-size: 1.2rem; line-height: 1.45; }
+.textLink { display: inline-flex; max-width: 100%; align-items: center; gap: 1rem; margin-top: 1.5rem; color: var(--blue); font-size: 1.1rem; line-height: 1.4; font-weight: 700; padding-block: 0.4rem; }
+.textLink:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+.steps { list-style: none; margin: 0; padding: 0; }
+.steps li { display: grid; grid-template-columns: 3.1rem minmax(0, 1fr); gap: 1.3rem; padding-block: 1.8rem; border-top: 1px solid var(--line-strong); }
+.steps li:first-child { padding-top: 0; border-top: 0; }
+.steps li:last-child { padding-bottom: 0; }
+.stepNumber { color: var(--blue); font-size: 2.7rem; font-weight: 700; line-height: 1; letter-spacing: -0.065em; }
+.steps h3 { font-size: 1.45rem; line-height: 1.2; letter-spacing: -0.025em; margin-bottom: 0.8rem; }
+.steps p { font-size: 1.1rem; line-height: 1.5; max-width: 50ch; }
+.faqSection { border-top: 1px solid var(--line); }
+.faqGrid { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: clamp(3rem, 6vw, 6rem); }
+.questions { border-top: 2px solid var(--fg); }
+.questions details { border-bottom: 1px solid var(--line-strong); }
+.questions summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 1.2rem; font-weight: 700; line-height: 1.3; padding-block: 1.4rem; cursor: pointer; list-style: none; }
+.questions summary::-webkit-details-marker { display: none; }
+.questions summary:focus-visible { outline-offset: -3px; }
+.questions summary svg { flex-shrink: 0; color: var(--blue); }
+.questions details[open] summary svg { transform: rotate(45deg); }
+.questions details > p { max-width: 58ch; padding-bottom: 1.7rem; font-size: 1.05rem; line-height: 1.55; }
+.contact { display: grid; grid-template-columns: 1.5fr 1fr; align-items: center; gap: 3rem; padding-block: clamp(3.5rem, 6vw, 6rem); background: var(--blue); color: #fff; }
+.contact p { margin-top: 1.3rem; max-width: 40ch; font-size: 1.2rem; line-height: 1.45; }
+.contact .primaryLink { justify-self: end; margin-top: 0; }
+@media (max-width: 880px) {
+  .heroGrid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .hero h1 { font-size: clamp(3.2rem, 8vw, 5.8rem); }
+  .heroCopy { max-width: 38rem; }
+  .heroCopy > p { font-size: 1.5rem; }
+  .sectionHeading { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .sectionHeading > p { max-width: 48ch; }
+  .workflows li { grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: 1.2rem; row-gap: 1.4rem; }
+  .inputOutput { grid-column: 2; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 1rem; border-left: 0; padding-left: 0; }
+  .inputOutput > p:last-child { font-size: 1.1rem; }
+  .processGrid, .faqGrid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+}
+@media (max-width: 600px) {
+  .heroInner { padding-block: 2.75rem 3rem; }
+  .hero h1 { font-size: clamp(2.7rem, 8.7vw, 3.8rem); letter-spacing: -0.05em; }
+  .heroCopy > p { font-size: 1.3rem; }
+  .heroCopy > .heroDetail { font-size: 1.1rem; }
+  .primaryLink { font-size: 1.05rem; gap: 1rem; padding: 1rem 1.15rem; }
+  .section { padding-block: 3.1rem; }
+  .section h2, .contact h2 { font-size: clamp(2.1rem, 7.5vw, 2.9rem); }
+  .workflows { margin-top: 2rem; }
+  .workflows li { padding-block: 1.65rem; grid-template-columns: 1.9rem minmax(0, 1fr); gap: 1.2rem 0.8rem; }
+  .workflowCopy h3 { font-size: 1.55rem; }
+  .inputOutput { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.65rem; }
+  .inputOutput svg { transform: rotate(90deg); }
+  .inputOutput > p { max-width: none; }
+  .rulesGrid { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; padding-block: 1.7rem; }
+  .rulesGrid > div:first-child { padding: 0 0 1.7rem; }
+  .rulesGrid > div:last-child { padding: 1.7rem 0 0; border-left: 0; border-top: 1px solid var(--line-strong); }
+  .setupDetails { margin-top: 2rem; }
+  .setupDetails > div { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; padding-block: 1.5rem; }
+  .setupDetails dt { font-size: 1.65rem; }
+  .steps li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.85rem; }
+  .stepNumber { font-size: 2.2rem; }
+  .steps h3 { font-size: 1.35rem; }
+  .questions summary { font-size: 1.1rem; }
+  .contact { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; padding-block: 3rem; }
+  .contact .primaryLink { justify-self: start; }
+}

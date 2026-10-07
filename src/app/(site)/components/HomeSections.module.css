@@ -1,0 +1,56 @@
+.section, .catalog { max-width: var(--maxw); margin: 0 auto; padding: clamp(3rem, 6vw, 6rem) var(--gutter); }
+.heading { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 1.5rem 4rem; align-items: end; }
+.label { font-size: 0.9rem; line-height: 1.5; font-weight: 700; }
+.heading .label { grid-column: 1 / -1; }
+.heading h2, .builder h2, .catalog h2 { font-family: var(--font-cover), Arial, sans-serif; font-weight: 800; font-variation-settings: "wdth" 95; color: var(--blue); font-size: clamp(2.25rem, 4.9vw, 4.8rem); line-height: 1.03; letter-spacing: -0.045em; overflow-wrap: anywhere; }
+.intro { max-width: 48ch; font-size: clamp(1.1rem, 1.5vw, 1.35rem); line-height: 1.55; }
+.services { margin-top: 3rem; border-top: 2px solid var(--blue); }
+.service { display: grid; grid-template-columns: 5rem minmax(0, 1fr); column-gap: 2rem; padding-block: 2.5rem; border-bottom: 1px solid var(--line); }
+.number { color: var(--blue); font-family: var(--font-cover), Arial, sans-serif; font-weight: 800; font-size: 3.5rem; line-height: 1; letter-spacing: -0.04em; }
+.service > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem 4rem; }
+.service h3 { font-size: clamp(1.6rem, 2.4vw, 2.25rem); line-height: 1.15; letter-spacing: -0.035em; }
+.service p { grid-row: span 2; font-size: 1.15rem; line-height: 1.6; }
+.service ul { padding-left: 1.2rem; margin: 0; color: var(--fg-soft); line-height: 1.7; }
+.link { display: inline-flex; align-items: center; gap: 0.8rem; color: var(--blue); font-size: 1.05rem; font-weight: 700; line-height: 1.5; padding-block: 0.6rem; width: fit-content; max-width: 100%; }
+.link svg { flex-shrink: 0; }
+.link:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+.steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 4rem; margin: 3rem 0 0; padding: 0; list-style: none; }
+.steps li { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.stepNumber { display: block; color: var(--blue); font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem; }
+.steps h3 { font-size: 1.45rem; letter-spacing: -0.025em; line-height: 1.25; }
+.steps p { max-width: 52ch; margin-top: 0.75rem; font-size: 1.1rem; line-height: 1.6; color: var(--fg-soft); }
+.builder { background: var(--blue); color: #fff; }
+.builderInner { max-width: var(--maxw); margin: auto; padding: clamp(3rem, 6vw, 6rem) var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 5rem; }
+.builder h2 { color: #fff; margin-top: 1.5rem; }
+.builderCopy p { font-size: clamp(1.2rem, 1.8vw, 1.65rem); line-height: 1.45; letter-spacing: -0.02em; }
+.builderCopy p + p { margin-top: 1.25rem; }
+.builder .link { color: #fff; margin-top: 1.5rem; }
+.builder .link:focus-visible { outline-color: #fff; }
+.photoLink { display: flex; align-items: center; gap: 0.8rem; width: fit-content; max-width: 100%; padding-block: 0.6rem; font-size: 1rem; line-height: 1.5; }
+.photoLink svg { flex-shrink: 0; }
+.photoLink:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+.photoLink:focus-visible { outline-color: #fff; }
+.catalog { background: var(--bg-raised); }
+.catalogHead { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2rem 4rem; align-items: end; }
+.catalogHead h2 { margin-top: 1.5rem; font-size: clamp(2rem, 4vw, 3.5rem); }
+.catalogHead > p { font-size: 1.15rem; line-height: 1.6; }
+.catalogNote { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 2rem; line-height: 1.6; color: var(--fg-soft); }
+.catalogGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; margin-top: 2.5rem; }
+.preview { border: 1px solid var(--line); }
+.catalogItem h3 { font-size: 1.6rem; margin-top: 1.2rem; line-height: 1.2; }
+.catalogItem p { margin-top: 0.75rem; font-size: 1.05rem; line-height: 1.6; }
+.catalog > .link { margin-top: 1rem; }
+@media (max-width: 760px) {
+  .heading, .service > div, .builderInner, .catalogHead, .catalogGrid { grid-template-columns: minmax(0, 1fr); }
+  .heading { gap: 1rem; }
+  .service { grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; padding-block: 2rem; }
+  .number { font-size: 2rem; }
+  .service > div { gap: 1rem; }
+  .service p { grid-row: auto; font-size: 1.05rem; }
+  .service ul { font-size: 1rem; }
+  .steps { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .steps p { font-size: 1.05rem; }
+  .builderInner { gap: 2rem; }
+  .builder h2 { margin-top: 1rem; }
+  .catalogHead { gap: 1.5rem; }
+}

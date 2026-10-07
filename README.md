@@ -28,7 +28,9 @@ Fonts and the Apollo photograph are served locally; the public homepage needs no
 
 Sanity inventory is optional. Configure the project/dataset variables described in src/sanity/env.ts to use the catalog and Studio. With no project configured, the public catalog has an empty state. Existing external preview and Stripe purchase links are provided by the inventory data.
 
-Contact links open an email client. The SMS consent page keeps its existing optional, unchecked checkbox and email request behavior. Vercel Analytics runs only in Vercel deployments.
+The public site includes Home, Websites, Automation, About, Contact, the website catalog, and the existing policy/consent pages. The homepage queries the same Sanity inventory as the catalog; only available records appear in its preview.
+
+Contact links lead to /contact. Its project brief prepares an encoded email draft locally, with a preview and an explicit link to open the visitor’s email app. It does not submit to a server or save answers. Direct email remains available without JavaScript. Website/automation links can preselect the project type. The SMS consent page keeps its existing optional, unchecked checkbox and email request behavior. Vercel Analytics runs only in Vercel deployments.
 
 The fictional automation walkthrough is a local interactive demonstration. It does not call an AI service, look up prices or send messages.
 

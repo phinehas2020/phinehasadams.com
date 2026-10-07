@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteSocialImage } from "@/lib/site-metadata";
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { sanityFetch } from "@/sanity/lib/live";
 import { WEBSITES_QUERY, type SanityWebsite } from "@/sanity/lib/queries";
@@ -12,6 +13,12 @@ export const metadata: Metadata = {
     "Website starting points I can rebuild with your copy, photos, and branding, then help get live on your domain.",
   alternates: {
     canonical: "/websites-for-sale",
+  },
+  openGraph: {
+    images: [siteSocialImage],
+    title: "Website Starting Points | Phinehas Adams",
+    description: "Website starting points I can rebuild with your copy, photos, and branding, then help get live on your domain.",
+    url: "/websites-for-sale",
   },
 };
 
@@ -41,8 +48,8 @@ export default async function WebsitesForSale() {
 
   return (
     <main className={styles.container}>
-      <Link href="/" className={styles.back}>
-        <ArrowLeftIcon size={18} aria-hidden="true" /> Back to home
+      <Link href="/websites" className={styles.back}>
+        <ArrowLeftIcon size={18} aria-hidden="true" /> Website services
       </Link>
 
       {/* ── Hero ── */}
@@ -88,10 +95,10 @@ export default async function WebsitesForSale() {
         <p className={styles.ctaText}>
           Tell me what the site needs to do and what you already have.
         </p>
-        <a href="mailto:contact@phinehasadams.com" className={styles.ctaButton}>
+        <Link href="/contact?type=website" className={styles.ctaButton}>
           <span>Talk about a website</span>
           <ArrowRightIcon size={24} className={styles.ctaIcon} aria-hidden="true" />
-        </a>
+        </Link>
       </section>
 
       {/* ── Website grid ── */}

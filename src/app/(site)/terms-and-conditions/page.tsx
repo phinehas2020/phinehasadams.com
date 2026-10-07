@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteSocialImage } from "@/lib/site-metadata";
 import Link from "next/link";
 import { PolicyPage } from "../components/site/PolicyPage";
 
@@ -6,6 +7,8 @@ export const metadata: Metadata = {
   title: "Terms and Conditions | Phinehas Adams",
   description:
     "Terms governing site use, website lead alerts, inquiries, and SMS communications for phinehasadams.com.",
+  alternates: { canonical: "/terms-and-conditions" },
+  openGraph: { title: "Terms and Conditions | Phinehas Adams", description: "Terms governing site use, website lead alerts, inquiries, and SMS communications for phinehasadams.com.", url: "/terms-and-conditions", images: [siteSocialImage] },
 };
 
 const sections = [
@@ -54,9 +57,9 @@ const sections = [
 export default function TermsAndConditionsPage() {
   return (
     <PolicyPage
-      eyebrow="DOC / LEGAL-02"
-      title="TERMS OF ENGAGEMENT"
-      intro="Operating rules for custom and ready-made work."
+      eyebrow="Terms"
+      title="Terms and conditions"
+      intro="Terms for using this website, discussing a project, and receiving optional SMS messages."
       sections={sections}
       contactEmail="support@phinehasadams.com"
     />

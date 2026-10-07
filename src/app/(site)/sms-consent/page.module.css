@@ -3,10 +3,12 @@
   margin: 0 auto;
   padding: clamp(3rem, 6vw, 6rem) var(--gutter) clamp(4rem, 8vw, 8rem);
   color: var(--site-ink);
+  overflow-wrap: anywhere;
 }
 
 .hero {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
   margin-bottom: clamp(3rem, 6vw, 5rem);
 }
@@ -24,6 +26,7 @@
 .heroGrid,
 .contentGrid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(2rem, 4vw, 4rem);
 }
 
@@ -186,6 +189,7 @@
 
 .detailSection {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.9rem;
   border-top: 1px solid var(--site-ink);
   padding-top: 1.5rem;

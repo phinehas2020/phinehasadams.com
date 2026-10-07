@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteSocialImage } from "@/lib/site-metadata";
 import Link from "next/link";
 import { PolicyPage } from "../components/site/PolicyPage";
 
@@ -6,6 +7,8 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Phinehas Adams",
   description:
     "Privacy policy for lead alerts, messages, and website inquiries for phinehasadams.com.",
+  alternates: { canonical: "/privacy-policy" },
+  openGraph: { title: "Privacy Policy | Phinehas Adams", description: "Privacy policy for lead alerts, messages, and website inquiries for phinehasadams.com.", url: "/privacy-policy", images: [siteSocialImage] },
 };
 
 const sections = [
@@ -51,9 +54,9 @@ const sections = [
 export default function PrivacyPolicyPage() {
   return (
     <PolicyPage
-      eyebrow="DOC / LEGAL-01"
-      title="PRIVACY PROTOCOL"
-      intro="Minimal collection. Clear use. No theater."
+      eyebrow="Privacy"
+      title="Privacy policy"
+      intro="What information you share, how it is used, and how to reach me."
       sections={sections}
       contactEmail="support@phinehasadams.com"
     />

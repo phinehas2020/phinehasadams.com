@@ -1,22 +1,25 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { siteSocialImage } from "@/lib/site-metadata";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "SMS Consent | Phinehas Adams",
   description:
     "Optional SMS consent form and disclosures for website lead alert text messages from Phinehas Adams.",
+  alternates: { canonical: "/sms-consent" },
+  openGraph: { title: "SMS Consent | Phinehas Adams", description: "Optional SMS consent form and disclosures for website lead alert text messages from Phinehas Adams.", url: "/sms-consent", images: [siteSocialImage] },
 };
 
 export default function SmsConsentPage() {
   return (
     <main className={styles.page}>
       <section className={styles.hero} aria-labelledby="sms-consent-title">
-        <p className={styles.eyebrow}>SMS / CONSENT-01</p>
+        <p className={styles.eyebrow}>SMS consent</p>
         <div className={styles.heroGrid}>
           <div className={styles.copy}>
             <h1 id="sms-consent-title" className={styles.title}>
-              SMS LEAD ALERTS
+              SMS lead alerts
             </h1>
             <p className={styles.intro}>
               Use this page to request optional text alerts from Phinehas Adams when

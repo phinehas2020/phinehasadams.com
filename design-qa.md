@@ -1,6 +1,37 @@
-# Blue Program design QA
+# Complete Blue Program site QA
 
 final result: passed
+
+The selected [Blue Program direction](docs/design/blue-program.png) now extends across nine public page routes: Home, Websites, Automation, About, Contact, Website Catalog, Privacy, Terms, and SMS Consent. [The site map](docs/design/site-map.md) records each page’s purpose and the original content carried forward.
+
+The original commit `3ad7c6b` was rendered separately at desktop and phone sizes. Its eleven homepage sections included inventory, background, capabilities, process, photography, and contact. The first three-block redesign omitted too much of that scope. The expanded site restores those functions and relevant content through the homepage and dedicated pages.
+
+## Full-site verification
+
+- Actual Chromium 151 checks cover all nine public routes at 320, 390, 768, and 1440px, with no normal-width horizontal overflow, page errors, or console errors. Each route has one main-content skip target. Primary navigation marks the current page; native FAQs work with Enter and Space.
+- Enlarged text exposed grid-width issues in the service, legal, SMS, and narrow Contact layouts. Shrinkable tracks, constrained controls, and wrapping resolve them. Corrected pages are checked at 200% text at 320 and 390px.
+- About retains the original background, all eleven original capability subjects, and all six gallery photographs. Each actual photo is scrolled into view and decoded before screenshots; no missing assets remain.
+- The homepage walkthrough passes 36 assertions: eight widths, clear cover columns, example navigation, expansion/collapse, focus, supplied and missing facts, unknown price, Back/Reset, Contact navigation, no-JavaScript content, reduced motion, and enlarged text.
+- Contact checks required-field/whitespace validation, first-error focus, Tab/reset paths, all project presets and same-path query navigation, optional fields, exact draft/mailto parity, Unicode/plus/ampersand encoding, stale-draft handling, and regeneration. It retains a visibly labeled previous draft after edits and removes its stale mailto action. No external or non-GET requests occur during the brief interaction.
+- Without JavaScript, the homepage and direct contact remain readable. The brief controls are disabled to avoid accidental GET submission, with a visible direct email alternative. The email app opener is explicit; the site never claims to have sent a message.
+- Catalog source, live previews, prices, sold status, and purchase links are preserved. The public production catalog was inspected: ten records, seven available purchase links, and three sold records. These are website starting points, not claimed client outcomes. The workspace has no Sanity variables and correctly shows an empty local inventory.
+- Sitemap and page metadata cover the full site. Existing home work/contact anchors remain useful; the photography anchor leads to the builder section and a direct gallery link. Studio and revalidation remain in place.
+
+ESLint, standalone TypeScript, and the production build pass. The build generates sixteen static pages; Contact is rendered on demand for project-type presets. Final route, social-image, robots, sitemap, and favicon checks are included.
+
+Evidence is in `/workspace/.design-research/phinehasadams/expanded-site` and `expanded-qa`. The original-site comparison is in `original-site-review`. Final screenshots use the actual production server and loaded fonts/images.
+
+Repository previews: [desktop homepage](docs/design/implemented-home.png), [phone homepage](docs/design/implemented-home-mobile.png), and [prepared contact draft](docs/design/implemented-contact-draft.png). These local previews use the supported empty catalog; production retains its configured inventory.
+
+Open Graph and Twitter image tags are explicitly verified on all public pages. The generated social image responds as a 1200 × 630 PNG. An inherited-image omission across the route group was corrected with shared explicit metadata. FAQ focus outlines are inset so the ring stays clear of the expanded answer text.
+
+External purchases and SMS delivery were not executed. Their existing integrations and consent semantics remain. The worked example uses fixed browser rules and does not call an AI provider or ordering system; the Contact page prepares an email for the visitor to review and send in their own app.
+
+## Earlier homepage verification
+
+The report below records the first cover implementation. Its selected visual direction is retained, while the current site adds the complete content and navigation described above.
+
+Earlier homepage result: passed
 
 **Source and implementation**
 

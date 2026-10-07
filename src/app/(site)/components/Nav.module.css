@@ -8,12 +8,17 @@
   display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
 }
 .name { font-size: clamp(1.5rem, 3.1vw, 2.75rem); font-weight: 700; letter-spacing: -0.035em; }
-.links { display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 3vw, 3rem); font-size: clamp(1rem, 1.85vw, 1.5rem); }
+.links { display: flex; flex-wrap: wrap; gap: clamp(1rem, 2.3vw, 2rem); font-size: clamp(1rem, 1.5vw, 1.25rem); }
 .links a { padding-block: 0.4rem; text-decoration-thickness: 1px; text-underline-offset: 0.3em; }
 .links a:hover { text-decoration: underline; }
+.links a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; }
 .name:focus-visible, .links a:focus-visible { outline-color: #fff; }
 @media (max-width: 600px) {
   .inner { flex-wrap: wrap; gap: 1rem; padding-top: 1.4rem; }
   .name { font-size: 1.7rem; }
-  .links { width: 100%; justify-content: space-between; gap: 1rem; font-size: 1rem; }
+  .links { width: 100%; justify-content: flex-start; gap: 0.6rem 1.2rem; font-size: 1rem; }
+}
+@media (min-width: 601px) and (max-width: 1000px) {
+  .inner { flex-wrap: wrap; gap: 0.8rem; }
+  .links { width: 100%; }
 }

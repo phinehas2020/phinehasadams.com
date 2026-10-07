@@ -5,6 +5,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   return [
+    ...["/websites", "/automation", "/about", "/contact", "/websites-for-sale"].map((path) => ({
+      url: `${baseUrl}${path}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: path === "/websites-for-sale" ? 0.7 : 0.8,
+    })),
     {
       url: `${baseUrl}/`,
       lastModified,

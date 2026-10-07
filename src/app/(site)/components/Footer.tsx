@@ -7,9 +7,13 @@ export default function Footer() {
       <div className={styles.inner}>
         <p className={styles.copy}>© {new Date().getFullYear()} Phinehas Adams</p>
         <nav className={styles.links} aria-label="Footer">
-          <Link href="/websites-for-sale">Websites</Link>
+          <Link href="/websites">Websites</Link>
+          <Link href="/automation">Automation</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
+          <Link href="/websites-for-sale">Website catalog</Link>
           <a href="mailto:contact@phinehasadams.com">Email</a>
-          <Link href="/sms-consent">SMS</Link>
+          <Link href="/sms-consent">SMS consent</Link>
           <Link href="/privacy-policy">Privacy</Link>
           <Link href="/terms-and-conditions">Terms</Link>
         </nav>

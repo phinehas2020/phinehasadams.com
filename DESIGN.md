@@ -2,7 +2,9 @@
 
 The user selected this direction on October 6, 2026. It supersedes the earlier cinematic/farm and tactical-telemetry directions.
 
-Visual target: [selected concept](docs/design/blue-program.png). The homepage follows its blue publication cover, large personal name, Earthrise band, worked example and direct contact prompt.
+Visual target: [selected concept](docs/design/blue-program.png). Its blue publication cover, large personal name, Earthrise band, and worked example set the visual direction. The full site extends that direction with dedicated Websites, Automation, About, and Contact pages, plus a substantive homepage and the existing website catalog and policy/consent pages.
+
+The original homepage at commit 3ad7c6b contained website inventory, approach, background, process, photography, capabilities, and contact details. Those functions and relevant content are carried into the expanded homepage and dedicated pages. The first three-block implementation was too narrow for the requested complete rework.
 
 ## Purpose and voice
 
@@ -17,7 +19,7 @@ Do not imply NASA, Tesla or SpaceX affiliation. Do not invent clients, results, 
 - Local Site Sans (Liberation Sans derivative) for body/navigation; local Cover Sans (Archivo derivative) for display. Font sources/licenses live in src/app/fonts.
 - Cover name uses the display face’s weight and width axes; never squeeze the whole layout or rasterize text.
 - Maximum content width 90rem; responsive gutter clamp(1.25rem, 4.8vw, 4.5rem).
-- Two-column desktop cover; stacked phone layout. Three visible navigation links without a hidden mobile menu.
+- Two-column desktop cover; stacked phone layout. Four visible navigation links for Websites, Automation, About, and Contact, with a home link in the name. Current page is underlined. No hidden mobile menu.
 - No cinematic grain, entry animation, fake telemetry, generic rounded cards or invented engineering annotations. Reduced-motion preference disables smooth scrolling.
 
 ## Imagery
@@ -30,7 +32,13 @@ The filter request is fictional. The browser walkthrough uses deterministic loca
 
 ## Existing site behavior
 
-Shared navigation/footer connect the homepage, catalog and policy/consent pages. Preserve Sanity inventory, sold status, prices, external preview/purchase links and optional SMS consent semantics. Contact uses email. Vercel Analytics runs on Vercel deployments, not local previews.
+Shared navigation/footer connect all pages. Preserve Sanity inventory, sold status, prices, external preview/purchase links and optional SMS consent semantics. The home catalog previews available records from the existing source; these are website starting points, not claimed client results.
+
+The Contact page validates a short project brief, shows the email subject/body, and lets the visitor open and send it in their own email app. Answers stay in browser state. No server submission, fabricated success, storage, or external AI call. Direct email is visible without JavaScript. Project-type links can preselect Website or Automation.
+
+About retains the original background, named tools and disciplines, and six photographs. Photography is supporting personal work on About, not the homepage’s sales pitch. Service pages describe practical deliverables, steps, examples, and questions in plain first-person language. Costs and timing depend on the agreed work; no invented figures or guarantees.
+
+Vercel Analytics runs on Vercel deployments, not local previews.
 
 ## References
 
